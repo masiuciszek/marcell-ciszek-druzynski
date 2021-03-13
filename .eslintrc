@@ -17,9 +17,10 @@
   "plugins": ["react", "react-hooks", "jsx-a11y", "prettier"],
   "extends": [
     "plugin:react/recommended",
-    "airbnb",
     "prettier/react",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "prettier/prettier": "error",
@@ -47,6 +48,7 @@
       },
       "plugins": ["@typescript-eslint/eslint-plugin"],
       "extends": [
+        "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
         "eslint-config-prettier/@typescript-eslint"
@@ -65,7 +67,8 @@
           {
             "avoidEscape": true
           }
-        ]
+        ],
+        "prettier/prettier": "error"
       }
     }
   ],
