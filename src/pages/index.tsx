@@ -1,21 +1,16 @@
-import * as React from "react"
+import React from 'react'
+import Layout from '@/components/Layout'
+import Seo from '@/components/Seo'
 
-interface Person {
-  name: string
-  age: number
-}
-
-const HomePage = () => {
-  const person: Person = {
-    name: "Marcell",
-    age: "2",
-  }
-
+const IndexPage = () => {
   return (
-    <h1>
-      {person.name} {person.age}{" "}
-    </h1>
+    <Layout>
+      <Seo title="Quick start" />
+      <h1 className="h1">Quick start</h1>
+      <p>Start new project with Gatsby CLI:</p>
+      <code className="code">gatsby new project-name https://github.com/p1t1ch/gatsby-starter-vadyan</code>
+    </Layout>
   )
 }
 
-export default HomePage
+export default IndexPage
