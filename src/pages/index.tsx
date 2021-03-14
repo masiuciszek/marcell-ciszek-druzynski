@@ -1,9 +1,10 @@
 import * as React from "react"
+import Title from "@/components/common/title"
 
 const HomePage = () => {
   return (
     <div>
-      <h1>pehelo</h1>
+      <Title mainTitle="yoooo" />
     </div>
   )
 }
