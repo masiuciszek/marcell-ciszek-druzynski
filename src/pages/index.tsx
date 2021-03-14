@@ -1,16 +1,10 @@
-import React from 'react'
-import Layout from '@/components/Layout'
-import Seo from '@/components/Seo'
+import * as React from "react"
 
-const IndexPage = () => {
+const HomePage = () => {
   return (
-    <Layout>
-      <Seo title="Quick start" />
-      <h1 className="h1">Quick start</h1>
-      <p>Start new project with Gatsby CLI:</p>
-      <code className="code">gatsby new project-name https://github.com/p1t1ch/gatsby-starter-vadyan</code>
-    </Layout>
+    <div>
+      <h1>pehelo</h1>
+    </div>
   )
 }
-
-export default IndexPage
+export default HomePage
