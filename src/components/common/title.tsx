@@ -1,11 +1,27 @@
 import React from "react"
+import { css, cx } from "@emotion/css"
 
 interface TitleProps {
   className?: string
   mainTitle: string
+  secondaryTitle?: string
 }
 
-const Title: React.FC<TitleProps> = ({ className, mainTitle }) => {
-  return <h1>{mainTitle}</h1>
+const styles = css`
+  border: 1px solid red;
+`
+
+const Title: React.FC<TitleProps> = ({ className, mainTitle, children, secondaryTitle }) => {
+  const hasSecondaryTitle = Boolean(secondaryTitle)
+  return (
+    <section
+      data-testid="page-title-component"
+      className={cx(styles, "component-title", className)}
+    >
+      <h1>{mainTitle}</h1>
+      {hasSecondaryTitle && <h3>{secondaryTitle}</h3>}
+      {children}
+    </section>
+  )
 }
 export default Title
