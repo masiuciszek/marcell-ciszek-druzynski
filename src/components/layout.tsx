@@ -5,6 +5,7 @@ import Fonts from "@/styles/fonts"
 
 const Main = styled.main`
   margin: 0 auto;
+  position: relative;
 `
 
 const Layout: React.FC = ({ children }) => {

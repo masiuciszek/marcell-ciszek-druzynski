@@ -6,9 +6,11 @@ interface RootWrapperProps {
   withSection: boolean
 }
 const styles = css`
-  max-width: var(--max-width);
-  padding: 1.2rem;
-  margin: 0 auto;
+  & {
+    max-width: var(--max-width);
+    padding: 1.2rem;
+    margin: 0 auto;
+  }
 `
 
 export const RootWrapper: React.FC<RootWrapperProps> = ({ children, className, withSection }) => {

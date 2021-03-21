@@ -1,6 +1,7 @@
+const path = require("path")
 const config = {
   // Project title. Used as SEO title and PWA name
-  title: "MArcell Ciszek Druzysnki",
+  title: "Marcell Ciszek Druzysnki",
   // Project short name. Used by PWA
   shortTitle: "Masiu CD",
   // Project description. Used in SEO meta tag and by PWA
@@ -55,7 +56,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "images",
-        path: "./src/images/",
+        path: path.join(__dirname, `src`, `images`),
       },
       __key: "images",
     },

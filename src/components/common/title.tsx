@@ -8,7 +8,9 @@ interface TitleProps {
 }
 
 const styles = css`
-  border: 1px solid red;
+  & {
+    border: 1px solid red;
+  }
 `
 
 const Title: React.FC<TitleProps> = ({ className, mainTitle, children, secondaryTitle }) => {
