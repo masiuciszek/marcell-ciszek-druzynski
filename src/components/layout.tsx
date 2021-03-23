@@ -1,19 +1,25 @@
 import * as React from "react"
-import styled from "@emotion/styled"
 import { GlobalStyles } from "@/styles/global-styles"
 import Fonts from "@/styles/fonts"
+import { cx, css } from "@emotion/css"
 
-const Main = styled.main`
-  margin: 0 auto;
-  position: relative;
+const mainStyles = css`
+  & {
+    margin: 0 auto;
+    position: relative;
+  }
 `
 
-const Layout: React.FC = ({ children }) => {
+interface LayoutProps {
+  className?: string
+}
+
+const Layout: React.FC<LayoutProps> = ({ children, className }) => {
   return (
     <>
       <GlobalStyles />
       <Fonts />
-      <Main>{children}</Main>
+      <main className={cx(mainStyles, className, "main-wrapper")}>{children}</main>
     </>
   )
 }

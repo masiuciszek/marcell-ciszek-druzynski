@@ -4,60 +4,29 @@ import Layout from "@/components/layout"
 import { RootWrapper } from "@/components/common/root-wrapper"
 import { graphql, PageProps } from "gatsby"
 import Img from "gatsby-image"
+import { css } from "@emotion/css"
 
-interface Node {
-  node: {
-    id: string
+interface HomeQuery {
+  marcell: {
     publicURL: string
   }
 }
-interface HomeQuery {
-  images: {
-    edges: Array<Node>
+
+const wrapperStyles = (backgroundImage: string) => css`
+  & {
+    background: url(${backgroundImage}) center center no-repeat;
+
+    min-height: 100vh;
+    background-repeat: none;
   }
-  foo: any
-}
+`
 
 const HomePage = ({ data }: PageProps<HomeQuery>) => {
-  console.log("data", data)
-  const [im, hey, marcell] = data.images.edges
+  console.log("data", data.marcell.publicURL)
 
   return (
-    <Layout>
-      {/* <div
-        style={{
-          objectFit: "cover",
-          width: "100%",
-          backgroundRepeat: "no-repeat",
-          height: 500,
-          backgroundImage: `url(${hey.node.publicURL})`,
-          position: "absolute",
-        }}
-      ></div>
-      <div
-        style={{
-          objectFit: "cover",
-          width: "100%",
-          backgroundRepeat: "no-repeat",
-          height: 500,
-          top: 220,
-          right: 0,
-          backgroundImage: `url(${im.node.publicURL})`,
-          position: "absolute",
-        }}
-      ></div>
-      <div
-        style={{
-          objectFit: "cover",
-          width: "100%",
-          backgroundRepeat: "no-repeat",
-          height: 500,
-          backgroundImage: `url(${marcell.node.publicURL})`,
-          top: 720,
-          position: "absolute",
-        }}
-      ></div> */}
-
+    <Layout className={wrapperStyles(data.marcell.publicURL)}>
+      {/* TODO: work with the background image when we have a more propper layout */}
       <RootWrapper withSection>
         <Title mainTitle="yoooo" />
       </RootWrapper>
@@ -67,21 +36,8 @@ const HomePage = ({ data }: PageProps<HomeQuery>) => {
 
 export const HOME_PAGE_QUERY = graphql`
   {
-    images: allFile(filter: { sourceInstanceName: { eq: "images" } }) {
-      edges {
-        node {
-          id
-
-          publicURL
-        }
-      }
-    }
-    foo: file(relativePath: { eq: "hey.png" }) {
-      childImageSharp {
-        fluid(quality: 10, maxWidth: 120, maxHeight: 100) {
-          ...GatsbyImageSharpFluid_tracedSVG
-        }
-      }
+    marcell: file(relativePath: { eq: "mcd.svg" }) {
+      publicURL
     }
   }
 `
