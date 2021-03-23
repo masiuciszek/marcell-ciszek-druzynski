@@ -5,33 +5,43 @@ const config = {
   // Project short name. Used by PWA
   shortTitle: "Masiu CD",
   // Project description. Used in SEO meta tag and by PWA
-  description: "My site",
+  description: "My personal site, share with code",
   // Keywords describing the project. Used in SEO meta tag
+  twitterHandle: "@MasiuCD",
   keywords: ["gatsby", "gatsby-starter", "react", "typescript", "jest", "pwa", "graphql"],
   // Absolute deployment path (without trailing slash). Used as base URL in SEO meta tags
   baseUrl: "https://gatsby-starter-vadyan.netlify.app",
   // Site language. Added in html tag and PWA manifest
   lang: "en",
   // Your username on Facebook. Used in SEO meta tags
-  facebookUsername: "s",
+  instagramUsername: "masiucd",
   // Your username on Twitter (without @). Used in SEO meta tags
-  twitterUsername: "s",
+  twitterUsername: "MasiuCD",
   // Path to main favicon. Recommended size: 512x512. Other sizes are generated automatically
-  favicon: "src/favicons/favicon-16x16.png",
+  favicon: "src/favicons/favicon.ico",
   // Theme color. Used as color of device toolbar in supported browsers
-  themeColor: "#362066",
+  themeColor: "#0e182a",
   // Background color. Used as background on PWA launch screen. Recommended to make it the same as body color
-  backgroundColor: "#362066",
+  backgroundColor: "#0e182a",
 }
+
+const routes = [
+  { name: "about", route: "/about" },
+  { name: "posts", route: "/posts" },
+  { name: "get in touch", route: "/contact" },
+]
+
 module.exports = {
   siteMetadata: {
     title: config.title,
     description: config.description,
+    twitterHandle: config.twitterHandle,
     keywords: config.keywords,
     baseUrl: config.baseUrl,
     lang: config.lang,
-    facebookUsername: config.facebookUsername,
+    instagramUsername: config.instagramUsername,
     twitterUsername: config.twitterUsername,
+    routes,
   },
   plugins: [
     "gatsby-plugin-emotion",
@@ -46,7 +56,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        icon: "src/images/icon.png",
+        // icon: "src/images/favicons/favicon-16x16",
+        icon: `${__dirname}/src/images/favicons/favicon-16x16.png`,
       },
     },
     "gatsby-plugin-mdx",

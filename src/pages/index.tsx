@@ -4,6 +4,7 @@ import Layout from "@/components/layout"
 import { RootWrapper } from "@/components/common/root-wrapper"
 import { graphql, PageProps } from "gatsby"
 import { css } from "@emotion/css"
+import { Seo } from "@/components/seo"
 
 interface HomeQuery {
   marcell: {
@@ -20,10 +21,9 @@ const wrapperStyles = (backgroundImage: string) => css`
 `
 
 const HomePage = ({ data }: PageProps<HomeQuery>) => {
-  console.log("data", data.marcell.publicURL)
-
   return (
     <Layout className={wrapperStyles(data.marcell.publicURL)}>
+      <Seo />
       {/* TODO: work with the background image when we have a more propper layout */}
       <RootWrapper withSection>
         <Title mainTitle="yoooo" />
