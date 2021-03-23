@@ -3,7 +3,6 @@ import Title from "@/components/common/title"
 import Layout from "@/components/layout"
 import { RootWrapper } from "@/components/common/root-wrapper"
 import { graphql, PageProps } from "gatsby"
-import Img from "gatsby-image"
 import { css } from "@emotion/css"
 
 interface HomeQuery {
@@ -15,7 +14,6 @@ interface HomeQuery {
 const wrapperStyles = (backgroundImage: string) => css`
   & {
     background: url(${backgroundImage}) center center no-repeat;
-
     min-height: 100vh;
     background-repeat: none;
   }
