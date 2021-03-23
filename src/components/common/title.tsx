@@ -9,7 +9,6 @@ interface TitleProps {
 
 const styles = css`
   & {
-    border: 1px solid red;
   }
 `
 
