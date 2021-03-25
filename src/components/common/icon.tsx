@@ -1,6 +1,6 @@
+import React from "react"
 import { remToPx } from "@/styles/css-utils"
 import { cx, css } from "@emotion/css"
-import React from "react"
 
 interface IconProps {
   src: string
