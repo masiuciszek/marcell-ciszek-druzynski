@@ -1,16 +1,20 @@
 import * as React from "react"
 import Title from "@/components/common/title"
-import Layout from "@/components/layout"
+import Layout from "@/components/layout/layout"
 import { RootWrapper } from "@/components/common/root-wrapper"
 import { graphql, PageProps } from "gatsby"
 import { css, cx } from "@emotion/css"
 import { Seo } from "@/components/seo"
 import Typed from "react-typed"
 import Image from "gatsby-image"
+import { above } from "@/styles/media-query"
 
 interface HomeQuery {
-  marcell: {
-    publicURL: string
+  mLogo: {
+    name: string
+    childImageSharp: {
+      fluid: any
+    }
   }
 }
 
@@ -34,11 +38,15 @@ const rootWrapperStyles = css`
 
 const wrapperStyles = css`
   & {
-    display: grid;
     border: 2px solid blue;
     width: 100%;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
+    display: flex;
+    flex-direction: column;
+    @media ${above.tabletL} {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+    }
   }
 `
 const titleStyles = css`
@@ -54,10 +62,16 @@ const colSttyles = css`
   & {
     flex: 1 0 50%;
     height: 20rem;
+    text-align: center;
+    border: 2px solid red;
+    .m-logo {
+      margin: 0 auto;
+    }
   }
 `
 
 const HomePage = ({ data }: PageProps<HomeQuery>) => {
+  console.log("data", data.mLogo.childImageSharp)
   return (
     <Layout>
       <Seo />
@@ -76,8 +90,9 @@ const HomePage = ({ data }: PageProps<HomeQuery>) => {
               loop
             />
           </Title>
+          {/* TODO: choudl be changed later on */}
           <div className={colSttyles}>
-            <p>Hello</p>
+            <Image className="m-logo" fluid={data.mLogo.childImageSharp.fluid} />
           </div>
         </div>
       </RootWrapper>
@@ -87,8 +102,14 @@ const HomePage = ({ data }: PageProps<HomeQuery>) => {
 
 export const HOME_PAGE_QUERY = graphql`
   {
-    marcell: file(relativePath: { eq: "mcd.svg" }) {
-      publicURL
+    mLogo: file(relativePath: { eq: "mmm.png" }) {
+      name
+      childImageSharp {
+        fluid(maxWidth: 300, quality: 100) {
+          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluidLimitPresentationSize
+        }
+      }
     }
   }
 `

@@ -2,6 +2,7 @@ import * as React from "react"
 import { GlobalStyles } from "@/styles/global-styles"
 import Fonts from "@/styles/fonts"
 import { cx, css } from "@emotion/css"
+import { Header } from "./header"
 
 const mainStyles = css`
   & {
@@ -19,6 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ children, className }) => {
     <>
       <GlobalStyles />
       <Fonts />
+      <Header />
       <main className={cx(mainStyles, className, "main-wrapper")}>{children}</main>
     </>
   )

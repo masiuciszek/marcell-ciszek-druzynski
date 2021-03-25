@@ -18,7 +18,7 @@ const config = {
   // Your username on Twitter (without @). Used in SEO meta tags
   twitterUsername: "MasiuCD",
   // Path to main favicon. Recommended size: 512x512. Other sizes are generated automatically
-  favicon: "src/favicons/favicon.ico",
+  favicon: `${__dirname}/src/images/mmm.png`,
   // Theme color. Used as color of device toolbar in supported browsers
   themeColor: "#0e182a",
   // Background color. Used as background on PWA launch screen. Recommended to make it the same as body color
@@ -26,9 +26,9 @@ const config = {
 }
 
 const routes = [
-  { name: "about", route: "/about" },
-  { name: "posts", route: "/posts" },
-  { name: "get in touch", route: "/contact" },
+  { name: "About", route: "/about" },
+  { name: "Blog", route: "/blog" },
+  { name: "Get in touch", route: "/contact" },
 ]
 
 module.exports = {
@@ -46,12 +46,6 @@ module.exports = {
   plugins: [
     "gatsby-plugin-emotion",
     "gatsby-plugin-image",
-    // {
-    //   resolve: "gatsby-plugin-google-analytics",
-    //   options: {
-    //     trackingId: "",
-    //   },
-    // },
     "gatsby-plugin-react-helmet",
     {
       resolve: "gatsby-plugin-manifest",
@@ -70,6 +64,13 @@ module.exports = {
         path: path.join(__dirname, `src`, `images`),
       },
       __key: "images",
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `icons`,
+        path: `${__dirname}/src/images/icons`,
+      },
     },
     {
       resolve: "gatsby-source-filesystem",

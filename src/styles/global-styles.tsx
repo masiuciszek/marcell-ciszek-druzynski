@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Global, css } from "@emotion/react"
+import { pxToRem } from "./css-utils"
 
 export const GlobalStyles = () => {
   return (
@@ -7,10 +8,10 @@ export const GlobalStyles = () => {
       styles={css`
         :root {
           /* colors */
-          --dark-: #384357;
+          --dark: #384357;
           --dark-blue: #222f44;
-          --dark-blue-2: #132035;
-          --dark-blue-main: #0e182a;
+          --dark-blue-2: #0e182a;
+          --dark-blue-main: #132035;
           --light-blue: #81a7ff;
           --grey: #e2e8f0;
           --grey-dark: #718096;
@@ -19,6 +20,7 @@ export const GlobalStyles = () => {
           /* elements */
           --background: var(--dark-main);
           --p: var(--dark-blue-3);
+          --a: var(--grey);
 
           /* Typography */
           --h1: 3.052rem;
@@ -27,6 +29,10 @@ export const GlobalStyles = () => {
           --h4: 1.563rem;
           --h5: 1.25rem;
           --small: 0.8rem;
+
+          /* Element-size */
+          --header-size: 6rem;
+          --a-size: ${pxToRem(16)};
 
           /* elevations */
           --sh-xs: 0 0 0 1px var(--transparentDark);
@@ -129,6 +135,11 @@ export const GlobalStyles = () => {
         samp {
           font-family: "HCo Operator Mono";
           font-weight: 300;
+        }
+
+        a {
+          text-decoration: none;
+          color: var(--a);
         }
       `}
     />
