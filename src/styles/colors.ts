@@ -1,6 +1,7 @@
 export const baseColors = {
-  dark: "var(--dark-main)",
-  p: "var(--dark-blue-3)",
-  a: "var(--grey)",
-  stroke: "var(--light-blue)",
+  background: "var(--background)",
+  p: "var(--p)",
+  a: "var(--a)",
+  stroke: "var(--stroke)",
+  highlightShadow: "var(--highlight-shadow)",
 }

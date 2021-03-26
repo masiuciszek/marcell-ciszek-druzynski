@@ -1,17 +1,14 @@
 import * as React from "react"
-import Title from "@/components/common/title"
 import Layout from "@/components/layout/layout"
 import { RootWrapper } from "@/components/common/root-wrapper"
 import { graphql, Link, PageProps } from "gatsby"
 import { css, cx } from "@emotion/css"
 import { Seo } from "@/components/seo"
 import Typed from "react-typed"
-import Image from "gatsby-image"
 import { above } from "@/styles/media-query"
-import Hero from "@/components/hero"
 import { pxToRem } from "@/styles/css-utils"
 import ContentWrapper from "@/components/common/content-wrapper"
-import { baseColors } from "@/styles/colors"
+import StrokeWrapper from "@/components/common/stroke-wrapper"
 
 interface HomeQuery {
   mLogo: {
@@ -23,8 +20,7 @@ interface HomeQuery {
 }
 
 const textLines = [
-  `I am .`,
-  `Developer from gothenburg Sweden`,
+  `Happy <strong>Developer</strong>`,
   `Endurance <strong>freak</strong> `,
   `Animal <strong>lover</strong> `,
   `<strong>Loves</strong> to create stuff`,
@@ -42,7 +38,6 @@ const rootWrapperStyles = css`
 
 const wrapperStyles = css`
   & {
-    border: 2px solid blue;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -56,13 +51,10 @@ const wrapperStyles = css`
 const sectionStyles = css`
   & {
     flex: 1 0 50%;
-    border: 2px solid white;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
-    span {
-      color: ${baseColors.stroke};
-    }
+    padding: 0.5rem;
   }
 `
 
@@ -72,7 +64,17 @@ const columnStyles = css`
     flex-flow: column wrap;
     justify-content: center;
     flex: 1 0 50%;
-    border: 2px solid pink;
+    padding: 0.5rem;
+  }
+`
+
+const stokeStyles = css`
+  & {
+    &::after {
+      bottom: ${pxToRem(9)};
+      height: 0.5rem;
+      transform: rotate(-3deg);
+    }
   }
 `
 
@@ -85,8 +87,9 @@ const HomePage = ({ data }: PageProps<HomeQuery>) => {
         <div className={cx(wrapperStyles, "home-wrapper")}>
           <ContentWrapper className={sectionStyles}>
             <h3>
-              Hi my <span>name</span> is <span>Marcell</span>, I create stuff with{" "}
-              <span>&lt;code/&gt;</span>.
+              Hi my <StrokeWrapper className={stokeStyles}>name</StrokeWrapper> is{" "}
+              <StrokeWrapper>Marcell</StrokeWrapper>, I create stuff with{" "}
+              <StrokeWrapper className={stokeStyles}>&lt;code/&gt;</StrokeWrapper>.
             </h3>
             <p>Writing and learning is my also passion</p>
             <Link to="/">Blog</Link>

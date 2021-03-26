@@ -13,15 +13,17 @@ export const GlobalStyles = () => {
           --dark-blue-2: #0e182a;
           --dark-blue-main: #132035;
           --light-blue: #81a7ff;
+          --light-blue-shadow: rgba(127, 167, 255, 0.45);
           --grey: #e2e8f0;
           --grey-dark: #718096;
           --white: #fff;
 
           /* elements */
           --background: var(--dark-main);
-          --p: var(--dark-blue-3);
+          --p: var(--white);
           --a: var(--grey);
           --stroke: var(--light-blue);
+          --highlight-shadow: var(--light-blue-shadow);
 
           /* Typography */
           --h1: 3.052rem;
@@ -74,11 +76,15 @@ export const GlobalStyles = () => {
           --background: var(--dark-main);
           --p: var(--white);
           --stroke: var(--light-blue);
+          --a: var(--grey);
+          --highlight-shadow: var(--light-blue-shadow);
         }
         body[data-theme="dark"] {
           --background: var(--dark-main);
           --p: var(--white);
           --stroke: var(--light-blue);
+          --a: var(--grey-dark);
+          --highlight-shadow: var(--light-blue-shadow);
         }
 
         p {
