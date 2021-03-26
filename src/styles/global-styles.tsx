@@ -21,6 +21,7 @@ export const GlobalStyles = () => {
           --background: var(--dark-main);
           --p: var(--dark-blue-3);
           --a: var(--grey);
+          --stroke: var(--light-blue);
 
           /* Typography */
           --h1: 3.052rem;

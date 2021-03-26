@@ -28,6 +28,7 @@ const config = {
 const routes = [
   { name: "About", route: "/about" },
   { name: "Blog", route: "/blog" },
+  { name: "Projects", route: "/projects" },
   { name: "Get in touch", route: "/contact" },
 ]
 

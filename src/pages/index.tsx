@@ -2,13 +2,16 @@ import * as React from "react"
 import Title from "@/components/common/title"
 import Layout from "@/components/layout/layout"
 import { RootWrapper } from "@/components/common/root-wrapper"
-import { graphql, PageProps } from "gatsby"
+import { graphql, Link, PageProps } from "gatsby"
 import { css, cx } from "@emotion/css"
 import { Seo } from "@/components/seo"
 import Typed from "react-typed"
 import Image from "gatsby-image"
 import { above } from "@/styles/media-query"
 import Hero from "@/components/hero"
+import { pxToRem } from "@/styles/css-utils"
+import ContentWrapper from "@/components/common/content-wrapper"
+import { baseColors } from "@/styles/colors"
 
 interface HomeQuery {
   mLogo: {
@@ -20,20 +23,20 @@ interface HomeQuery {
 }
 
 const textLines = [
-  ` I am Marcell Ciszek Druzynski.`,
+  `I am .`,
   `Developer from gothenburg Sweden`,
   `Endurance <strong>freak</strong> `,
   `Animal <strong>lover</strong> `,
-  `And loves to create things`,
+  `<strong>Loves</strong> to create stuff`,
 ]
 
 const rootWrapperStyles = css`
   & {
     border: 2px solid red;
-    min-height: 75vh;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
+    min-height: 65vh;
+    margin-right: auto !important;
   }
 `
 
@@ -43,28 +46,33 @@ const wrapperStyles = css`
     width: 100%;
     display: flex;
     flex-direction: column;
+    min-height: ${pxToRem(500)};
     @media ${above.tabletL} {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 20px;
+      flex-flow: row wrap;
     }
-  }
-`
-const titleStyles = css`
-  & {
-    border: 2px solid red;
   }
 `
 
-const colSttyles = css`
+const sectionStyles = css`
   & {
     flex: 1 0 50%;
-    height: 20rem;
-    text-align: center;
-    border: 2px solid red;
-    .m-logo {
-      margin: 0 auto;
+    border: 2px solid white;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    span {
+      color: ${baseColors.stroke};
     }
+  }
+`
+
+const columnStyles = css`
+  & {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    flex: 1 0 50%;
+    border: 2px solid pink;
   }
 `
 
@@ -73,26 +81,28 @@ const HomePage = ({ data }: PageProps<HomeQuery>) => {
     <Layout>
       <Seo />
       {/* TODO: work with the background image when we have a more propper layout */}
-      <Title
-        mainTitle="Hi my name is Marcell, I create stuff with code."
-        secondaryTitle="Writing and learning is my second passion "
-        className={titleStyles}
-      ></Title>
       <RootWrapper withSection className={rootWrapperStyles}>
-        <div className={cx(wrapperStyles, "wrapper")}>
-          <Typed
-            style={{
-              maxWidth: 120,
-              fontSize: 40,
-            }}
-            strings={textLines}
-            typeSpeed={60}
-            backSpeed={50}
-            loop
-          />
-          {/* TODO: choudl be changed later on */}
-          <div className={colSttyles}>
-            <Image className="m-logo" fluid={data.mLogo.childImageSharp.fluid} />
+        <div className={cx(wrapperStyles, "home-wrapper")}>
+          <ContentWrapper className={sectionStyles}>
+            <h3>
+              Hi my <span>name</span> is <span>Marcell</span>, I create stuff with{" "}
+              <span>&lt;code/&gt;</span>.
+            </h3>
+            <p>Writing and learning is my also passion</p>
+            <Link to="/">Blog</Link>
+          </ContentWrapper>
+          <div className={cx(columnStyles, "col")}>
+            <Typed
+              style={{
+                maxWidth: 320,
+                fontSize: 34,
+              }}
+              strings={textLines}
+              typeSpeed={60}
+              backSpeed={50}
+              loop
+            />
+            <h4>Some Icon here?</h4>
           </div>
         </div>
       </RootWrapper>
