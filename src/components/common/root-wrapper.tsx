@@ -3,7 +3,7 @@ import { cx, css } from "@emotion/css"
 
 interface RootWrapperProps {
   className?: string
-  withSection: boolean
+  withSection?: boolean
 }
 const styles = css`
   & {

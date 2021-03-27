@@ -20,14 +20,36 @@ const colors: Colors = {
   white: "var(--white)",
 }
 
+const baseColors = {
+  background: "var(--background)",
+  p: "var(--p)",
+  a: "var(--a)",
+  stroke: "var(--stroke)",
+  highlightShadow: "var(--highlight-shadow)",
+}
+
 interface Elements {
   background: string
   p: string
+  maxWidth: string
+  borderRadiusS: string
+  btnBackgroundOne: string
+  btnBackgroundTwo: string
+  highlightShadow: string
 }
 
 const elements: Elements = {
-  background: "var(--dark-main)",
-  p: "var(--dark-blue-3)",
+  background: "var(--background)",
+  p: "var(--p)",
+  maxWidth: "var(--max-width)",
+  borderRadiusS: "var(--border-radius-s)",
+  btnBackgroundOne: "var(--btn-bg-1)",
+  btnBackgroundTwo: "var(--btn-bg-2)",
+  highlightShadow: "var(--highlight-shadow)",
+}
+
+const transition = {
+  main: "var(--main-trans)",
 }
 
 interface Elevations {
@@ -53,4 +75,4 @@ const elevations: Elevations = {
   shadowOutline: "var(--sh-outline)",
 }
 
-export { colors, elements, elevations }
+export { colors, elements, elevations, transition, baseColors }

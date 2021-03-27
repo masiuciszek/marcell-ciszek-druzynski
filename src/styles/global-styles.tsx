@@ -8,7 +8,7 @@ export const GlobalStyles = () => {
       styles={css`
         :root {
           /* colors */
-          --dark: #384357;
+          --dark-main: #384357;
           --dark-blue: #222f44;
           --dark-blue-2: #0e182a;
           --dark-blue-main: #132035;
@@ -19,11 +19,13 @@ export const GlobalStyles = () => {
           --white: #fff;
 
           /* elements */
-          --background: var(--dark-main);
+          --background: var(--dark-blue-main);
           --p: var(--white);
           --a: var(--grey);
           --stroke: var(--light-blue);
           --highlight-shadow: var(--light-blue-shadow);
+          --btn-bg-1: var(--light-blue);
+          --btn-bg-2: var(--dark-blue);
 
           /* Typography */
           --h1: 3.052rem;
@@ -36,6 +38,12 @@ export const GlobalStyles = () => {
           /* Element-size */
           --header-size: 6rem;
           --a-size: ${pxToRem(16)};
+
+          /* border-radius */
+          --border-radius-s: 4px;
+
+          /* transition */
+          --main-trans: 300ms ease all;
 
           /* elevations */
           --sh-xs: 0 0 0 1px var(--transparentDark);
@@ -73,18 +81,22 @@ export const GlobalStyles = () => {
         }
 
         body[data-theme="light"] {
-          --background: var(--dark-main);
+          --background: var(--dark-blue-main);
           --p: var(--white);
           --stroke: var(--light-blue);
           --a: var(--grey);
           --highlight-shadow: var(--light-blue-shadow);
+          --btn-bg-1: var(--light-blue);
+          --btn-bg-2: var(--dark-blue);
         }
         body[data-theme="dark"] {
-          --background: var(--dark-main);
+          --background: var(--dark-blue-main);
           --p: var(--white);
           --stroke: var(--light-blue);
           --a: var(--grey-dark);
           --highlight-shadow: var(--light-blue-shadow);
+          --btn-bg-1: var(--light-blue);
+          --btn-bg-2: var(--dark-blue);
         }
 
         p {

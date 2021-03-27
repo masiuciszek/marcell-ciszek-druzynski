@@ -24,6 +24,7 @@ const headerStyles = css`
     border: 2px solid #fff;
     min-height: var(--header-size);
     margin-bottom: ${pxToRem(20)};
+    width: 100%;
   }
 `
 interface HeaderQueryType {
@@ -54,6 +55,7 @@ export const Header = () => {
   return (
     <header className={headerStyles}>
       <h2>Marcell</h2>
+      <p>icon here</p>
       <IconButton>
         <Icon className={iconStyles} src={sun.publicURL} alt={sun.name} />
       </IconButton>

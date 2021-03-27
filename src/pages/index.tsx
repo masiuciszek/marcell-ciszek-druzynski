@@ -1,127 +1,130 @@
 import * as React from "react"
 import Layout from "@/components/layout/layout"
-import { RootWrapper } from "@/components/common/root-wrapper"
-import { graphql, Link, PageProps } from "gatsby"
+import { graphql, PageProps } from "gatsby"
 import { css, cx } from "@emotion/css"
 import { Seo } from "@/components/seo"
 import Typed from "react-typed"
-import { above } from "@/styles/media-query"
+import { above, below } from "@/styles/media-query"
 import { pxToRem } from "@/styles/css-utils"
 import ContentWrapper from "@/components/common/content-wrapper"
-import StrokeWrapper from "@/components/common/stroke-wrapper"
+import styled from "@emotion/styled"
+import { LinkElement } from "@/components/common/link"
+import { StaticImage } from "gatsby-plugin-image"
+import { elements } from "@/styles/styled-record"
 
 interface HomeQuery {
-  mLogo: {
+  round: {
+    id: string
     name: string
-    childImageSharp: {
-      fluid: any
-    }
+    publicURL: string
   }
+  stains: any
 }
 
 const textLines = [
-  `Happy <strong>Developer</strong>`,
-  `Endurance <strong>freak</strong> `,
-  `Animal <strong>lover</strong> `,
-  `<strong>Loves</strong> to create stuff`,
+  `Happy <strong class="strong-text">&#60;Developer/&#62;</strong>`,
+  `&#60;Endurance/&#62; <strong class="strong-text">freak</strong> `,
+  `&#60;Animal/&#62;<strong class="strong-text">lover</strong> `,
+  `<strong class="strong-text">&#60;Loves/&#62;</strong> to create stuff`,
 ]
 
-const rootWrapperStyles = css`
+const contentWrapperStyles = css`
   & {
-    border: 2px solid red;
-    display: flex;
-    align-items: center;
-    min-height: 65vh;
-    margin-right: auto !important;
-  }
-`
-
-const wrapperStyles = css`
-  & {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    min-height: ${pxToRem(500)};
-    @media ${above.tabletL} {
-      flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    @media ${above.tablet} {
+      flex-direction: row;
+    }
+    .strong-text {
+      position: relative;
+      display: inline-block;
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 1rem;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background-color: ${elements.highlightShadow};
+      }
     }
   }
 `
 
-const sectionStyles = css`
-  & {
-    flex: 1 0 50%;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    padding: 0.5rem;
-  }
-`
+const ImageWrapper = styled.div`
+  flex: 1 0 50%;
 
-const columnStyles = css`
-  & {
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    flex: 1 0 50%;
-    padding: 0.5rem;
-  }
-`
-
-const stokeStyles = css`
-  & {
-    &::after {
-      bottom: ${pxToRem(9)};
-      height: 0.5rem;
-      transform: rotate(-3deg);
+  img {
+    @media ${above.mobileS} {
+      object-fit: cover;
+      width: 300px;
     }
+  }
+`
+
+const Capture = styled.div`
+  flex: 1 0 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+`
+
+const stroke = css`
+  & {
+    width: 100%;
+    height: 12px;
+    background-color: #fff;
+    background-image: url("https://images.pexels.com/photos/3408354/pexels-photo-3408354.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position: center;
   }
 `
 
 const HomePage = ({ data }: PageProps<HomeQuery>) => {
+  const { stains } = data
+
   return (
-    <Layout>
+    <Layout fluid>
       <Seo />
-      {/* TODO: work with the background image when we have a more propper layout */}
-      <RootWrapper withSection className={rootWrapperStyles}>
-        <div className={cx(wrapperStyles, "home-wrapper")}>
-          <ContentWrapper className={sectionStyles}>
-            <h3>
-              Hi my <StrokeWrapper className={stokeStyles}>name</StrokeWrapper> is{" "}
-              <StrokeWrapper>Marcell</StrokeWrapper>, I create stuff with{" "}
-              <StrokeWrapper className={stokeStyles}>&lt;code/&gt;</StrokeWrapper>.
-            </h3>
-            <p>Writing and learning is my also passion</p>
-            <Link to="/">Blog</Link>
-          </ContentWrapper>
-          <div className={cx(columnStyles, "col")}>
-            <Typed
-              style={{
-                maxWidth: 320,
-                fontSize: 34,
-              }}
-              strings={textLines}
-              typeSpeed={60}
-              backSpeed={50}
-              loop
-            />
-            <h4>Some Icon here?</h4>
-          </div>
-        </div>
-      </RootWrapper>
+      {/* <div className={stroke} /> */}
+
+      <ContentWrapper className={contentWrapperStyles}>
+        <ImageWrapper>
+          <StaticImage src="../images/round-title.svg" alt="my name is marcell" />
+          {/* <img src={data.round.publicURL} alt={`${data.round.name} in japanese`} /> */}
+        </ImageWrapper>
+        <Capture>
+          <Typed
+            style={{
+              maxWidth: 520,
+              fontSize: 34,
+            }}
+            strings={textLines}
+            typeSpeed={60}
+            backSpeed={50}
+            loop
+          />
+          <LinkElement to="/" text="blog" />
+        </Capture>
+      </ContentWrapper>
     </Layout>
   )
 }
 
 export const HOME_PAGE_QUERY = graphql`
   {
-    mLogo: file(relativePath: { eq: "mmm.png" }) {
+    round: file(relativePath: { eq: "round-title.svg" }) {
+      publicURL
+      id
       name
+    }
+    stains: file(relativePath: { eq: "stains.png" }) {
       childImageSharp {
-        fluid(maxWidth: 300, quality: 100) {
-          ...GatsbyImageSharpFluid
-          ...GatsbyImageSharpFluidLimitPresentationSize
-        }
+        gatsbyImageData(formats: AUTO, layout: FULL_WIDTH)
       }
     }
   }
