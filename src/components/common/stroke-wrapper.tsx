@@ -11,7 +11,6 @@ interface StrokeWrapperProps {
 const styles = css`
   & {
     color: ${baseColors.stroke};
-    display: inline-block;
     position: relative;
     &::after {
       content: "";

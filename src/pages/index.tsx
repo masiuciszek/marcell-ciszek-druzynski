@@ -11,6 +11,7 @@ import styled from "@emotion/styled"
 import { LinkElement } from "@/components/common/link"
 import { StaticImage } from "gatsby-plugin-image"
 import { elements } from "@/styles/styled-record"
+import AnimatedWrapper from "@/components/animated/animated-wrapper"
 
 interface HomeQuery {
   round: {
@@ -24,12 +25,15 @@ interface HomeQuery {
 const textLines = [
   `Happy <strong class="strong-text">&#60;Developer/&#62;</strong>`,
   `&#60;Endurance/&#62; <strong class="strong-text">freak</strong> `,
-  `&#60;Animal/&#62;<strong class="strong-text">lover</strong> `,
+  `&#60;Animal/&#62; <strong class="strong-text">lover</strong> `,
   `<strong class="strong-text">&#60;Loves/&#62;</strong> to create stuff`,
 ]
 
 const contentWrapperStyles = css`
   & {
+    min-height: 65vh;
+    border-top: 1px solid ${elements.p};
+    border-bottom: 1px solid ${elements.p};
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -74,29 +78,26 @@ const Capture = styled.div`
   flex-direction: column;
 `
 
-const stroke = css`
-  & {
-    width: 100%;
-    height: 12px;
-    background-color: #fff;
-    background-image: url("https://images.pexels.com/photos/3408354/pexels-photo-3408354.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-    background-position: center;
-  }
-`
-
 const HomePage = ({ data }: PageProps<HomeQuery>) => {
   const { stains } = data
 
   return (
     <Layout fluid>
       <Seo />
-      {/* <div className={stroke} /> */}
 
       <ContentWrapper className={contentWrapperStyles}>
-        <ImageWrapper>
-          <StaticImage src="../images/round-title.svg" alt="my name is marcell" />
-          {/* <img src={data.round.publicURL} alt={`${data.round.name} in japanese`} /> */}
-        </ImageWrapper>
+        <AnimatedWrapper isAnimated options={{ transition: { ease: "easeOut", duration: 12 } }}>
+          <ImageWrapper>
+            <StaticImage
+              placeholder="tracedSVG"
+              src="../images/round-title.svg"
+              alt="my name is marcell"
+              layout="constrained"
+            />
+            {/* <img src={data.round.publicURL} alt={`${data.round.name} in japanese`} /> */}
+          </ImageWrapper>
+        </AnimatedWrapper>
+
         <Capture>
           <Typed
             style={{

@@ -4,6 +4,7 @@ import Fonts from "@/styles/fonts"
 import { cx, css } from "@emotion/css"
 import { Header } from "./header"
 import { elements } from "@/styles/styled-record"
+import { Footer } from "./footer"
 
 const mainStyles = (fluid = false) => css`
   & {
@@ -25,6 +26,7 @@ const Layout: React.FC<LayoutProps> = ({ children, className, fluid }) => {
       <Fonts />
       <Header />
       <main className={cx(mainStyles(fluid), className, "main-wrapper")}>{children}</main>
+      <Footer />
     </>
   )
 }

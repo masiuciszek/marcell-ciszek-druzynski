@@ -2,9 +2,9 @@ import React from "react"
 import { Nav } from "./nav"
 import { css } from "@emotion/css"
 import { graphql, useStaticQuery } from "gatsby"
-import Icon from "@/components/common/icon"
 import { buttonResetStyles, pxToRem } from "@/styles/css-utils"
 import styled from "@emotion/styled"
+import { StaticImage } from "gatsby-plugin-image"
 
 const HEADER_QUERY = graphql`
   {
@@ -45,19 +45,27 @@ const IconButton = styled.button`
   ${buttonResetStyles}
 `
 
-const iconStyles = css`
-  & {
-  }
-`
-
 export const Header = () => {
   const { moon, sun } = useStaticQuery<HeaderQueryType>(HEADER_QUERY)
+
   return (
     <header className={headerStyles}>
-      <h2>Marcell</h2>
-      <p>icon here</p>
+      <StaticImage
+        width={100}
+        src="../../images/love.svg"
+        alt="masiu logo"
+        layout="constrained"
+        placeholder="blurred"
+      />
+
       <IconButton>
-        <Icon className={iconStyles} src={sun.publicURL} alt={sun.name} />
+        <StaticImage
+          width={35}
+          layout="constrained"
+          src="../../images/icons/sun-white.svg"
+          alt="moon icon"
+          placeholder="tracedSVG"
+        />
       </IconButton>
       <Nav />
     </header>
