@@ -1,11 +1,10 @@
 import * as React from "react"
 import Layout from "@/components/layout/layout"
 import { graphql, PageProps } from "gatsby"
-import { css, cx } from "@emotion/css"
+import { css } from "@emotion/css"
 import { Seo } from "@/components/seo"
 import Typed from "react-typed"
-import { above, below } from "@/styles/media-query"
-import { pxToRem } from "@/styles/css-utils"
+import { above } from "@/styles/media-query"
 import ContentWrapper from "@/components/common/content-wrapper"
 import styled from "@emotion/styled"
 import { LinkElement } from "@/components/common/link"
@@ -79,8 +78,6 @@ const Capture = styled.div`
 `
 
 const HomePage = ({ data }: PageProps<HomeQuery>) => {
-  const { stains } = data
-
   return (
     <Layout fluid>
       <Seo />
