@@ -6,6 +6,7 @@ import { buttonResetStyles, pxToRem } from "@/styles/css-utils"
 import styled from "@emotion/styled"
 import { StaticImage } from "gatsby-plugin-image"
 import useTheme from "@/hooks/theme"
+import AnimatedWrapper from "../animated/animated-wrapper"
 
 const HEADER_QUERY = graphql`
   {
@@ -20,12 +21,13 @@ const HEADER_QUERY = graphql`
   }
 `
 const headerStyles = css`
-  & {
-    position: relative;
-    border: 2px solid #fff;
-    min-height: var(--header-size);
-    margin-bottom: ${pxToRem(20)};
-    width: 100%;
+  position: relative;
+  border: 2px solid #fff;
+  min-height: var(--header-size);
+  margin-bottom: ${pxToRem(20)};
+  width: 100%;
+  .theme-toggle-button {
+    transition: 2s ease-in-out all;
   }
 `
 interface HeaderQueryType {
@@ -50,6 +52,9 @@ export const Header = () => {
   const { moon, sun } = useStaticQuery<HeaderQueryType>(HEADER_QUERY)
   const { storedTheme, handleTheme } = useTheme()
 
+  const isMoonIcon = storedTheme === "light"
+  const isSunIcon = storedTheme === "dark"
+
   return (
     <header className={headerStyles}>
       <StaticImage
@@ -60,25 +65,30 @@ export const Header = () => {
         placeholder="blurred"
       />
 
-      <IconButton onClick={handleTheme}>
-        {storedTheme === "dark" ? (
+      <AnimatedWrapper isAnimated={isSunIcon}>
+        <IconButton onClick={handleTheme} role="button">
           <StaticImage
+            className="theme-toggle-button"
             width={35}
             layout="constrained"
             src="../../images/icons/sun-white.svg"
             alt="moon icon"
             placeholder="tracedSVG"
           />
-        ) : (
+        </IconButton>
+      </AnimatedWrapper>
+      <AnimatedWrapper isAnimated={isMoonIcon}>
+        <IconButton onClick={handleTheme} role="button">
           <StaticImage
+            className="theme-toggle-button"
             width={35}
             layout="constrained"
             src="../../images/icons/moon.svg"
             alt="moon icon"
             placeholder="tracedSVG"
           />
-        )}
-      </IconButton>
+        </IconButton>
+      </AnimatedWrapper>
       <Nav />
     </header>
   )

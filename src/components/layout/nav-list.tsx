@@ -1,5 +1,7 @@
 import { pxToRem } from "@/styles/css-utils"
+import { elements } from "@/styles/styled-record"
 import styled from "@emotion/styled"
+import { motion } from "framer-motion"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import React from "react"
 
@@ -36,6 +38,27 @@ const List = styled.ul`
   }
   a {
     font-size: var(--a-size);
+    position: relative;
+    transition: 400ms ease-in-out all;
+    display: inline-block;
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -0.1rem;
+      left: 0;
+      background-color: ${elements.stroke};
+      width: 0;
+      height: 0;
+      transition: 400ms ease-in-out all;
+      transform: rotate(-5deg);
+    }
+    &:hover {
+      transform: scale(1.045);
+      &:after {
+        width: 2rem;
+        height: 0.3rem;
+      }
+    }
   }
 `
 
@@ -43,7 +66,6 @@ export const NavList = () => {
   const {
     site: { siteMetadata },
   } = useStaticQuery<QueryType>(NAV_QUERY)
-  // console.log("routes", query.site.siteMetadata.routes)
 
   return (
     <List>

@@ -31,7 +31,6 @@ const textLines = [
 
 const contentWrapperStyles = css`
   min-height: 65vh;
-  border-top: 1px solid ${elements.p};
   border-bottom: 1px solid ${elements.p};
   display: flex;
   flex-direction: column;
@@ -80,15 +79,13 @@ const HomePage = ({ data }: PageProps<HomeQuery>) => {
   return (
     <Layout>
       <Seo />
-
       <Hero>
-        <ContentWrapper className={contentWrapperStyles} fluid>
+        <ContentWrapper className={contentWrapperStyles}>
           <AnimatedWrapper isAnimated options={{ transition: { ease: "easeOut", duration: 1.5 } }}>
             <ImageWrapper>
               <HeyMyNameIs />
             </ImageWrapper>
           </AnimatedWrapper>
-
           <Capture>
             <Typed
               style={{

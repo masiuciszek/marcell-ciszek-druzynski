@@ -10,7 +10,7 @@ const styles = (fluid = false) => css`
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
-  max-width: ${fluid ? elements.maxWidth : null};
+  max-width: ${fluid ? "100%" : elements.maxWidth};
 `
 
 const ContentWrapper: React.FC<ContentWrapperProps> = ({ children, className, fluid }) => {

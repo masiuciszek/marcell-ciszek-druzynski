@@ -2,7 +2,6 @@ import { pxToRem } from "@/styles/css-utils"
 import { css, cx } from "@emotion/css"
 import styled from "@emotion/styled"
 import { graphql, useStaticQuery } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
 import React from "react"
 import StrokeWrapper from "../common/stroke-wrapper"
 import SocialList from "../social-media/social-list"
@@ -31,11 +30,12 @@ const QUERY = graphql`
 
 const styles = css`
   min-height: 4.5em;
-  border: 2px solid red;
   display: flex;
   justify-content: center;
   flex-flow: column wrap;
   align-items: center;
+  width: 100%;
+  /* margin: 0; */
 `
 
 const Small = styled.small`

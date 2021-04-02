@@ -10,7 +10,7 @@ type isArray<T> = T extends Array<infer Member> ? Array<Member> : Array<T>
 type MetaArray = isArray<Meta>
 
 interface SeoProps {
-  descreption?: string
+  description?: string
   title?: string
   meta?: MetaArray
 }
@@ -26,7 +26,7 @@ interface SeoQuery {
 }
 const genererateMetaData = (name: string, content: string) => ({ name, content })
 
-export const Seo = ({ descreption, title, meta = [] }: SeoProps) => {
+export const Seo = ({ description: descreption, title, meta = [] }: SeoProps) => {
   const {
     site: { siteMetadata },
   } = useStaticQuery<SeoQuery>(graphql`

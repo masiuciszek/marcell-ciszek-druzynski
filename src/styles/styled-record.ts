@@ -31,21 +31,25 @@ const baseColors = {
 interface Elements {
   background: string
   p: string
+  a: string
   maxWidth: string
   borderRadiusS: string
   btnBackgroundOne: string
   btnBackgroundTwo: string
   highlightShadow: string
+  stroke: string
 }
 
 const elements: Elements = {
   background: "var(--background)",
   p: "var(--p)",
+  a: "var(--a)",
   maxWidth: "var(--max-width)",
   borderRadiusS: "var(--border-radius-s)",
   btnBackgroundOne: "var(--btn-bg-1)",
   btnBackgroundTwo: "var(--btn-bg-2)",
   highlightShadow: "var(--highlight-shadow)",
+  stroke: "var(--stroke)",
 }
 
 const transition = {
