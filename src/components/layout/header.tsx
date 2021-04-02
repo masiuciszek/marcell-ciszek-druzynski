@@ -5,6 +5,7 @@ import { graphql, useStaticQuery } from "gatsby"
 import { buttonResetStyles, pxToRem } from "@/styles/css-utils"
 import styled from "@emotion/styled"
 import { StaticImage } from "gatsby-plugin-image"
+import useTheme from "@/hooks/theme"
 
 const HEADER_QUERY = graphql`
   {
@@ -47,6 +48,7 @@ const IconButton = styled.button`
 
 export const Header = () => {
   const { moon, sun } = useStaticQuery<HeaderQueryType>(HEADER_QUERY)
+  const { storedTheme, handleTheme } = useTheme()
 
   return (
     <header className={headerStyles}>
@@ -58,14 +60,24 @@ export const Header = () => {
         placeholder="blurred"
       />
 
-      <IconButton>
-        <StaticImage
-          width={35}
-          layout="constrained"
-          src="../../images/icons/sun-white.svg"
-          alt="moon icon"
-          placeholder="tracedSVG"
-        />
+      <IconButton onClick={handleTheme}>
+        {storedTheme === "dark" ? (
+          <StaticImage
+            width={35}
+            layout="constrained"
+            src="../../images/icons/sun-white.svg"
+            alt="moon icon"
+            placeholder="tracedSVG"
+          />
+        ) : (
+          <StaticImage
+            width={35}
+            layout="constrained"
+            src="../../images/icons/moon.svg"
+            alt="moon icon"
+            placeholder="tracedSVG"
+          />
+        )}
       </IconButton>
       <Nav />
     </header>

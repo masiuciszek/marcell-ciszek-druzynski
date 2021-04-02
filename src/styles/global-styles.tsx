@@ -12,6 +12,7 @@ export const GlobalStyles = () => {
           --dark-blue: #222f44;
           --dark-blue-2: #0e182a;
           --dark-blue-main: #132035;
+          --dark-blue-main-shadow: rgba(19, 32, 53, 0.45);
           --light-blue: #81a7ff;
           --light-blue-shadow: rgba(127, 167, 255, 0.45);
           --grey: #e2e8f0;
@@ -26,6 +27,7 @@ export const GlobalStyles = () => {
           --highlight-shadow: var(--light-blue-shadow);
           --btn-bg-1: var(--light-blue);
           --btn-bg-2: var(--dark-blue);
+          --circle: var(--dark-blue);
 
           /* Typography */
           --h1: 3.052rem;
@@ -76,27 +78,29 @@ export const GlobalStyles = () => {
             Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
           font-weight: 400;
           line-height: 1.75;
-          background: var(--dark-blue-main);
-          color: var(--white);
+          background: var(--background);
+          color: var(--p);
         }
 
         body[data-theme="light"] {
-          --background: var(--dark-blue-main);
-          --p: var(--white);
+          --background: var(--white);
+          --p: var(--dark-blue-2);
           --stroke: var(--light-blue);
-          --a: var(--grey);
-          --highlight-shadow: var(--light-blue-shadow);
+          --a: var(--dark-blue-2);
+          --highlight-shadow: var(--dark-blue-main-shadow);
           --btn-bg-1: var(--light-blue);
           --btn-bg-2: var(--dark-blue);
+          --circle: var(--dark-blue);
         }
         body[data-theme="dark"] {
           --background: var(--dark-blue-main);
           --p: var(--white);
           --stroke: var(--light-blue);
-          --a: var(--grey-dark);
+          --a: var(--white);
           --highlight-shadow: var(--light-blue-shadow);
           --btn-bg-1: var(--light-blue);
           --btn-bg-2: var(--dark-blue);
+          --circle: var(--light-blue);
         }
 
         p {
@@ -159,6 +163,10 @@ export const GlobalStyles = () => {
         a {
           text-decoration: none;
           color: var(--a);
+        }
+
+        #circle {
+          fill: var(--circle);
         }
       `}
     />

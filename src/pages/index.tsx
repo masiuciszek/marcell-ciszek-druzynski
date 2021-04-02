@@ -8,9 +8,10 @@ import { above } from "@/styles/media-query"
 import ContentWrapper from "@/components/common/content-wrapper"
 import styled from "@emotion/styled"
 import { LinkElement } from "@/components/common/link"
-import { StaticImage } from "gatsby-plugin-image"
 import { elements } from "@/styles/styled-record"
 import AnimatedWrapper from "@/components/animated/animated-wrapper"
+import Hero from "@/components/hero"
+import HeyMyNameIs from "@/components/icons/my-name-is"
 
 interface HomeQuery {
   round: {
@@ -29,30 +30,28 @@ const textLines = [
 ]
 
 const contentWrapperStyles = css`
-  & {
-    min-height: 65vh;
-    border-top: 1px solid ${elements.p};
-    border-bottom: 1px solid ${elements.p};
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 2rem auto;
-    @media ${above.tablet} {
-      flex-direction: row;
-    }
-    .strong-text {
-      position: relative;
-      display: inline-block;
-      &:after {
-        content: "";
-        position: absolute;
-        bottom: 1rem;
-        left: 0;
-        width: 100%;
-        height: 8px;
-        background-color: ${elements.highlightShadow};
-      }
+  min-height: 65vh;
+  border-top: 1px solid ${elements.p};
+  border-bottom: 1px solid ${elements.p};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  @media ${above.tablet} {
+    flex-direction: row;
+  }
+  .strong-text {
+    position: relative;
+    display: inline-block;
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 1rem;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background-color: ${elements.highlightShadow};
     }
   }
 `
@@ -79,36 +78,32 @@ const Capture = styled.div`
 
 const HomePage = ({ data }: PageProps<HomeQuery>) => {
   return (
-    <Layout fluid>
+    <Layout>
       <Seo />
 
-      <ContentWrapper className={contentWrapperStyles}>
-        <AnimatedWrapper isAnimated options={{ transition: { ease: "easeOut", duration: 12 } }}>
-          <ImageWrapper>
-            <StaticImage
-              placeholder="tracedSVG"
-              src="../images/round-title.svg"
-              alt="my name is marcell"
-              layout="constrained"
-            />
-            {/* <img src={data.round.publicURL} alt={`${data.round.name} in japanese`} /> */}
-          </ImageWrapper>
-        </AnimatedWrapper>
+      <Hero>
+        <ContentWrapper className={contentWrapperStyles} fluid>
+          <AnimatedWrapper isAnimated options={{ transition: { ease: "easeOut", duration: 1.5 } }}>
+            <ImageWrapper>
+              <HeyMyNameIs />
+            </ImageWrapper>
+          </AnimatedWrapper>
 
-        <Capture>
-          <Typed
-            style={{
-              maxWidth: 520,
-              fontSize: 34,
-            }}
-            strings={textLines}
-            typeSpeed={60}
-            backSpeed={50}
-            loop
-          />
-          <LinkElement to="/" text="blog" />
-        </Capture>
-      </ContentWrapper>
+          <Capture>
+            <Typed
+              style={{
+                maxWidth: 520,
+                fontSize: 34,
+              }}
+              strings={textLines}
+              typeSpeed={60}
+              backSpeed={50}
+              loop
+            />
+            <LinkElement to="/" text="blog" />
+          </Capture>
+        </ContentWrapper>
+      </Hero>
     </Layout>
   )
 }
