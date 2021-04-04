@@ -68,18 +68,19 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `icons`,
-        path: `${__dirname}/src/images/icons`,
+        name: `posts`,
+        path: `${__dirname}/posts`,
       },
+      __key: "posts",
     },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "pages",
-        path: "./src/pages/",
-      },
-      __key: "pages",
-    },
+    // {
+    //   resolve: "gatsby-source-filesystem",
+    //   options: {
+    //     name: "pages",
+    //     path: "./src/pages/",
+    //   },
+    //   __key: "pages",
+    // },
     {
       resolve: `gatsby-plugin-typescript`,
       options: {
