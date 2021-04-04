@@ -49,7 +49,7 @@ const List = styled.ul`
       background-color: ${elements.stroke};
       width: 0;
       height: 0;
-      transition: 400ms ease-in-out all;
+      transition: 200ms ease all;
       transform: rotate(-5deg);
     }
     &:hover {

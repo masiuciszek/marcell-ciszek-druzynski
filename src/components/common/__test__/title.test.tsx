@@ -4,9 +4,13 @@ import Title from "../title"
 
 describe("Title", () => {
   test("renders as expected", () => {
-    expect(2 + 2).toBe(4)
     const mainTitle = "mainTitle"
-    render(<Title mainTitle={mainTitle} />)
-    screen.debug()
+    const secondaryTitle = "secondayTitle"
+    const className = "className"
+    render(<Title mainTitle={mainTitle} secondaryTitle={secondaryTitle} className={className} />)
+    expect(screen.getByText(mainTitle)).toBeInTheDocument()
+    expect(screen.getByText(secondaryTitle)).toBeInTheDocument()
+    expect(screen.getByTestId("page-title-component")).toHaveClass(className)
+    // screen.debug()
   })
 })

@@ -6,8 +6,9 @@ import Title from "@/components/common/title"
 import ContentWrapper from "@/components/common/content-wrapper"
 import { css } from "@emotion/css"
 import Hero from "@/components/hero"
-import { IGatsbyImageData } from "gatsby-plugin-image"
-import { FileNode, IGatsbyImageDataParent } from "gatsby-plugin-image/dist/src/components/hooks"
+import { ImageDataLike } from "@/types/types"
+import styled from "@emotion/styled"
+import { elements } from "@/styles/styled-record"
 
 const notFoundPageStyles = css`
   margin: 0 auto;
@@ -17,13 +18,39 @@ const notFoundPageStyles = css`
   align-items: center;
 `
 
-type ImageDataLike = FileNode | IGatsbyImageDataParent | IGatsbyImageData
-
 interface NotFoundPageProps {
   hero: {
     childImageSharp: ImageDataLike
   }
 }
+
+const StyledLink = styled(Link)`
+  display: inline-block;
+  background-color: ${elements.background};
+  width: 11rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  border: 1px solid ${elements.stroke};
+  color: ${elements.a};
+  transition: 200ms ease all;
+  &:hover {
+    background-color: ${elements.p};
+    color: ${elements.background};
+    width: 10.9rem;
+  }
+`
+
+const titleStyles = css`
+  h1,
+  h3 {
+    color: ${elements.background};
+    text-shadow: 1px 2px ${elements.p};
+  }
+`
 
 const NotFoundPage = ({ location, data }: PageProps<NotFoundPageProps>) => {
   const { hero } = data
@@ -33,10 +60,11 @@ const NotFoundPage = ({ location, data }: PageProps<NotFoundPageProps>) => {
       <Hero image={hero as ImageDataLike}>
         <ContentWrapper className={notFoundPageStyles}>
           <Title
+            className={titleStyles}
             mainTitle={`Oops something went wrong, could not find page ${location.pathname}`}
             secondaryTitle="No worries I will help you to get back"
           >
-            <Link to="/">Back Home</Link>
+            <StyledLink to="/">Back Home</StyledLink>
           </Title>
         </ContentWrapper>
       </Hero>
@@ -46,9 +74,13 @@ const NotFoundPage = ({ location, data }: PageProps<NotFoundPageProps>) => {
 
 export const NOT_FOUND_PAGE_QUERY = graphql`
   {
-    hero: file(relativePath: { eq: "jp-404.jpg" }) {
+    hero: file(relativePath: { eq: "jp-view-1.png" }) {
       childImageSharp {
-        gatsbyImageData(layout: CONSTRAINED, tracedSVGOptions: { blackOnWhite: true })
+        gatsbyImageData(
+          quality: 90
+          layout: CONSTRAINED
+          tracedSVGOptions: { blackOnWhite: true, threshold: 90 }
+        )
       }
     }
   }

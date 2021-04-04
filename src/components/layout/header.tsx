@@ -1,7 +1,7 @@
 import React from "react"
 import { Nav } from "./nav"
 import { css } from "@emotion/css"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import { buttonResetStyles, pxToRem } from "@/styles/css-utils"
 import styled from "@emotion/styled"
 import { StaticImage } from "gatsby-plugin-image"
@@ -22,7 +22,6 @@ const HEADER_QUERY = graphql`
 `
 const headerStyles = css`
   position: relative;
-  border: 2px solid #fff;
   min-height: var(--header-size);
   margin-bottom: ${pxToRem(20)};
   width: 100%;
@@ -57,13 +56,15 @@ export const Header = () => {
 
   return (
     <header className={headerStyles}>
-      <StaticImage
-        width={100}
-        src="../../images/love.svg"
-        alt="masiu logo"
-        layout="constrained"
-        placeholder="blurred"
-      />
+      <Link to="/">
+        <StaticImage
+          width={100}
+          src="../../images/love.svg"
+          alt="masiu logo"
+          layout="constrained"
+          placeholder="blurred"
+        />
+      </Link>
 
       <AnimatedWrapper isAnimated={isSunIcon}>
         <IconButton onClick={handleTheme} role="button">

@@ -1,10 +1,9 @@
 import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
-import { getImage, IGatsbyImageData, IImage } from "gatsby-plugin-image"
+import { getImage } from "gatsby-plugin-image"
 import { BgImage } from "gbimage-bridge"
-import { FileNode, IGatsbyImageDataParent } from "gatsby-plugin-image/dist/src/components/hooks"
+import { ImageDataLike } from "@/types/types"
 
-type ImageDataLike = FileNode | IGatsbyImageDataParent | IGatsbyImageData
 interface HeroProps {
   image?: ImageDataLike
 }
