@@ -1,44 +1,26 @@
 import React from "react"
 import { Nav } from "./nav"
 import { css } from "@emotion/css"
-import { graphql, Link, useStaticQuery } from "gatsby"
+import { Link } from "gatsby"
 import { buttonResetStyles, pxToRem } from "@/styles/css-utils"
 import styled from "@emotion/styled"
 import { StaticImage } from "gatsby-plugin-image"
 import useTheme from "@/hooks/theme"
 import AnimatedWrapper from "../animated/animated-wrapper"
+import Marcell from "../icons/marcell"
 
-const HEADER_QUERY = graphql`
-  {
-    sun: file(relativePath: { eq: "icons/sun-white.svg" }) {
-      name
-      publicURL
-    }
-    moon: file(relativePath: { eq: "icons/moon.svg" }) {
-      name
-      publicURL
-    }
-  }
-`
 const headerStyles = css`
   position: relative;
   min-height: var(--header-size);
   margin-bottom: ${pxToRem(20)};
   width: 100%;
+
+  display: flex;
+  align-items: center;
   .theme-toggle-button {
     transition: 2s ease-in-out all;
   }
 `
-interface HeaderQueryType {
-  sun: {
-    name: string
-    publicURL: string
-  }
-  moon: {
-    name: string
-    publicURL: string
-  }
-}
 
 const IconButton = styled.button`
   position: absolute;
@@ -47,24 +29,24 @@ const IconButton = styled.button`
   ${buttonResetStyles}
 `
 
-export const Header = () => {
-  const { moon, sun } = useStaticQuery<HeaderQueryType>(HEADER_QUERY)
-  const { storedTheme, handleTheme } = useTheme()
+const MarcellLink = styled(Link)`
+  display: inline-block;
+  svg {
+    width: ${pxToRem(200)};
+    height: ${pxToRem(80)};
+  }
+`
 
+export const Header = () => {
+  const { storedTheme, handleTheme } = useTheme()
   const isMoonIcon = storedTheme === "light"
   const isSunIcon = storedTheme === "dark"
 
   return (
     <header className={headerStyles}>
-      <Link to="/">
-        <StaticImage
-          width={100}
-          src="../../images/love.svg"
-          alt="masiu logo"
-          layout="constrained"
-          placeholder="blurred"
-        />
-      </Link>
+      <MarcellLink to="/">
+        <Marcell />
+      </MarcellLink>
 
       <AnimatedWrapper isAnimated={isSunIcon}>
         <IconButton onClick={handleTheme} role="button">

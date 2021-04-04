@@ -30,7 +30,7 @@ const textLines = [
 ]
 
 const contentWrapperStyles = css`
-  min-height: 65vh;
+  min-height: 72vh;
   border-bottom: 1px solid ${elements.p};
   display: flex;
   flex-direction: column;

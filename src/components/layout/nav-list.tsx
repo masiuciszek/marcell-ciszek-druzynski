@@ -1,9 +1,8 @@
 import { pxToRem } from "@/styles/css-utils"
-import { elements } from "@/styles/styled-record"
 import styled from "@emotion/styled"
-import { motion } from "framer-motion"
-import { graphql, Link, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
+import HoverLink from "../common/hover-link"
 
 const NAV_QUERY = graphql`
   {
@@ -36,30 +35,6 @@ const List = styled.ul`
     margin-bottom: ${pxToRem(8)};
     margin-right: ${pxToRem(33)};
   }
-  a {
-    font-size: var(--a-size);
-    position: relative;
-    transition: 400ms ease-in-out all;
-    display: inline-block;
-    &:after {
-      content: "";
-      position: absolute;
-      bottom: -0.1rem;
-      left: 0;
-      background-color: ${elements.stroke};
-      width: 0;
-      height: 0;
-      transition: 200ms ease all;
-      transform: rotate(-5deg);
-    }
-    &:hover {
-      transform: scale(1.045);
-      &:after {
-        width: 2rem;
-        height: 0.3rem;
-      }
-    }
-  }
 `
 
 export const NavList = () => {
@@ -71,7 +46,7 @@ export const NavList = () => {
     <List>
       {siteMetadata.routes.map(({ name, route }) => (
         <li key={name}>
-          <Link to={route}>{name}</Link>
+          <HoverLink path={route} text={name} />
         </li>
       ))}
     </List>

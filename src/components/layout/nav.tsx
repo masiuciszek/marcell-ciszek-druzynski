@@ -7,7 +7,10 @@ import React from "react"
 import { NavList } from "./nav-list"
 
 const NavBar = styled.nav`
-  min-height: 5em;
+  height: 100%;
+  min-height: ${pxToRem(80)};
+  display: flex;
+  align-items: center;
 `
 
 const MenuIcon = styled.button`

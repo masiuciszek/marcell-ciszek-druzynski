@@ -168,6 +168,10 @@ export const GlobalStyles = () => {
         #circle {
           fill: var(--circle);
         }
+        #a,
+        #header-icon {
+          fill: var(--p);
+        }
       `}
     />
   )
