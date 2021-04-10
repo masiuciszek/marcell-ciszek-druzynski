@@ -50,7 +50,7 @@ const socialLinks = [
   },
   {
     name: "Twitter",
-    path: "https://mobile.twitter.com/MasiuCD",
+    path: "https://mobile.twitter.com/masiu_cd",
   },
   {
     name: "Linkedin",

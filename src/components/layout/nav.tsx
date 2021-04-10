@@ -49,7 +49,7 @@ const MenuIcon = styled.button`
 
 export const Nav = () => {
   const aboveTablet = useMediaQuery(above.tabletL)
-  console.log({ aboveTablet })
+
   const showMenuIcon = !aboveTablet
   return (
     <NavBar>

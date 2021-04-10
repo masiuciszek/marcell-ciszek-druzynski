@@ -61,3 +61,10 @@ exports.onCreateWebpackConfig = ({ getConfig, actions, stage, loaders }) => {
     },
   })
 }
+
+exports.createPages = ({ actions: { createPage } }) => {
+  createPage({
+    path: "/test/",
+    component: require.resolve("./src/templates/test.tsx"),
+  })
+}
