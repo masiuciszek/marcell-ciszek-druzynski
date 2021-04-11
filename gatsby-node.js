@@ -62,9 +62,39 @@ exports.onCreateWebpackConfig = ({ getConfig, actions, stage, loaders }) => {
   })
 }
 
-exports.createPages = ({ actions: { createPage } }) => {
-  createPage({
-    path: "/test/",
-    component: require.resolve("./src/templates/test.tsx"),
+exports.createPages = async ({ actions: { createPage }, graphql }) => {
+  const result = await graphql(`
+    {
+      allMdx(sort: { fields: [frontmatter___date], order: ASC }) {
+        edges {
+          node {
+            slug
+            frontmatter {
+              title
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.error) {
+    throw new Error(`failed to parse graphql query${result.error}`)
+  }
+
+  const posts = result.data.allMdx.edges
+  posts.forEach(({ node }, index) => {
+    const previousPost = index === 0 ? null : posts[index - 1].node
+    const nextPost = index === posts.length - 1 ? null : posts[index + 1].node
+
+    createPage({
+      path: `/blog/${node.slug}`,
+      component: require.resolve("./src/templates/blog-post.tsx"),
+      context: {
+        slug: node.slug,
+        previousPost,
+        nextPost,
+      },
+    })
   })
 }

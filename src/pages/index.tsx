@@ -95,19 +95,4 @@ const HomePage = () => {
   )
 }
 
-// export const HOME_PAGE_QUERY = graphql`
-//   {
-//     round: file(relativePath: { eq: "round-title.svg" }) {
-//       publicURL
-//       id
-//       name
-//     }
-//     stains: file(relativePath: { eq: "stains.png" }) {
-//       childImageSharp {
-//         gatsbyImageData(formats: AUTO, layout: FULL_WIDTH)
-//       }
-//     }
-//   }
-// `
-
 export default HomePage

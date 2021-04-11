@@ -1,8 +1,11 @@
+import { motion } from "framer-motion"
 import React from "react"
 
 const HeyMyNameIs = () => {
   return (
-    <svg
+    <motion.svg
+      whileHover={{ scale: 1.025 }}
+      style={{ transition: "200ms all" }}
       width="372"
       height="350"
       viewBox="0 0 372 350"
@@ -28,7 +31,7 @@ const HeyMyNameIs = () => {
           </g>
         </g>
       </g>
-    </svg>
+    </motion.svg>
   )
 }
 export default HeyMyNameIs
