@@ -38,7 +38,6 @@ const BlogPost = ({ data, pageContext }: PageProps<BlogPostQuery, BlogPostContex
     <Layout>
       <article>
         <MDXRenderer>{data.post.body}</MDXRenderer>
-
         <div>
           {hasPreviousPost && (
             <Link to={`/blog/${previousPost?.slug}`}>

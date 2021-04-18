@@ -7,6 +7,8 @@ interface Colors {
   grey: string
   greyDark: string
   white: string
+  stroke: string
+  highlightShadow: string
 }
 
 const colors: Colors = {
@@ -18,6 +20,8 @@ const colors: Colors = {
   grey: "var(--grey)",
   greyDark: "(var--dark-grey)",
   white: "var(--white)",
+  stroke: "var(--stroke)",
+  highlightShadow: "var(--highlight-shadow)",
 }
 
 const baseColors = {
@@ -38,6 +42,8 @@ interface Elements {
   btnBackgroundTwo: string
   highlightShadow: string
   stroke: string
+  boxBackground: string
+  boxText: string
 }
 
 const elements: Elements = {
@@ -50,10 +56,32 @@ const elements: Elements = {
   btnBackgroundTwo: "var(--btn-bg-2)",
   highlightShadow: "var(--highlight-shadow)",
   stroke: "var(--stroke)",
+  boxBackground: "var(--box-background)",
+  boxText: "var(--box-text)",
 }
 
 const transition = {
   main: "var(--main-trans)",
+}
+
+interface Sizes {
+  h1: "var(--h1)"
+  h2: "var(--h2)"
+  h3: "var(--h3)"
+  h4: "var(--h4)"
+  h5: "var(--h5)"
+  p: "var(--p-size)"
+  small: "var(--small)"
+}
+
+export const sizes: Sizes = {
+  h1: "var(--h1)",
+  h2: "var(--h2)",
+  h3: "var(--h3)",
+  h4: "var(--h4)",
+  h5: "var(--h5)",
+  p: "var(--p-size)",
+  small: "var(--small)",
 }
 
 interface Elevations {

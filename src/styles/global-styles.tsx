@@ -28,6 +28,8 @@ export const GlobalStyles = () => {
           --btn-bg-1: var(--light-blue);
           --btn-bg-2: var(--dark-blue);
           --circle: var(--dark-blue);
+          --box-background: var(--dark-blue);
+          --box-text: var(--dark-blue);
 
           /* Typography */
           --h1: 3.052rem;
@@ -35,6 +37,7 @@ export const GlobalStyles = () => {
           --h3: 1.953rem;
           --h4: 1.563rem;
           --h5: 1.25rem;
+          --p-size: 1rem;
           --small: 0.8rem;
 
           /* Element-size */
@@ -91,6 +94,8 @@ export const GlobalStyles = () => {
           --btn-bg-1: var(--light-blue);
           --btn-bg-2: var(--dark-blue);
           --circle: var(--dark-blue);
+          --box-background: var(--grey);
+          --box-text: var(--dark-blue-2);
         }
         body[data-theme="dark"] {
           --background: var(--dark-blue-main);
@@ -101,10 +106,13 @@ export const GlobalStyles = () => {
           --btn-bg-1: var(--light-blue);
           --btn-bg-2: var(--dark-blue);
           --circle: var(--light-blue);
+          --box-background: var(--dark-blue);
+          --box-text: var(--white);
         }
 
         p {
           margin-bottom: 1rem;
+          font-size: var(--p-size);
         }
 
         h1,

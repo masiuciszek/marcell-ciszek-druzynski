@@ -1,6 +1,7 @@
 // Extend default Gatsby config with SVGR support, aliases and Webpack Bundle Analyzer
 const path = require("path")
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
+const { paginate } = require("gatsby-awesome-pagination")
 
 exports.onCreateWebpackConfig = ({ getConfig, actions, stage, loaders }) => {
   const existingConfig = getConfig()
@@ -81,8 +82,16 @@ exports.createPages = async ({ actions: { createPage }, graphql }) => {
   if (result.error) {
     throw new Error(`failed to parse graphql query${result.error}`)
   }
-
   const posts = result.data.allMdx.edges
+
+  paginate({
+    createPage,
+    items: posts,
+    itemsPerPage: 3,
+    pathPrefix: "/blog",
+    component: path.resolve("./src/templates/blog-list.tsx"),
+  })
+
   posts.forEach(({ node }, index) => {
     const previousPost = index === 0 ? null : posts[index - 1].node
     const nextPost = index === posts.length - 1 ? null : posts[index + 1].node
