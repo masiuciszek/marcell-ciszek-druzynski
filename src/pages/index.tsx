@@ -87,7 +87,7 @@ const HomePage = () => {
               backSpeed={50}
               loop
             />
-            <LinkElement to="/" text="blog" />
+            <LinkElement to="/blog" text="blog" />
           </Capture>
         </ContentWrapper>
       </Hero>

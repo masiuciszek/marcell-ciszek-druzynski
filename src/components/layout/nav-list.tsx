@@ -31,6 +31,7 @@ interface QueryType {
 const List = styled.ul`
   display: flex;
   justify-content: flex-end;
+  list-style: none;
   li {
     margin-bottom: ${pxToRem(8)};
     margin-right: ${pxToRem(33)};
