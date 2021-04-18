@@ -47,7 +47,6 @@ export const Header = () => {
       <MarcellLink to="/">
         <Marcell />
       </MarcellLink>
-
       <AnimatedWrapper isAnimated={isSunIcon}>
         <IconButton onClick={handleTheme} role="button">
           <StaticImage

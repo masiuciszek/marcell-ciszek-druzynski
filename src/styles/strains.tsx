@@ -6,6 +6,7 @@ export const strains = css`
   background: var(--highlight-shadow) url(${blackgrit});
   background-size: 550px;
   transform: rotate(1deg) scale(1);
+  position: relative;
   &:after {
     display: block;
     content: "";

@@ -1,5 +1,7 @@
+import Paginate from "@/components/blog-post/paginate"
 import Layout from "@/components/layout/layout"
-import { graphql, Link, PageProps } from "gatsby"
+import { css } from "@emotion/css"
+import { graphql, PageProps } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import React from "react"
 
@@ -30,26 +32,19 @@ interface BlogPostContext {
   nextPost: Node | null
 }
 
+const articleStyles = css`
+  margin-bottom: 2rem;
+`
+
 const BlogPost = ({ data, pageContext }: PageProps<BlogPostQuery, BlogPostContext>) => {
   const { previousPost, nextPost } = pageContext
-  const hasPreviousPost = Boolean(pageContext.previousPost)
-  const hasNextPost = Boolean(pageContext.nextPost)
+
   return (
-    <Layout>
-      <article>
+    <Layout fluid>
+      <article className={articleStyles}>
         <MDXRenderer>{data.post.body}</MDXRenderer>
-        <div>
-          {hasPreviousPost && (
-            <Link to={`/blog/${previousPost?.slug}`}>
-              {" "}
-              {previousPost?.slug.replaceAll("/", "")}{" "}
-            </Link>
-          )}
-          {hasNextPost && (
-            <Link to={`/blog/${nextPost?.slug}`}> {nextPost?.slug.replaceAll("/", "")} </Link>
-          )}
-        </div>
       </article>
+      <Paginate previousPost={previousPost} nextPost={nextPost} />
     </Layout>
   )
 }
