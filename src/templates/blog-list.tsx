@@ -6,7 +6,7 @@ import { PageProps } from "gatsby"
 import { graphql } from "gatsby"
 
 import Post from "@/components/blog-list/post"
-import Navigation from "@/components/blog-list/navigation"
+import Pagination from "@/components/blog-list/navigation"
 
 interface Node {
   node: {
@@ -42,6 +42,7 @@ interface BlogPageContext {
 const BlogListWrapper = styled.section`
   max-width: ${elements.maxWidth};
   margin: 0 auto;
+  height: 100%;
 `
 
 const PostsWrapper = styled.section``
@@ -56,7 +57,7 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
   return (
     <Layout>
       <BlogListWrapper>
-        <Navigation
+        <Pagination
           previousPagePath={pageContext.previousPagePath}
           pageNumber={pageContext.pageNumber}
           numberOfPages={pageContext.numberOfPages}
@@ -68,7 +69,7 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
           ))}
         </PostsWrapper>
 
-        <Navigation
+        <Pagination
           previousPagePath={pageContext.previousPagePath}
           pageNumber={pageContext.pageNumber}
           numberOfPages={pageContext.numberOfPages}

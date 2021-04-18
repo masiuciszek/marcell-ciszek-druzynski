@@ -1,4 +1,4 @@
-import { elements } from "@/styles/styled-record"
+import { elements, elevations } from "@/styles/styled-record"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 import React from "react"
@@ -23,6 +23,7 @@ const StyledPost = styled.article`
   margin-bottom: 2rem;
   padding: 1rem;
   background-color: ${elements.boxBackground};
+  box-shadow: ${elevations.shadowLg};
   p {
     color: ${elements.boxText};
   }
