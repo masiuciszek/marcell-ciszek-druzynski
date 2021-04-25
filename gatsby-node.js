@@ -63,10 +63,10 @@ exports.onCreateWebpackConfig = ({ getConfig, actions, stage, loaders }) => {
   })
 }
 
-exports.createPages = async ({ actions: { createPage }, graphql }) => {
+exports.createPages = async ({ actions: { createPage }, graphql, reporter }) => {
   const result = await graphql(`
     {
-      allMdx(sort: { fields: [frontmatter___date], order: ASC }) {
+      posts: allMdx(sort: { fields: [frontmatter___date], order: ASC }) {
         edges {
           node {
             slug
@@ -76,13 +76,21 @@ exports.createPages = async ({ actions: { createPage }, graphql }) => {
           }
         }
       }
+      tagsGroup: allMdx {
+        group(field: frontmatter___tags) {
+          fieldValue
+        }
+      }
     }
   `)
 
   if (result.error) {
-    throw new Error(`failed to parse graphql query${result.error}`)
+    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    return
+    // throw new Error(`failed to parse graphql query${result.error}`)
   }
-  const posts = result.data.allMdx.edges
+  const posts = result.data.posts.edges
+  const tags = result.data.tagsGroup.group
 
   paginate({
     createPage,
@@ -103,6 +111,16 @@ exports.createPages = async ({ actions: { createPage }, graphql }) => {
         slug: node.slug,
         previousPost,
         nextPost,
+      },
+    })
+  })
+
+  tags.forEach(({ fieldValue }) => {
+    createPage({
+      path: `/tags/${fieldValue}/`,
+      component: require.resolve("./src/templates/tags.tsx"),
+      context: {
+        tag: fieldValue,
       },
     })
   })

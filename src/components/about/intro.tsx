@@ -27,8 +27,8 @@ const Intro = () => {
         layout="constrained"
       />
       <p>
-        {/* TODO: make age and programming time dynamic */}I am a developer from Gotheburg Sweden. I
-        am {getDate()} years old and been programming for {getDate("10/13/2018")} years
+        I am a developer from Gotheburg Sweden. I am {getDate()} years old and been programming for{" "}
+        {getDate("10/13/2018")} years
       </p>
 
       <p>
