@@ -40,7 +40,7 @@ const BlogPost = ({ data, pageContext }: PageProps<BlogPostQuery, BlogPostContex
   const { previousPost, nextPost } = pageContext
 
   return (
-    <Layout fluid>
+    <Layout>
       <article className={articleStyles}>
         <MDXRenderer>{data.post.body}</MDXRenderer>
       </article>

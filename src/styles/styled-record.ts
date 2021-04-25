@@ -13,7 +13,7 @@ interface Colors {
 
 const colors: Colors = {
   dark: "var(--dark)",
-  darkBlue: "var(--dar-blue)",
+  darkBlue: "var(--dark-blue)",
   darkBlue2: "var(--dark-blue-2)",
   darkBlueMain: "var(--dark-blue-main)",
   lightBlue: "var(--light-blue)",
@@ -107,4 +107,20 @@ const elevations: Elevations = {
   shadowOutline: "var(--sh-outline)",
 }
 
-export { colors, elements, elevations, transition, baseColors }
+interface Fonts {
+  operatorMono: string
+  operatorMonoCode: string
+  operatorMonoMasiu: string
+  justMono: string
+  rednika: string
+}
+
+const fonts: Fonts = {
+  operatorMono: "var(--operator-mono)",
+  operatorMonoCode: "var(--operator-mono-code)",
+  operatorMonoMasiu: "var(--operator-mono-masiu)",
+  justMono: "var(--just-mono)",
+  rednika: "var(--rednika)",
+}
+
+export { colors, elements, elevations, transition, baseColors, fonts }

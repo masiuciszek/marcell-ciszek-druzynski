@@ -1,11 +1,29 @@
 import React from "react"
-import { Link, graphql, PageProps } from "gatsby"
+import { graphql, PageProps } from "gatsby"
 import Layout from "@/components/layout/layout"
+import styled from "@emotion/styled"
+import DirectionLink from "@/components/common/direction-link"
+import { PostsWrapper } from "@/components/blog-list/styled"
+import Post from "@/components/blog-list/post"
+import Title from "@/components/common/title"
+import { css } from "@emotion/css"
+import { strains } from "@/styles/strains"
+import { pxToRem } from "@/styles/css-utils"
+import StrokeWrapper from "@/components/common/stroke-wrapper"
+import { elements } from "@/styles/styled-record"
 
 type Node = {
   node: {
+    id: string
     slug: string
-    frontmatter: { title: string }
+    excerpt: string
+    frontmatter: {
+      title: string
+      date: string
+      tags: string[]
+      spoiler: string
+      length: string
+    }
   }
 }
 
@@ -19,11 +37,54 @@ interface TagsQueryContext {
   tag: string
 }
 
+const Wrapper = styled.section`
+  padding: 0.5em;
+`
+
+const directionLinkStyles = css`
+  margin-bottom: 1.5em;
+`
+
+const titleStyles = css`
+  ${strains}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: ${pxToRem(90)};
+
+  h1 {
+    margin: 0;
+  }
+`
+
+const strokeStyles = css`
+  color: ${elements.background};
+  &:after {
+    background-color: ${elements.background};
+    bottom: 1rem;
+  }
+`
+
 const Tags: React.FC<PageProps<TagsQueryType, TagsQueryContext>> = ({ data, pageContext }) => {
   console.log(data, pageContext.tag)
+  const { edges } = data.posts
+  // /blog/slug
   return (
     <Layout>
-      <h1>Tags</h1>
+      <Wrapper>
+        <DirectionLink className={directionLinkStyles} />
+        <Title className={titleStyles}>
+          <h1>
+            posts for tag <StrokeWrapper className={strokeStyles}>{pageContext.tag}</StrokeWrapper>{" "}
+          </h1>
+        </Title>
+        <PostsWrapper>
+          {edges.map(({ node }) => (
+            <Post key={node.id} node={node} />
+          ))}
+        </PostsWrapper>
+      </Wrapper>
     </Layout>
   )
 }
@@ -38,9 +99,15 @@ export const TAGS_QUERY = graphql`
       totalCount
       edges {
         node {
+          id
+          excerpt
           slug
           frontmatter {
             title
+            date
+            tags
+            spoiler
+            length
           }
         }
       }

@@ -4,9 +4,10 @@ import { elements } from "@/styles/styled-record"
 import styled from "@emotion/styled"
 import { PageProps } from "gatsby"
 import { graphql } from "gatsby"
-
 import Post from "@/components/blog-list/post"
 import Pagination from "@/components/blog-list/navigation"
+import TagsNavigation from "@/components/blog-list/tags-navigation"
+import { PostsWrapper } from "@/components/blog-list/styled"
 
 interface Node {
   node: {
@@ -23,10 +24,13 @@ interface Node {
   }
 }
 
+type Tag = { fieldValue: string }
+
 interface BlogPageQuery {
   allMdx: {
     edges: Array<Node>
   }
+  tags: { group: Array<Tag> }
 }
 
 interface BlogPageContext {
@@ -45,24 +49,21 @@ const BlogListWrapper = styled.section`
   height: 100%;
 `
 
-const PostsWrapper = styled.section``
-
 const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContext>) => {
   const { edges } = data.allMdx
+  const { group: tagsList } = data.tags
   const { previousPagePath, nextPagePath } = pageContext
-
-  console.log(pageContext)
-  console.log(edges)
 
   return (
     <Layout>
       <BlogListWrapper>
         <Pagination
-          previousPagePath={pageContext.previousPagePath}
+          previousPagePath={previousPagePath}
           pageNumber={pageContext.pageNumber}
           numberOfPages={pageContext.numberOfPages}
-          nextPagePath={pageContext.nextPagePath}
+          nextPagePath={nextPagePath}
         />
+        <TagsNavigation tagsList={tagsList} />
         <PostsWrapper>
           {edges.map(({ node }) => (
             <Post key={node.id} node={node} />
@@ -70,10 +71,10 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
         </PostsWrapper>
 
         <Pagination
-          previousPagePath={pageContext.previousPagePath}
+          previousPagePath={previousPagePath}
           pageNumber={pageContext.pageNumber}
           numberOfPages={pageContext.numberOfPages}
-          nextPagePath={pageContext.nextPagePath}
+          nextPagePath={nextPagePath}
         />
       </BlogListWrapper>
     </Layout>
@@ -96,6 +97,11 @@ export const BLOG_PAGE_QUERY = graphql`
             length
           }
         }
+      }
+    }
+    tags: allMdx {
+      group(field: frontmatter___tags) {
+        fieldValue
       }
     }
   }

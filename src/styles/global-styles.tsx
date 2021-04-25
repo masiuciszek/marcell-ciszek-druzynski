@@ -63,6 +63,16 @@ export const GlobalStyles = () => {
 
           /* elements */
           --max-width: 970px;
+
+          /* fonts */
+
+          --operator-mono: "HCo Operator Mono", -apple-system, BlinkMacSystemFont, "Segoe UI",
+            Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+          --operator-mono-code: "HCo Operator Mono";
+          --operator-mono-masiu: "Operator Mono", "Inconsolata", Consolas, Monaco, "Andale Mono",
+            "Ubuntu Mono", monospace;
+          --just-mono: "Operator mono";
+          --rednika: "radnika", sans-serif;
         }
         *::before,
         *::after,
@@ -77,8 +87,7 @@ export const GlobalStyles = () => {
         body {
           margin: 0;
           padding: 0;
-          font-family: "HCo Operator Mono", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-            Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+          font-family: var(----operator-mono);
           font-weight: 400;
           line-height: 1.75;
           background: var(--background);
@@ -121,7 +130,7 @@ export const GlobalStyles = () => {
         h4,
         h5,
         h6 {
-          font-family: "radnika", sans-serif;
+          font-family: var(--rednika);
           font-weight: normal;
           font-style: italic;
         }
@@ -171,6 +180,11 @@ export const GlobalStyles = () => {
         a {
           text-decoration: none;
           color: var(--a);
+        }
+
+        /* Scrollbar Styles */
+        body::-webkit-scrollbar {
+          width: 12px;
         }
 
         #circle {

@@ -1,4 +1,5 @@
 import { strains } from "@/styles/strains"
+import { elements } from "@/styles/styled-record"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 import React from "react"
@@ -27,6 +28,7 @@ const PaginateStyles = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0.2em;
+    color: ${elements.boxText};
     &[aria-disabled="true"] {
       pointer-events: none;
       text-decoration: line-through;

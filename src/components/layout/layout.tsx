@@ -10,7 +10,7 @@ const mainStyles = (fluid = false) => css`
   & {
     margin: 0 auto;
     position: relative;
-    max-width: ${fluid ? elements.maxWidth : null};
+    max-width: ${fluid ? null : elements.maxWidth};
   }
 `
 
