@@ -27,6 +27,10 @@ const styles = css`
 `
 
 const StrokeWrapper: React.FC<StrokeWrapperProps> = ({ children, className }) => {
-  return <span className={cx(styles, className)}>{children}</span>
+  return (
+    <span data-testid="components-common-strokeWrapper" className={cx(styles, className)}>
+      {children}
+    </span>
+  )
 }
 export default StrokeWrapper

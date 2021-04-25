@@ -2,7 +2,7 @@ module.exports = {
   transform: { "^.+\\.[tj]sx?$": "<rootDir>/test/jest-preprocess.js" },
 
   moduleNameMapper: {
-    ".+\\.(svg|jpg|jpeg|png|webp|woff|woff2|mp4|webm|mp3|css)$": "<rootDir>/__mocks__/file.js",
+    ".+\\.(svg|jpg|jpeg|png|webp|woff|woff2|mp4|webm|mp3|css)$": "<rootDir>/__mocks__/file-mock.js",
     "@test-utils": "<rootDir>/test/test-utils.tsx",
     "@/(.*)": "<rootDir>/src/$1",
   },
@@ -18,6 +18,7 @@ module.exports = {
 
   collectCoverageFrom: [
     "<rootDir>/src/components/**/*.{tsx,ts,js}",
+    "<rootDir>/src/images/**/*.{png,svg,jpg,jpeg}",
     "<rootDir>/src/utils/*.{tsx,ts,js}",
   ],
 }

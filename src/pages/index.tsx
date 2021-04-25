@@ -67,7 +67,7 @@ const Capture = styled.div`
 
 const HomePage = () => {
   return (
-    <Layout>
+    <Layout fluid>
       <Seo />
       <Hero>
         <ContentWrapper className={contentWrapperStyles}>

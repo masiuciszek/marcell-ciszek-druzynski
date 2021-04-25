@@ -52,7 +52,6 @@ const titleStyles = css`
   align-items: center;
   position: relative;
   height: ${pxToRem(90)};
-
   h1 {
     margin: 0;
   }

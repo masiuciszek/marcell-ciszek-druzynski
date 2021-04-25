@@ -11,6 +11,5 @@ describe("Title", () => {
     expect(screen.getByText(mainTitle)).toBeInTheDocument()
     expect(screen.getByText(secondaryTitle)).toBeInTheDocument()
     expect(screen.getByTestId("page-title-component")).toHaveClass(className)
-    // screen.debug()
   })
 })
