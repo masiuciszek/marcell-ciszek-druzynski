@@ -6,10 +6,6 @@ import React from "react"
 import StrokeWrapper from "../common/stroke-wrapper"
 import SocialList from "../social-media/social-list"
 
-interface FooterProps {
-  className?: string
-}
-
 interface QueryType {
   site: {
     siteMetadata: {
@@ -28,29 +24,28 @@ const QUERY = graphql`
   }
 `
 
-const styles = css`
+const FooterStyles = styled.footer`
   min-height: 4.5em;
   display: flex;
   justify-content: center;
   flex-flow: column wrap;
   align-items: center;
   width: 100%;
-  /* margin: 0; */
 `
 
 const Small = styled.small`
   font-size: ${pxToRem(12)};
 `
 
-export const Footer = ({ className }: FooterProps) => {
+export const Footer = () => {
   const { site } = useStaticQuery<QueryType>(QUERY)
   return (
-    <footer className={cx(styles, className)}>
+    <FooterStyles>
       <SocialList />
       <Small>
         &copy; {new Date().getFullYear()} Copyright{" "}
         <StrokeWrapper>{site.siteMetadata.title}</StrokeWrapper>. All rights reserved.
       </Small>
-    </footer>
+    </FooterStyles>
   )
 }

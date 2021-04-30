@@ -15,7 +15,7 @@ const styles = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 10em;
+  max-width: 12em;
   max-height: 2.5em;
   box-shadow: ${elevations.shadowM};
   color: ${elements.p};

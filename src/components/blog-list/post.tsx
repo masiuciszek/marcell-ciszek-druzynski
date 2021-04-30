@@ -1,3 +1,4 @@
+import { above } from "@/styles/media-query"
 import { elements, elevations } from "@/styles/styled-record"
 import styled from "@emotion/styled"
 import { motion } from "framer-motion"
@@ -45,6 +46,7 @@ const TagsListStyles = styled.ul`
     text-align: center;
     border-radius: ${elements.borderRadiusS};
     display: block;
+    margin-left: 0.75rem;
   }
 `
 interface TagsListProps {
@@ -82,16 +84,39 @@ const StyledPost = styled.article`
 `
 
 const Head = styled.div`
-  h5 {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: column wrap;
+  strong {
+    position: relative;
     display: inline-block;
-    border-bottom: 2px solid ${elements.filler};
+    align-self: center;
+    &:after {
+      content: "";
+      width: 95%;
+      height: 0.2rem;
+      background-color: ${elements.filler};
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+  .date-and-length-of-post {
+    align-self: center;
+  }
+  @media ${above.mobileL} {
+    flex-flow: row;
   }
 `
 
 const Bottom = styled.section`
   display: grid;
-  grid-template-columns: 2fr 1fr;
   grid-gap: 1rem;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  @media ${above.mobileL} {
+    grid-template-columns: 2fr 1fr;
+  }
 `
 
 const ReadMore = styled(Link)`
@@ -101,10 +126,15 @@ const ReadMore = styled(Link)`
 `
 
 const Post = ({ node }: PostProps) => {
+  const { title, date, length } = node.frontmatter
   return (
     <StyledPost>
       <Head>
-        <h5>{node.frontmatter.title}</h5>
+        <strong>{title}</strong>
+        <div className="date-and-length-of-post">
+          <p>{date}</p>
+          <p>{length}</p>
+        </div>
       </Head>
       <p>{node.excerpt}</p>
       <Bottom>

@@ -66,7 +66,6 @@ const strokeStyles = css`
 `
 
 const Tags: React.FC<PageProps<TagsQueryType, TagsQueryContext>> = ({ data, pageContext }) => {
-  console.log(data, pageContext.tag)
   const { edges } = data.posts
   // /blog/slug
   return (
@@ -75,7 +74,8 @@ const Tags: React.FC<PageProps<TagsQueryType, TagsQueryContext>> = ({ data, page
         <DirectionLink className={directionLinkStyles} />
         <Title className={titleStyles}>
           <h1>
-            posts for tag <StrokeWrapper className={strokeStyles}>{pageContext.tag}</StrokeWrapper>{" "}
+            posts for topic{" "}
+            <StrokeWrapper className={strokeStyles}>{pageContext.tag}</StrokeWrapper>{" "}
           </h1>
         </Title>
         <PostsWrapper>
@@ -103,7 +103,7 @@ export const TAGS_QUERY = graphql`
           slug
           frontmatter {
             title
-            date
+            date(formatString: "DD MMMM, YYYY")
             tags
             spoiler
             length

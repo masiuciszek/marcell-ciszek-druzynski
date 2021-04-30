@@ -1,6 +1,8 @@
 import { above, below } from "@/styles/media-query"
 import { elements } from "@/styles/styled-record"
+import { randomNumber } from "@/util"
 import styled from "@emotion/styled"
+import { motion } from "framer-motion"
 import React from "react"
 import StrokeWrapper from "../common/stroke-wrapper"
 
@@ -66,11 +68,11 @@ const SocialList = () => {
       </Small>
       <List>
         {socialLinks.map(({ name, path }) => (
-          <li key={name}>
+          <motion.li key={name} whileHover={{ rotate: randomNumber(5) }}>
             <a href={path} target="_blank" rel="noreferrer">
               {name} &lambda;
             </a>
-          </li>
+          </motion.li>
         ))}
       </List>
     </SocialListWrapper>
