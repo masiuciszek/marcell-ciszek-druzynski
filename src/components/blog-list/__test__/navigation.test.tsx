@@ -2,13 +2,6 @@ import * as React from "react"
 import { render, screen } from "@testing-library/react"
 import Navigation from "../navigation"
 
-// interface NavigationProps {
-//   previousPagePath: string
-//   pageNumber: number
-//   numberOfPages: number
-//   nextPagePath: string
-// }
-
 describe("Navigation", () => {
   test("renders as expected", () => {
     const previousPagePath = "previousPagePath"
@@ -24,8 +17,10 @@ describe("Navigation", () => {
         nextPagePath={nextPagePath}
       />,
     )
-    screen.debug()
-    // expect(screen.getByText(helloWorld)).toBeInTheDocument()
-    // expect(screen.getByTestId(/components-common-Navigation/i)).toHaveClass(className)
+    const prevLink = screen.getByRole("link", { name: /prev 3 posts/i })
+    expect(prevLink).toHaveAttribute("href", previousPagePath)
+
+    const nextLink = screen.getByRole("link", { name: /3 more posts/i })
+    expect(nextLink).toHaveAttribute("href", nextPagePath)
   })
 })
