@@ -1,6 +1,5 @@
-import { baseColors } from "@/styles/colors"
 import { pxToRem } from "@/styles/css-utils"
-import { fonts } from "@/styles/styled-record"
+import { fonts, elements } from "@/styles/styled-record"
 import { cx, css } from "@emotion/css"
 
 import React from "react"
@@ -10,7 +9,7 @@ interface StrokeWrapperProps {
 }
 
 const styles = css`
-  color: ${baseColors.stroke};
+  color: ${elements.filler};
   position: relative;
   font-family: ${fonts.justMono};
   display: inline-block;
@@ -21,7 +20,7 @@ const styles = css`
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: ${baseColors.highlightShadow};
+    background-color: ${elements.highlightShadow};
     height: ${pxToRem(4)};
   }
 `

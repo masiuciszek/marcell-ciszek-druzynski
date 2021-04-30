@@ -42,6 +42,7 @@ interface Elements {
   btnBackgroundTwo: string
   highlightShadow: string
   stroke: string
+  filler: string
   boxBackground: string
   boxText: string
 }
@@ -56,6 +57,7 @@ const elements: Elements = {
   btnBackgroundTwo: "var(--btn-bg-2)",
   highlightShadow: "var(--highlight-shadow)",
   stroke: "var(--stroke)",
+  filler: "var(--filler)",
   boxBackground: "var(--box-background)",
   boxText: "var(--box-text)",
 }
@@ -108,6 +110,7 @@ const elevations: Elevations = {
 }
 
 interface Fonts {
+  fallback: string
   operatorMono: string
   operatorMonoCode: string
   operatorMonoMasiu: string
@@ -116,6 +119,7 @@ interface Fonts {
 }
 
 const fonts: Fonts = {
+  fallback: "var(--fallback)",
   operatorMono: "var(--operator-mono)",
   operatorMonoCode: "var(--operator-mono-code)",
   operatorMonoMasiu: "var(--operator-mono-masiu)",

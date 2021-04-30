@@ -14,6 +14,7 @@ export const GlobalStyles = () => {
           --dark-blue-main: #132035;
           --dark-blue-main-shadow: rgba(19, 32, 53, 0.45);
           --light-blue: #81a7ff;
+          --light-blue-xs: #9eddf8;
           --light-blue-shadow: rgba(127, 167, 255, 0.45);
           --grey: #e2e8f0;
           --grey-dark: #718096;
@@ -30,6 +31,7 @@ export const GlobalStyles = () => {
           --circle: var(--dark-blue);
           --box-background: var(--dark-blue);
           --box-text: var(--dark-blue);
+          --filler: var(--light-blue-xs);
 
           /* Typography */
           --h1: 3.052rem;
@@ -66,6 +68,8 @@ export const GlobalStyles = () => {
 
           /* fonts */
 
+          --fallback: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+            Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
           --operator-mono: "HCo Operator Mono", -apple-system, BlinkMacSystemFont, "Segoe UI",
             Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
           --operator-mono-code: "HCo Operator Mono";
@@ -74,6 +78,7 @@ export const GlobalStyles = () => {
           --just-mono: "Operator mono";
           --rednika: "radnika", sans-serif;
         }
+
         *::before,
         *::after,
         * {
@@ -87,11 +92,12 @@ export const GlobalStyles = () => {
         body {
           margin: 0;
           padding: 0;
-          font-family: var(----operator-mono);
+          font-family: var(--fallback);
           font-weight: 400;
           line-height: 1.75;
           background: var(--background);
           color: var(--p);
+          font-family: var(--operator-mono);
         }
 
         body[data-theme="light"] {
@@ -105,6 +111,7 @@ export const GlobalStyles = () => {
           --circle: var(--dark-blue);
           --box-background: var(--grey);
           --box-text: var(--dark-blue-2);
+          --filler: var(--dark-blue);
         }
         body[data-theme="dark"] {
           --background: var(--dark-blue-main);
@@ -117,6 +124,7 @@ export const GlobalStyles = () => {
           --circle: var(--light-blue);
           --box-background: var(--dark-blue);
           --box-text: var(--white);
+          --filler: var(--light-blue-xs);
         }
 
         p {
