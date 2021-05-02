@@ -7,6 +7,8 @@ import { graphql } from "gatsby"
 import Post from "@/components/blog-list/post"
 import Pagination from "@/components/blog-list/navigation"
 import TagsNavigation from "@/components/blog-list/tags-navigation"
+import ContentWrapper from "@/components/common/content-wrapper"
+import { css } from "@emotion/css"
 
 interface Node {
   node: {
@@ -42,11 +44,23 @@ interface BlogPageContext {
   skip: number
 }
 
-const BlogListWrapper = styled.section`
-  /* max-width: ${elements.maxWidth}; */
-  /* margin: 0 auto; */
-  /* height: 100%; */
-  border: 2px solid red;
+const contentWrapperStyles = css`
+  min-height: 60vh;
+  border-bottom: 1px solid ${elements.p};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+`
+
+const PostWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 100%;
 `
 
 const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContext>) => {
@@ -55,8 +69,8 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
   const { previousPagePath, nextPagePath } = pageContext
 
   return (
-    <Layout>
-      <BlogListWrapper>
+    <Layout fluid>
+      <ContentWrapper className={contentWrapperStyles}>
         <Pagination
           previousPagePath={previousPagePath}
           pageNumber={pageContext.pageNumber}
@@ -64,18 +78,18 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
           nextPagePath={nextPagePath}
         />
         <TagsNavigation tagsList={tagsList} />
-
-        {edges.map(({ node }) => (
-          <Post key={node.id} node={node} />
-        ))}
-
+        <PostWrapper>
+          {edges.map(({ node }) => (
+            <Post key={node.id} node={node} />
+          ))}
+        </PostWrapper>
         <Pagination
           previousPagePath={previousPagePath}
           pageNumber={pageContext.pageNumber}
           numberOfPages={pageContext.numberOfPages}
           nextPagePath={nextPagePath}
         />
-      </BlogListWrapper>
+      </ContentWrapper>
     </Layout>
   )
 }

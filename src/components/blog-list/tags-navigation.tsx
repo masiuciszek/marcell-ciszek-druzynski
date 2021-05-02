@@ -11,14 +11,10 @@ interface TagsNavigationProps {
 }
 
 const Wrapper = styled.aside`
-  h3 {
-    text-align: center;
-    font-family: ${fonts.operatorMono};
-  }
+  margin-bottom: 0.5em;
 `
 
 const StyledList = styled.ul`
-  /* border: 2px solid ${elements.stroke}; */
   display: flex;
   justify-content: space-evenly;
   flex-flow: row wrap;
@@ -28,13 +24,8 @@ const StyledList = styled.ul`
 `
 
 const StyledLi = styled(motion.li)`
-  /* border: 2px solid; */
   padding: 0.5rem;
-  /* flex: 1 0 50%; */
-  /* flex-basis: 20%; */
-  /* flex: 1 1 20%; */
   text-align: center;
-
   min-width: 4em;
   margin-bottom: 0.5em;
 
@@ -63,7 +54,6 @@ const StyledLi = styled(motion.li)`
 const TagsNavigation: React.FC<TagsNavigationProps> = ({ tagsList }) => {
   return (
     <Wrapper>
-      <h3>Categories</h3>
       <StyledList>
         {tagsList.map((tag) => (
           <StyledLi

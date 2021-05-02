@@ -1,5 +1,4 @@
 import { pxToRem } from "@/styles/css-utils"
-import { css, cx } from "@emotion/css"
 import styled from "@emotion/styled"
 import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
