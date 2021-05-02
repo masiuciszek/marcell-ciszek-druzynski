@@ -55,7 +55,7 @@ export const BLOG_POST_QUERY = graphql`
       id
       frontmatter {
         title
-        date
+        date(formatString: "DD MMMM, YYYY")
         spoiler
         length
         tags

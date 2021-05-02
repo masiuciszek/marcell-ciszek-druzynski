@@ -74,15 +74,7 @@ const StyledLink = styled(Link)`
 
 const HoverLink = ({ path, text, className }: Props) => {
   return (
-    <StyledLink
-      to={path}
-      className={cx(className)}
-      // activeStyle={{
-      //   color: "blue",
-      //   fontWeight: 700,
-      // }}
-      activeClassName="active"
-    >
+    <StyledLink to={path} className={cx(className)} activeClassName="active">
       <span>{text}</span>
     </StyledLink>
   )

@@ -8,13 +8,16 @@ import { StaticImage } from "gatsby-plugin-image"
 import useTheme from "@/hooks/theme"
 import AnimatedWrapper from "../animated/animated-wrapper"
 import Marcell from "../icons/marcell"
+import MenuIcon from "./menu-icon"
+import useToggle from "@/hooks/toggle"
+import useMediaQuery from "@/hooks/media-query"
+import { above } from "@/styles/media-query"
 
 const headerStyles = css`
   position: relative;
   min-height: var(--header-size);
   margin-bottom: ${pxToRem(20)};
-  width: 100%;
-
+  /* width: 100%; */
   display: flex;
   align-items: center;
   .theme-toggle-button {
@@ -39,11 +42,15 @@ const MarcellLink = styled(Link)`
 
 export const Header = () => {
   const { storedTheme, handleTheme } = useTheme()
+  const isaAboveTablet = useMediaQuery(above.tabletL)
+  const hasMenuIcon = !isaAboveTablet
+  const { state: isOpen, toggle: toggleIsOpen } = useToggle()
   const isMoonIcon = storedTheme === "light"
   const isSunIcon = storedTheme === "dark"
 
   return (
     <header className={headerStyles}>
+      {hasMenuIcon && <MenuIcon isOpen={isOpen} toggleIsOpen={toggleIsOpen} />}
       <MarcellLink to="/">
         <Marcell />
       </MarcellLink>
@@ -71,7 +78,7 @@ export const Header = () => {
           />
         </IconButton>
       </AnimatedWrapper>
-      <Nav />
+      <Nav isOpen={isOpen} />
     </header>
   )
 }

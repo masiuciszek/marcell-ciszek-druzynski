@@ -10,7 +10,8 @@ import { css } from "@emotion/css"
 import { strains } from "@/styles/strains"
 import { pxToRem } from "@/styles/css-utils"
 import StrokeWrapper from "@/components/common/stroke-wrapper"
-import { elements } from "@/styles/styled-record"
+import { elements, sizes } from "@/styles/styled-record"
+import { above, below } from "@/styles/media-query"
 
 type Node = {
   node: {
@@ -51,9 +52,19 @@ const titleStyles = css`
   justify-content: center;
   align-items: center;
   position: relative;
+  flex-flow: column wrap;
+  text-align: center;
   height: ${pxToRem(90)};
-  h1 {
+  h3 {
     margin: 0;
+  }
+  @media ${above.tablet} {
+    flex-flow: row;
+  }
+  @media ${below.tablet} {
+    h3 {
+      font-size: ${sizes.h4};
+    }
   }
 `
 
@@ -73,10 +84,10 @@ const Tags: React.FC<PageProps<TagsQueryType, TagsQueryContext>> = ({ data, page
       <Wrapper>
         <DirectionLink className={directionLinkStyles} />
         <Title className={titleStyles}>
-          <h1>
+          <h3>
             posts for topic{" "}
             <StrokeWrapper className={strokeStyles}>{pageContext.tag}</StrokeWrapper>{" "}
-          </h1>
+          </h3>
         </Title>
         <PostsWrapper>
           {edges.map(({ node }) => (

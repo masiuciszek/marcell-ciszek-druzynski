@@ -7,7 +7,6 @@ import { graphql } from "gatsby"
 import Post from "@/components/blog-list/post"
 import Pagination from "@/components/blog-list/navigation"
 import TagsNavigation from "@/components/blog-list/tags-navigation"
-import { PostsWrapper } from "@/components/blog-list/styled"
 
 interface Node {
   node: {
@@ -44,9 +43,10 @@ interface BlogPageContext {
 }
 
 const BlogListWrapper = styled.section`
-  max-width: ${elements.maxWidth};
-  margin: 0 auto;
-  height: 100%;
+  /* max-width: ${elements.maxWidth}; */
+  /* margin: 0 auto; */
+  /* height: 100%; */
+  border: 2px solid red;
 `
 
 const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContext>) => {
@@ -64,11 +64,10 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
           nextPagePath={nextPagePath}
         />
         <TagsNavigation tagsList={tagsList} />
-        <PostsWrapper>
-          {edges.map(({ node }) => (
-            <Post key={node.id} node={node} />
-          ))}
-        </PostsWrapper>
+
+        {edges.map(({ node }) => (
+          <Post key={node.id} node={node} />
+        ))}
 
         <Pagination
           previousPagePath={previousPagePath}

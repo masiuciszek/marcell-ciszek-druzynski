@@ -1,34 +1,10 @@
 import { pxToRem } from "@/styles/css-utils"
-import styled from "@emotion/styled"
-import { graphql, useStaticQuery } from "gatsby"
+import { Route } from "@/types/types"
+import { css, cx } from "@emotion/css"
 import React from "react"
 import HoverLink from "../common/hover-link"
 
-const NAV_QUERY = graphql`
-  {
-    site {
-      siteMetadata {
-        routes {
-          name
-          route
-        }
-      }
-    }
-  }
-`
-interface Route {
-  name: string
-  route: string
-}
-
-interface QueryType {
-  site: {
-    siteMetadata: {
-      routes: Array<Route>
-    }
-  }
-}
-const List = styled.ul`
+const styles = css`
   display: flex;
   justify-content: flex-end;
   list-style: none;
@@ -38,18 +14,19 @@ const List = styled.ul`
   }
 `
 
-export const NavList = () => {
-  const {
-    site: { siteMetadata },
-  } = useStaticQuery<QueryType>(NAV_QUERY)
+interface NavListProps {
+  className?: string
+  routes: Array<Route>
+}
 
+export const NavList = ({ className, routes }: NavListProps) => {
   return (
-    <List>
-      {siteMetadata.routes.map(({ name, route }) => (
+    <ul className={cx(styles, className)}>
+      {routes.map(({ name, route }) => (
         <li key={name}>
           <HoverLink path={route} text={name} />
         </li>
       ))}
-    </List>
+    </ul>
   )
 }

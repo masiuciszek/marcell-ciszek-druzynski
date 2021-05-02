@@ -1,0 +1,89 @@
+import { buttonResetStyles } from "@/styles/css-utils"
+import { elements } from "@/styles/styled-record"
+import styled from "@emotion/styled"
+import { motion } from "framer-motion"
+import React from "react"
+
+interface MenuIconProps {
+  isOpen: boolean
+  toggleIsOpen: () => void
+}
+
+const MenuIconWrapper = styled(motion.button)`
+  ${buttonResetStyles};
+  position: absolute;
+  width: 2rem;
+  height: 1.35rem;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 3;
+  .nav-icon-part:nth-of-type(1) {
+    background: ${elements.p};
+    width: 100%;
+  }
+  .nav-icon-part:nth-of-type(2) {
+    background: ${elements.p};
+    width: 100%;
+  }
+  .nav-icon-part:nth-of-type(3) {
+    background: ${elements.p};
+    width: 100%;
+  }
+  .nav-icon-part {
+  }
+`
+// TODO: WIP, change to SVG
+// TODO: WIP, use variants
+const MenuIcon: React.FC<MenuIconProps> = ({ isOpen, toggleIsOpen }) => {
+  console.log({ isOpen })
+  return (
+    <MenuIconWrapper
+      type="button"
+      aria-pressed={isOpen}
+      onClick={toggleIsOpen}
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        top: isOpen ? "1.8rem" : "1.3rem",
+        right: isOpen ? "1rem" : "5rem",
+        position: isOpen ? "fixed" : "absolute",
+      }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+    >
+      <motion.div
+        className="nav-icon-part"
+        animate={{
+          rotate: isOpen ? 120 : 0,
+          width: isOpen ? "1.8rem" : "90%",
+          height: "0.2rem",
+          backgroundColor: isOpen ? elements.background : elements.p,
+        }}
+      />
+      <motion.div
+        className="nav-icon-part"
+        animate={{
+          height: "0.2rem",
+          scale: isOpen ? 0 : 1,
+          opacity: isOpen ? 0 : 1,
+          backgroundColor: isOpen ? elements.background : elements.p,
+          // x: isOpen ? "1000%" : 0,
+        }}
+      />
+      <motion.div
+        className="nav-icon-part"
+        animate={{
+          rotate: isOpen ? -120 : 0,
+          width: isOpen ? "1.8rem" : "88%",
+          height: "0.2rem",
+          position: isOpen ? "absolute" : "static",
+          backgroundColor: isOpen ? elements.background : elements.p,
+        }}
+      />
+    </MenuIconWrapper>
+  )
+}
+export default MenuIcon

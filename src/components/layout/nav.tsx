@@ -1,66 +1,96 @@
 import useMediaQuery from "@/hooks/media-query"
 import { pxToRem } from "@/styles/css-utils"
-import { above } from "@/styles/media-query"
+import { above, below } from "@/styles/media-query"
 import { elements } from "@/styles/styled-record"
+import { Route } from "@/types/types"
+import { css } from "@emotion/css"
 import styled from "@emotion/styled"
+import { AnimatePresence, motion } from "framer-motion"
+import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
 import { NavList } from "./nav-list"
 
 const NavBar = styled.nav`
-  height: 100%;
   min-height: ${pxToRem(80)};
   display: flex;
   align-items: center;
 `
 
-const MenuIcon = styled.button`
-  position: absolute;
-  width: 3rem;
-  height: 1.8rem;
-  right: 4rem;
-  top: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  border: none;
-  background: none;
-  outline: none;
-  .nav-icon-part:nth-of-type(1) {
-    background: ${elements.p};
-    height: 0.3rem;
-    width: 100%;
-  }
-  .nav-icon-part:nth-of-type(2) {
-    background: ${elements.p};
-    height: 0.3rem;
-    width: 100%;
-  }
-  .nav-icon-part:nth-of-type(3) {
-    background: ${elements.p};
-    height: 0.3rem;
-    width: 100%;
-  }
-  .nav-icon-part {
-    /* margin-bottom: ${pxToRem(3)}; */
+const MobileListWrapper = styled(motion.section)`
+  background-color: ${elements.bgShadow};
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+`
+
+const mobileListStyles = css`
+  flex-flow: column wrap;
+  li {
+    a {
+      color: ${elements.background};
+    }
   }
 `
 
-export const Nav = () => {
-  const aboveTablet = useMediaQuery(above.tabletL)
+interface QueryType {
+  site: {
+    siteMetadata: {
+      routes: Array<Route>
+    }
+  }
+}
 
-  const showMenuIcon = !aboveTablet
+interface NavProps {
+  isOpen: boolean
+}
+
+export const Nav = ({ isOpen }: NavProps) => {
+  const {
+    site: {
+      siteMetadata: { routes },
+    },
+  } = useStaticQuery<QueryType>(NAV_QUERY)
+  const matchesAboveTablet = useMediaQuery(above.tabletL)
+  const matchesUnderTablet = useMediaQuery(below.tabletL)
+  const isRegularNavList = matchesAboveTablet && !isOpen
+  const isMobileNavList = matchesUnderTablet && isOpen
+
   return (
     <NavBar>
-      {showMenuIcon && (
-        <MenuIcon role="button" aria-pressed="true">
-          <div className="nav-icon-part part-1"></div>
-          <div className="nav-icon-part part-2"></div>
-          <div className="nav-icon-part part-3"></div>
-        </MenuIcon>
-      )}
-      {aboveTablet && <NavList />}
+      {/* Main  list */}
+      {isRegularNavList && <NavList routes={routes} />}
+
+      {/* Mobile list */}
+      <AnimatePresence exitBeforeEnter initial={false}>
+        {isMobileNavList && (
+          <MobileListWrapper
+            layout
+            initial={{ opacity: 0, y: "-100%", height: 0 }}
+            animate={{ opacity: 1, y: 0, height: "auto" }}
+            exit={{ opacity: 0, y: "-100%", height: 0 }}
+            transition={{ duration: 0.5, type: "spring" }}
+          >
+            <NavList className={mobileListStyles} routes={routes} />
+          </MobileListWrapper>
+        )}
+      </AnimatePresence>
     </NavBar>
   )
 }
+
+const NAV_QUERY = graphql`
+  {
+    site {
+      siteMetadata {
+        routes {
+          name
+          route
+        }
+      }
+    }
+  }
+`

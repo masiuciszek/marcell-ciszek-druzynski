@@ -1,5 +1,6 @@
 import { strains } from "@/styles/strains"
 import { elements } from "@/styles/styled-record"
+import { sliceIt } from "@/util"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 import React from "react"
@@ -51,19 +52,22 @@ const Paginate = ({ previousPost, nextPost }: PaginateProps) => {
   return (
     <PaginateStyles>
       {hasPreviousPost ? (
-        <Link to={`/blog/${previousPost?.slug}`}> {previousPost?.frontmatter.title ?? ""}</Link>
+        <Link to={`/blog/${previousPost?.slug}`}>
+          {sliceIt(previousPost?.frontmatter.title ?? "", 0, 16)}
+        </Link>
       ) : (
         <Link aria-disabled="true" to={`/blog/${previousPost?.slug}`}>
-          {previousPost?.frontmatter.title ?? "previous Post"}
+          previous Post
         </Link>
       )}
 
       {hasNextPost ? (
-        <Link to={`/blog/${nextPost?.slug}`}> {nextPost?.frontmatter.title ?? ""} </Link>
+        <Link to={`/blog/${nextPost?.slug}`}>
+          {sliceIt(nextPost?.frontmatter.title ?? "End of posts", 0, 16)}
+        </Link>
       ) : (
         <Link aria-disabled to={`/blog/${nextPost?.slug}`}>
-          {" "}
-          {nextPost?.frontmatter.title ?? "End of posts"}{" "}
+          End of posts
         </Link>
       )}
     </PaginateStyles>

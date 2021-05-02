@@ -45,6 +45,7 @@ interface Elements {
   filler: string
   boxBackground: string
   boxText: string
+  bgShadow: string
 }
 
 const elements: Elements = {
@@ -60,6 +61,7 @@ const elements: Elements = {
   filler: "var(--filler)",
   boxBackground: "var(--box-background)",
   boxText: "var(--box-text)",
+  bgShadow: "var(--bg-shadow)",
 }
 
 const transition = {

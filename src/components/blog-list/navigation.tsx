@@ -19,7 +19,7 @@ const topSectionStyles = css`
   align-items: center;
   background-color: ${elements.p};
   ${strains}
-  margin: 2rem 0;
+  margin: 2rem auto;
 
   @media ${below.tablet} {
     justify-items: center;
