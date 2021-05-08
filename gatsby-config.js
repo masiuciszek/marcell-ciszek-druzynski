@@ -28,7 +28,7 @@ const config = {
 const routes = [
   { name: "About", route: "/about" },
   { name: "Blog", route: "/blog" },
-  { name: "Projects", route: "/projects" },
+  { name: "Bites", route: "/bites" },
   { name: "Get in touch", route: "/contact" },
 ]
 
@@ -48,6 +48,13 @@ module.exports = {
     "gatsby-plugin-emotion",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
+    `gatsby-transformer-json`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `./src/data/`,
+      },
+    },
     {
       resolve: "gatsby-plugin-manifest",
       options: {

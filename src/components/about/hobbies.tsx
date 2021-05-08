@@ -23,7 +23,7 @@ export const Hobbies = () => {
       </p>
 
       <p>
-        <strong>I Live in Gotheburg Sweden</strong>
+        <strong>I Live in Gothenburg Sweden</strong>
         <br />
         <p>
           Gothenburg is where I am born and raised, I been living in asia for a longer period which

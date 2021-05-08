@@ -1,11 +1,19 @@
 import { pxToRem } from "@/styles/css-utils"
 import { above, below } from "@/styles/media-query"
 import { elements } from "@/styles/styled-record"
+import { ContactType } from "@/types/types"
 import { randomNumber } from "@/util"
 import styled from "@emotion/styled"
 import { motion } from "framer-motion"
 import React from "react"
 import StrokeWrapper from "../common/stroke-wrapper"
+
+interface Node {
+  node: ContactType
+}
+interface SocialListProps {
+  contactList: Node[]
+}
 
 const SocialListWrapper = styled.aside`
   width: 100%;
@@ -66,29 +74,14 @@ const List = styled.ul`
   }
 `
 
-const socialLinks = [
-  {
-    name: "Github",
-    path: "https://github.com/masiucd",
-  },
-  {
-    name: "Twitter",
-    path: "https://mobile.twitter.com/masiu_cd",
-  },
-  {
-    name: "Linkedin",
-    path: "https://www.linkedin.com/in/marcell-ciszek",
-  },
-]
-
-const SocialList = () => {
+const SocialList = ({ contactList }: SocialListProps) => {
   return (
     <SocialListWrapper>
       <Small>
         <StrokeWrapper>Say Hi</StrokeWrapper> to me on
       </Small>
       <List>
-        {socialLinks.map(({ name, path }) => (
+        {contactList.map(({ node: { name, path } }) => (
           <motion.li key={name} whileHover={{ rotate: randomNumber(5) }}>
             <a href={path} target="_blank" rel="noreferrer">
               {name}

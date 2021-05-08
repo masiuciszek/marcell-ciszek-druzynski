@@ -1,15 +1,22 @@
 import { pxToRem } from "@/styles/css-utils"
+import { ContactType } from "@/types/types"
 import styled from "@emotion/styled"
 import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
 import StrokeWrapper from "../common/stroke-wrapper"
 import SocialList from "../social-media/social-list"
 
+interface Node {
+  node: ContactType
+}
 interface QueryType {
   site: {
     siteMetadata: {
       title: string
     }
+  }
+  contactList: {
+    edges: Array<Node>
   }
 }
 
@@ -18,6 +25,15 @@ const QUERY = graphql`
     site {
       siteMetadata {
         title
+      }
+    }
+    contactList: allContactListJson {
+      edges {
+        node {
+          id
+          name
+          path
+        }
       }
     }
   }
@@ -38,10 +54,10 @@ const Small = styled.small`
 `
 
 export const Footer = () => {
-  const { site } = useStaticQuery<QueryType>(QUERY)
+  const { site, contactList } = useStaticQuery<QueryType>(QUERY)
   return (
     <FooterStyles>
-      <SocialList />
+      <SocialList contactList={contactList.edges} />
       <Small>
         &copy; {new Date().getFullYear()} Copyright{" "}
         <StrokeWrapper>{site.siteMetadata.title}</StrokeWrapper>. All rights reserved.
