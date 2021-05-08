@@ -3,6 +3,7 @@ import { elements, elevations } from "@/styles/styled-record"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 import React from "react"
+import StrokeWrapper from "../common/stroke-wrapper"
 import TagsList from "./tags-list"
 
 interface PostProps {

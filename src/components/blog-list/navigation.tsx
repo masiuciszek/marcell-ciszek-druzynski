@@ -4,7 +4,7 @@ import { css } from "@emotion/css"
 import { elements, elevations } from "@/styles/styled-record"
 import { Link } from "gatsby"
 import { strains } from "@/styles/strains"
-import { above, below } from "@/styles/media-query"
+import { below } from "@/styles/media-query"
 
 interface NavigationProps {
   previousPagePath: string
@@ -36,9 +36,6 @@ const topSectionStyles = css`
     grid-gap: 1rem;
     text-align: center;
     align-items: center;
-  }
-  @media ${above.tablet} {
-    /* height: 3rem; */
   }
 
   h4,

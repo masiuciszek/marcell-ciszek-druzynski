@@ -45,20 +45,22 @@ const contentWrapperStyles = css`
       background-color: ${elements.highlightShadow};
     }
   }
-  @media ${below.mobileL} {
+  @media ${below.mobileXL} {
     .typed-span {
-      font-size: ${pxToRem(18)};
+      font-size: ${pxToRem(20)};
     }
   }
 `
 
 const ImageWrapper = styled.div`
-  flex: 1 0 50%;
-
-  img {
-    @media ${above.mobileS} {
-      object-fit: cover;
-      width: 300px;
+  @media ${above.mobileS} {
+    svg {
+      width: ${pxToRem(300)};
+    }
+  }
+  @media ${above.mobileL} {
+    svg {
+      width: ${pxToRem(350)};
     }
   }
 `

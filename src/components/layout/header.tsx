@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 import { Nav } from "./nav"
 import { css } from "@emotion/css"
 import { Link } from "gatsby"
@@ -12,6 +12,7 @@ import MenuIcon from "./menu-icon"
 import useToggle from "@/hooks/toggle"
 import useMediaQuery from "@/hooks/media-query"
 import { above } from "@/styles/media-query"
+import useOnClickOutside from "@/hooks/click-outside"
 
 const headerStyles = css`
   position: relative;
@@ -42,14 +43,17 @@ const MarcellLink = styled(Link)`
 
 export const Header = () => {
   const { storedTheme, handleTheme } = useTheme()
+  const ref = useRef(null)
+  const { state: isOpen, toggle: toggleIsOpen, setTorFalse: close } = useToggle()
+  useOnClickOutside(ref, close)
+
   const isaAboveTablet = useMediaQuery(above.tabletL)
   const hasMenuIcon = !isaAboveTablet
-  const { state: isOpen, toggle: toggleIsOpen } = useToggle()
   const isMoonIcon = storedTheme === "light"
   const isSunIcon = storedTheme === "dark"
 
   return (
-    <header className={headerStyles}>
+    <header className={headerStyles} ref={ref}>
       {hasMenuIcon && <MenuIcon isOpen={isOpen} toggleIsOpen={toggleIsOpen} />}
       <MarcellLink to="/">
         <Marcell />

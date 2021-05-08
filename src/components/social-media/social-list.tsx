@@ -37,6 +37,9 @@ const List = styled.ul`
   margin: 0;
   list-style: none;
 
+  li {
+  }
+
   @media ${below.mobileL} {
     li {
       margin-left: 0.25em;
