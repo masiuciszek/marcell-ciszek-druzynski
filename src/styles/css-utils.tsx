@@ -12,3 +12,8 @@ export const buttonResetStyles = css`
   padding: 0;
   margin: 0;
 `
+
+export const commonGridStyles = css`
+  display: grid;
+  grid-template-columns: 1fr;
+`

@@ -1,7 +1,6 @@
 import React from "react"
 import Layout from "@/components/layout/layout"
 import { elements } from "@/styles/styled-record"
-import styled from "@emotion/styled"
 import { PageProps } from "gatsby"
 import { graphql } from "gatsby"
 import Post from "@/components/blog-list/post"
@@ -9,7 +8,7 @@ import Pagination from "@/components/blog-list/navigation"
 import TagsNavigation from "@/components/blog-list/tags-navigation"
 import ContentWrapper from "@/components/common/content-wrapper"
 import { css } from "@emotion/css"
-import GridWrapper from "@/components/common/grid-wrapper"
+import { commonGridStyles } from "@/styles/css-utils"
 
 interface Node {
   node: {
@@ -46,14 +45,11 @@ interface BlogPageContext {
 }
 
 const contentWrapperStyles = css`
-  border-bottom: 1px solid ${elements.p};
-  display: grid;
-  grid-template-columns: 1fr;
   margin: 2rem auto;
   justify-items: center;
   width: 100%;
   align-self: center;
-  border: 1px solid red;
+  border-bottom: 1px solid ${elements.p};
 `
 
 const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContext>) => {
@@ -71,8 +67,6 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
           nextPagePath={nextPagePath}
         />
         <TagsNavigation tagsList={tagsList} />
-        {/* <GridWrapper className={gridWrapperStyles}>
-          </GridWrapper> */}
         {edges.map(({ node }) => (
           <Post key={node.id} node={node} />
         ))}

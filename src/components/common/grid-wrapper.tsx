@@ -1,9 +1,9 @@
 import React from "react"
 import { css, cx } from "@emotion/css"
+import { commonGridStyles } from "@/styles/css-utils"
 
 export const gridWrapperStyles = css`
-  display: grid;
-  grid-template-columns: 1fr;
+  ${commonGridStyles}
 `
 
 interface GridWrapperProps {

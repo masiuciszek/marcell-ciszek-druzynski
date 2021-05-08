@@ -14,13 +14,20 @@ interface NavigationProps {
 }
 
 const topSectionStyles = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: ${elements.p};
   ${strains}
-  margin: 2rem auto;
   width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  text-align: center;
+  margin: 2rem 0;
+  justify-items: center;
+  align-items: center;
+
+  @media (max-width: 750px) {
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
 
   @media ${below.tablet} {
     justify-items: center;
@@ -31,7 +38,7 @@ const topSectionStyles = css`
     align-items: center;
   }
   @media ${above.tablet} {
-    height: 3rem;
+    /* height: 3rem; */
   }
 
   h4,
@@ -49,9 +56,7 @@ const topSectionStyles = css`
     transform: rotate(3deg);
     text-align: center;
     border: 1px solid ${elements.p};
-    @media ${above.tablet} {
-      flex-basis: 30%;
-    }
+    width: 8em;
     span {
       color: ${elements.stroke};
       text-shadow: 1px 1px ${elements.p};

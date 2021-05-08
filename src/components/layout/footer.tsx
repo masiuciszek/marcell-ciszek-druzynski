@@ -24,7 +24,7 @@ const QUERY = graphql`
 `
 
 const FooterStyles = styled.footer`
-  min-height: 4.5em;
+  min-height: 4.75em;
   display: flex;
   justify-content: center;
   flex-flow: column wrap;
@@ -34,6 +34,7 @@ const FooterStyles = styled.footer`
 
 const Small = styled.small`
   font-size: ${pxToRem(12)};
+  display: block;
 `
 
 export const Footer = () => {

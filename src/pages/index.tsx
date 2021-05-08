@@ -3,7 +3,7 @@ import Layout from "@/components/layout/layout"
 import { css } from "@emotion/css"
 import { Seo } from "@/components/seo"
 import Typed from "react-typed"
-import { above } from "@/styles/media-query"
+import { above, below } from "@/styles/media-query"
 import ContentWrapper from "@/components/common/content-wrapper"
 import styled from "@emotion/styled"
 import { LinkElement } from "@/components/common/link"
@@ -11,12 +11,14 @@ import { elements } from "@/styles/styled-record"
 import AnimatedWrapper from "@/components/animated/animated-wrapper"
 import Hero from "@/components/hero"
 import HeyMyNameIs from "@/components/icons/my-name-is"
+import { pxToRem } from "@/styles/css-utils"
 
 const textLines = [
-  `Happy <strong class="strong-text">&#60;Developer/&#62;</strong>`,
-  `&#60;Endurance/&#62; <strong class="strong-text">freak</strong> `,
-  `&#60;Animal/&#62; <strong class="strong-text">lover</strong> `,
-  `<strong class="strong-text">&#60;Create/&#62;</strong> stuff`,
+  `<span class="typed-span">Happy <strong class="strong-text">&#60;Developer/&#62;</strong></span>`,
+  `<span class="typed-span">&#60;Endurance/&#62; <strong class="strong-text">freak</strong></span>`,
+  `<span class="typed-span">&#60;Animal/&#62; <strong class="strong-text">lover</strong></span>`,
+  `<span class="typed-span"><strong class="strong-text">&#60;Create/&#62;</strong> stuff</span>`,
+  `<span class="typed-span"><strong class="strong-text">&#60;Love/&#62;</strong> photograph's</span>`,
 ]
 
 const contentWrapperStyles = css`
@@ -41,6 +43,11 @@ const contentWrapperStyles = css`
       width: 100%;
       height: 8px;
       background-color: ${elements.highlightShadow};
+    }
+  }
+  @media ${below.mobileL} {
+    .typed-span {
+      font-size: ${pxToRem(18)};
     }
   }
 `

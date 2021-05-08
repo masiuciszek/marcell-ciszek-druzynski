@@ -1,3 +1,4 @@
+import { commonGridStyles } from "@/styles/css-utils"
 import { elements } from "@/styles/styled-record"
 import { css, cx } from "@emotion/css"
 import React from "react"
@@ -7,9 +8,10 @@ interface ContentWrapperProps {
   fluid?: boolean
 }
 const styles = (fluid = false) => css`
+  ${commonGridStyles};
   padding: 0.5rem;
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
   max-width: ${fluid ? "100%" : elements.maxWidth};
 `
 

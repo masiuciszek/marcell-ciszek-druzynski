@@ -1,3 +1,4 @@
+import { pxToRem } from "@/styles/css-utils"
 import { above, below } from "@/styles/media-query"
 import { elements } from "@/styles/styled-record"
 import { randomNumber } from "@/util"
@@ -7,38 +8,55 @@ import React from "react"
 import StrokeWrapper from "../common/stroke-wrapper"
 
 const SocialListWrapper = styled.aside`
-  display: flex;
   width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  justify-content: space-evenly;
-  flex-flow: column wrap;
-  @media ${above.tablet} {
-    width: 40em;
-    flex-flow: row;
+
+  @media ${above.mobileL} {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  @media ${above.tabletL} {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    max-width: 55em;
   }
 `
 
 const Small = styled.small`
-  flex: 1 0 30%;
+  margin-bottom: 0.35em;
+  @media ${below.mobileL} {
+    margin-left: 0.4em;
+  }
 `
 
 const List = styled.ul`
   display: flex;
-  list-style: none;
   padding: 0;
-  display: flex;
-  justify-content: space-between;
+  margin: 0;
+  list-style: none;
 
-  @media ${above.tablet} {
-    flex: 1 0 70%;
-  }
-  @media ${below.tablet} {
-    width: 100%;
+  @media ${below.mobileL} {
+    li {
+      margin-left: 0.25em;
+      font-size: ${pxToRem(14)};
+    }
   }
 
-  li {
-    padding: 0;
-    margin: 0;
+  @media ${below.mobileM} {
+    justify-content: center;
+    align-items: center;
+  }
+  justify-content: center;
+  align-items: center;
+  @media ${above.mobileL} {
+    flex-direction: row;
+    width: 90%;
+    margin-bottom: 0.35em;
+    li {
+      margin: 0.25em;
+    }
   }
   a {
     color: ${elements.a};
@@ -70,7 +88,7 @@ const SocialList = () => {
         {socialLinks.map(({ name, path }) => (
           <motion.li key={name} whileHover={{ rotate: randomNumber(5) }}>
             <a href={path} target="_blank" rel="noreferrer">
-              {name} &lambda;
+              {name}
             </a>
           </motion.li>
         ))}
