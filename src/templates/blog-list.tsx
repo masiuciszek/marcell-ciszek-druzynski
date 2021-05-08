@@ -8,7 +8,6 @@ import Pagination from "@/components/blog-list/navigation"
 import TagsNavigation from "@/components/blog-list/tags-navigation"
 import ContentWrapper from "@/components/common/content-wrapper"
 import { css } from "@emotion/css"
-import { commonGridStyles } from "@/styles/css-utils"
 
 interface Node {
   node: {
