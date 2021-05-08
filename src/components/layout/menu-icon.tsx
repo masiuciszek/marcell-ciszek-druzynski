@@ -1,5 +1,5 @@
 import { buttonResetStyles } from "@/styles/css-utils"
-import { elements } from "@/styles/styled-record"
+import { elements, elevations } from "@/styles/styled-record"
 import styled from "@emotion/styled"
 import { motion } from "framer-motion"
 import React from "react"
@@ -21,15 +21,15 @@ const MenuIconWrapper = styled(motion.button)`
   align-items: center;
   z-index: 3;
   .nav-icon-part:nth-of-type(1) {
-    background: ${elements.p};
+    box-shadow: ${elevations.shadowM};
     width: 100%;
   }
   .nav-icon-part:nth-of-type(2) {
-    background: ${elements.p};
+    box-shadow: ${elevations.shadowM};
     width: 100%;
   }
   .nav-icon-part:nth-of-type(3) {
-    background: ${elements.p};
+    box-shadow: ${elevations.shadowM};
     width: 100%;
   }
   .nav-icon-part {
@@ -38,7 +38,6 @@ const MenuIconWrapper = styled(motion.button)`
 // TODO: WIP, change to SVG
 // TODO: WIP, use variants
 const MenuIcon: React.FC<MenuIconProps> = ({ isOpen, toggleIsOpen }) => {
-  console.log({ isOpen })
   return (
     <MenuIconWrapper
       type="button"
@@ -60,7 +59,7 @@ const MenuIcon: React.FC<MenuIconProps> = ({ isOpen, toggleIsOpen }) => {
           rotate: isOpen ? 120 : 0,
           width: isOpen ? "1.8rem" : "90%",
           height: "0.2rem",
-          backgroundColor: isOpen ? elements.background : elements.p,
+          backgroundColor: isOpen ? elements.background : elements.stroke,
         }}
       />
       <motion.div
@@ -69,7 +68,7 @@ const MenuIcon: React.FC<MenuIconProps> = ({ isOpen, toggleIsOpen }) => {
           height: "0.2rem",
           scale: isOpen ? 0 : 1,
           opacity: isOpen ? 0 : 1,
-          backgroundColor: isOpen ? elements.background : elements.p,
+          backgroundColor: isOpen ? elements.background : elements.stroke,
           // x: isOpen ? "1000%" : 0,
         }}
       />
@@ -80,7 +79,7 @@ const MenuIcon: React.FC<MenuIconProps> = ({ isOpen, toggleIsOpen }) => {
           width: isOpen ? "1.8rem" : "88%",
           height: "0.2rem",
           position: isOpen ? "absolute" : "static",
-          backgroundColor: isOpen ? elements.background : elements.p,
+          backgroundColor: isOpen ? elements.background : elements.stroke,
         }}
       />
     </MenuIconWrapper>

@@ -9,6 +9,7 @@ import Pagination from "@/components/blog-list/navigation"
 import TagsNavigation from "@/components/blog-list/tags-navigation"
 import ContentWrapper from "@/components/common/content-wrapper"
 import { css } from "@emotion/css"
+import GridWrapper from "@/components/common/grid-wrapper"
 
 interface Node {
   node: {
@@ -45,22 +46,14 @@ interface BlogPageContext {
 }
 
 const contentWrapperStyles = css`
-  min-height: 60vh;
   border-bottom: 1px solid ${elements.p};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
   margin: 2rem auto;
-`
-
-const PostWrapper = styled.div`
+  justify-items: center;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1 0 100%;
+  align-self: center;
+  border: 1px solid red;
 `
 
 const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContext>) => {
@@ -69,7 +62,7 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
   const { previousPagePath, nextPagePath } = pageContext
 
   return (
-    <Layout fluid>
+    <Layout>
       <ContentWrapper className={contentWrapperStyles}>
         <Pagination
           previousPagePath={previousPagePath}
@@ -78,11 +71,11 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
           nextPagePath={nextPagePath}
         />
         <TagsNavigation tagsList={tagsList} />
-        <PostWrapper>
-          {edges.map(({ node }) => (
-            <Post key={node.id} node={node} />
-          ))}
-        </PostWrapper>
+        {/* <GridWrapper className={gridWrapperStyles}>
+          </GridWrapper> */}
+        {edges.map(({ node }) => (
+          <Post key={node.id} node={node} />
+        ))}
         <Pagination
           previousPagePath={previousPagePath}
           pageNumber={pageContext.pageNumber}

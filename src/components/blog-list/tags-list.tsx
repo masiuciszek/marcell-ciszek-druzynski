@@ -31,6 +31,7 @@ const TagsListStyles = styled.ul`
     border-radius: ${elements.borderRadiusS};
     display: block;
     margin-left: 0.75rem;
+    margin-bottom: 0.25rem;
   }
 `
 interface TagsListProps {

@@ -29,12 +29,12 @@ const StyledLi = styled(motion.li)`
   min-width: 4em;
   margin-bottom: 0.5em;
 
-  &:nth-child(2n) {
+  &:nth-of-type(2n) {
     a {
       transform: rotate(2deg);
     }
   }
-  &:nth-child(3n) {
+  &:nth-of-type(3n) {
     a {
       transform: rotate(-2deg);
     }

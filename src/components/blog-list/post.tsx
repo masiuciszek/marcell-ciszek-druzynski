@@ -26,17 +26,13 @@ const StyledPost = styled.article`
   padding: 1rem;
   background-color: ${elements.boxBackground};
   box-shadow: ${elevations.shadowLg};
-  width: 16.5em;
+  width: 100%;
 
-  @media ${above.mobileL} {
-    width: 28em;
-  }
   @media ${above.tablet} {
-    width: 35em;
-    /* width: 40em; */
+    width: 34em;
   }
   @media ${above.tabletL} {
-    width: 40em;
+    width: 45em;
   }
   p {
     color: ${elements.boxText};
