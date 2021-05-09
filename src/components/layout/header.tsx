@@ -44,7 +44,7 @@ const MarcellLink = styled(Link)`
 export const Header = () => {
   const { storedTheme, handleTheme } = useTheme()
   const ref = useRef(null)
-  const { state: isOpen, toggle: toggleIsOpen, setTorFalse: close } = useToggle()
+  const { state: isOpen, toggle: toggleIsOpen, setToFalse: close } = useToggle()
   useOnClickOutside(ref, close)
 
   const isaAboveTablet = useMediaQuery(above.tabletL)
