@@ -3,7 +3,6 @@ import { graphql, PageProps } from "gatsby"
 import Layout from "@/components/layout/layout"
 import styled from "@emotion/styled"
 import DirectionLink from "@/components/common/direction-link"
-import { PostsWrapper } from "@/components/blog-list/styled"
 import Post from "@/components/blog-list/post"
 import Title from "@/components/common/title"
 import { css } from "@emotion/css"
@@ -12,6 +11,8 @@ import { pxToRem } from "@/styles/css-utils"
 import StrokeWrapper from "@/components/common/stroke-wrapper"
 import { elements, sizes } from "@/styles/styled-record"
 import { above, below } from "@/styles/media-query"
+import ContentWrapper from "@/components/common/content-wrapper"
+import { blogListStyles } from "@/styles/blog-list"
 
 type Node = {
   node: {
@@ -38,30 +39,27 @@ interface TagsQueryContext {
   tag: string
 }
 
-const Wrapper = styled.section`
-  padding: 0.5em;
-`
-
 const directionLinkStyles = css`
-  margin-bottom: 1.5em;
+  @media ${below.tablet} {
+    margin-top: 1rem;
+  }
 `
 
 const titleStyles = css`
+  background-color: ${elements.p};
   ${strains}
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 2rem 0;
+  justify-items: center;
   align-items: center;
-  position: relative;
-  flex-flow: column wrap;
-  text-align: center;
-  height: ${pxToRem(90)};
-  h3 {
-    margin: 0;
-  }
+  grid-gap: 1rem;
   @media ${above.tablet} {
-    flex-flow: row;
+    width: 80%;
   }
   @media ${below.tablet} {
+    width: 100%;
+    grid-template-columns: 1fr;
     h3 {
       font-size: ${sizes.h4};
     }
@@ -78,23 +76,20 @@ const strokeStyles = css`
 
 const Tags: React.FC<PageProps<TagsQueryType, TagsQueryContext>> = ({ data, pageContext }) => {
   const { edges } = data.posts
-  // /blog/slug
   return (
     <Layout>
-      <Wrapper>
-        <DirectionLink className={directionLinkStyles} />
+      <ContentWrapper className={blogListStyles}>
         <Title className={titleStyles}>
+          <DirectionLink className={directionLinkStyles} />
           <h3>
             posts for topic{" "}
             <StrokeWrapper className={strokeStyles}>{pageContext.tag}</StrokeWrapper>{" "}
           </h3>
         </Title>
-        <PostsWrapper>
-          {edges.map(({ node }) => (
-            <Post key={node.id} node={node} />
-          ))}
-        </PostsWrapper>
-      </Wrapper>
+        {edges.map(({ node }) => (
+          <Post key={node.id} node={node} />
+        ))}
+      </ContentWrapper>
     </Layout>
   )
 }

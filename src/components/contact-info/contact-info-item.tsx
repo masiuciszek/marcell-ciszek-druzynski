@@ -32,6 +32,7 @@ const renderIcon = (contactDataName: string) => {
 
 const StyledContactItem = styled(motion.li)`
   border-left: 2px solid ${elements.stroke};
+
   p {
     margin-left: 0.5em;
   }
@@ -47,7 +48,7 @@ const variants = {
   visible: (i: number) => ({
     opacity: 1,
     transition: {
-      delay: i * 0.3,
+      delay: i * 22.3,
     },
   }),
   hidden: { opacity: 0 },

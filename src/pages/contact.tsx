@@ -1,6 +1,7 @@
 import ContentWrapper from "@/components/common/content-wrapper"
 import StrokeWrapper from "@/components/common/stroke-wrapper"
 import ContactInfo from "@/components/contact-info"
+import { Content } from "@/components/contact-info/content"
 import Layout from "@/components/layout/layout"
 import { elements, fonts } from "@/styles/styled-record"
 import { css } from "@emotion/css"
@@ -8,7 +9,6 @@ import styled from "@emotion/styled"
 import React from "react"
 
 const wrapperStyles = css`
-  border: 2px solid red;
   justify-items: center;
 `
 
@@ -43,12 +43,7 @@ const ContactPage = () => {
         <H1>
           <StrokeWrapper className={strokeStyles}>Contact</StrokeWrapper> me
         </H1>
-        <p>
-          I have some <StrokeWrapper>questions</StrokeWrapper>, and want to stay in touch
-        </p>
-        <p>
-          Hey, sure you can always send me a <StrokeWrapper>message</StrokeWrapper>
-        </p>
+        <Content />
         <ContactInfo />
       </ContentWrapper>
     </Layout>

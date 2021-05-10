@@ -1,13 +1,12 @@
 import React from "react"
 import Layout from "@/components/layout/layout"
-import { elements } from "@/styles/styled-record"
 import { PageProps } from "gatsby"
 import { graphql } from "gatsby"
 import Post from "@/components/blog-list/post"
 import Pagination from "@/components/blog-list/navigation"
 import TagsNavigation from "@/components/blog-list/tags-navigation"
 import ContentWrapper from "@/components/common/content-wrapper"
-import { css } from "@emotion/css"
+import { blogListStyles } from "@/styles/blog-list"
 
 interface Node {
   node: {
@@ -43,14 +42,6 @@ interface BlogPageContext {
   skip: number
 }
 
-const contentWrapperStyles = css`
-  margin: 2rem auto;
-  justify-items: center;
-  width: 100%;
-  align-self: center;
-  border-bottom: 1px solid ${elements.p};
-`
-
 const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContext>) => {
   const { edges } = data.allMdx
   const { group: tagsList } = data.tags
@@ -58,7 +49,7 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
 
   return (
     <Layout>
-      <ContentWrapper className={contentWrapperStyles}>
+      <ContentWrapper className={blogListStyles}>
         <Pagination
           previousPagePath={previousPagePath}
           pageNumber={pageContext.pageNumber}

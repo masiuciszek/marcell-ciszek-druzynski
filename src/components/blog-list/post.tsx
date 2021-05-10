@@ -1,5 +1,6 @@
-import { above } from "@/styles/media-query"
+import { above, below } from "@/styles/media-query"
 import { elements, elevations } from "@/styles/styled-record"
+import { sliceIt } from "@/util"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 import React from "react"
@@ -74,13 +75,24 @@ const Head = styled.div`
   }
 `
 
+const Body = styled.div`
+  margin: 0 auto;
+  @media ${below.mobileL} {
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+`
+
 const Bottom = styled.section`
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 1fr;
-  justify-items: center;
+
   @media ${above.mobileL} {
     grid-template-columns: 2fr 1fr;
+  }
+  @media ${below.mobileL} {
+    justify-items: center;
   }
 `
 
@@ -88,6 +100,17 @@ const ReadMore = styled(Link)`
   display: block;
   cursor: pointer;
   align-self: center;
+  span {
+    &:after {
+      width: 0;
+      transition: width 250ms ease-in;
+    }
+    &:hover {
+      &:after {
+        width: 100%;
+      }
+    }
+  }
 `
 
 const Post = ({ node }: PostProps) => {
@@ -101,10 +124,15 @@ const Post = ({ node }: PostProps) => {
           <p>{length}</p>
         </div>
       </Head>
-      <p>{node.excerpt}</p>
+      <Body>
+        <p>{node.excerpt}</p>
+      </Body>
+      <hr />
       <Bottom>
         {/* TODO: Fancy arrow animation here with svg */}
-        <ReadMore to={`/blog/${node.slug}`}>Read More about {node.frontmatter.title}</ReadMore>
+        <ReadMore to={`/blog/${node.slug}`}>
+          Read about <StrokeWrapper>{sliceIt(node.frontmatter.title)}</StrokeWrapper>
+        </ReadMore>
         <TagsList tags={node.frontmatter.tags} />
       </Bottom>
     </StyledPost>

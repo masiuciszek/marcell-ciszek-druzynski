@@ -1,3 +1,4 @@
+import { above } from "@/styles/media-query"
 import { ContactType } from "@/types/types"
 import styled from "@emotion/styled"
 import { motion } from "framer-motion"
@@ -36,6 +37,9 @@ const ContactGrid = styled(motion.ul)`
   margin: 1rem auto;
   padding: 0.5em;
   list-style: none;
+  @media ${above.tablet} {
+    margin-bottom: 2rem;
+  }
 `
 
 const variants = {
@@ -62,8 +66,6 @@ const variants = {
 
 const ContactInfo = () => {
   const { contactList } = useStaticQuery<QueryType>(CONTACT_QUERY)
-  
-
   return (
     <ContactGrid initial="initial" animate="visible" exit="exit" variants={variants}>
       {contactList.edges.map(({ node }, i) => (
