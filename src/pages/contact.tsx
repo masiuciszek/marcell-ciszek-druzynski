@@ -3,6 +3,7 @@ import StrokeWrapper from "@/components/common/stroke-wrapper"
 import ContactInfo from "@/components/contact-info"
 import { Content } from "@/components/contact-info/content"
 import Layout from "@/components/layout/layout"
+import MailChimp from "@/components/mail-chimp"
 import { Seo } from "@/components/seo"
 import { elements, fonts } from "@/styles/styled-record"
 import { css } from "@emotion/css"
@@ -37,7 +38,7 @@ const strokeStyles = css`
   font-family: ${fonts.rednika};
 `
 
-const ContactPage = () => {
+const ContactPage = (): JSX.Element => {
   return (
     <Layout>
       <Seo title="Contact me" description="Let's get in touch" />
@@ -46,6 +47,8 @@ const ContactPage = () => {
           <StrokeWrapper className={strokeStyles}>Contact</StrokeWrapper> me
         </H1>
         <Content />
+        <MailChimp />
+        {/* TODO: When we scroll down then we will animate the icons */}
         <ContactInfo />
       </ContentWrapper>
     </Layout>

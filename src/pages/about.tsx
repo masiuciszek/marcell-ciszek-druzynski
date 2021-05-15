@@ -14,7 +14,7 @@ const styles = css`
   margin: 1rem auto;
 `
 
-const AboutPage = () => {
+const AboutPage = (): JSX.Element => {
   return (
     <Layout fluid>
       <Seo title="about me" description="who am I what I do and what I like" />

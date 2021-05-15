@@ -52,7 +52,7 @@ const titleStyles = css`
   }
 `
 
-const NotFoundPage = ({ location, data }: PageProps<NotFoundPageProps>) => {
+const NotFoundPage = ({ location, data }: PageProps<NotFoundPageProps>): JSX.Element => {
   const { hero } = data
   return (
     <Layout>
