@@ -47,10 +47,9 @@ const StyledLink = styled(Link)`
       width: 0.75em;
       height: 0.75em;
       content: "";
-      pointer-events: none;
-      background-color: ${elements.bgShadow};
+      background-color: ${elements.stroke};
       position: absolute;
-      z-index: 0;
+      z-index: -1;
       opacity: 1;
       --translate: -0.5rem;
       --rotate: 0deg;
@@ -63,7 +62,7 @@ const StyledLink = styled(Link)`
       position: absolute;
       bottom: 0;
       left: 0;
-      background-color: ${elements.background};
+      background-color: ${elements.bgShadow};
       width: 100%;
       height: 2px;
       transition: 200ms ease all;

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useReducer, useState, Reducer } from "react"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 import styled from "@emotion/styled"
 import StrokeWrapper from "./common/stroke-wrapper"
@@ -6,6 +6,7 @@ import { buttonResetStyles, pxToRem } from "@/styles/css-utils"
 import { above } from "@/styles/media-query"
 import { elements, elevations, sizes } from "@/styles/styled-record"
 import { css } from "@emotion/css"
+import Debugger from "./debugger"
 
 const Form = styled.form`
   display: grid;
@@ -82,9 +83,6 @@ const SubmitButton = styled.button`
   font-size: ${pxToRem(16)};
   background-color: ${elements.fillerStroke};
 `
-// TODO: Useform hook for validation
-const useForm = () => {}
-
 const strokeStyles = css`
   color: ${elements.fillerStroke};
   &::after {
@@ -92,17 +90,95 @@ const strokeStyles = css`
   }
 `
 
-const MailChimp = () => {
-  const [name, setName] = useState<string>("")
-  const [email, setEmail] = useState<string>("")
+interface State {
+  values: Record<string, string>
+  errors: Record<string, string>
+  touched: Record<string, boolean>
+  isSubmitting: boolean
+}
 
+const SET_FIELD_VALUE = "SET_FIELD_VALUE"
+const SET_FIELD_TOUCHED = "SET_FIELD_TOUCHED"
+
+type Action =
+  | { type: "SET_FIELD_VALUE"; payload: any }
+  | { type: "SET_FIELD_TOUCHED"; payload: any }
+
+const reducer: Reducer<State, Action> = (state: State, action: Action) => {
+  switch (action.type) {
+    case SET_FIELD_VALUE:
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          ...action.payload,
+        },
+      }
+    case SET_FIELD_TOUCHED:
+      return {
+        ...state,
+        touched: {
+          ...state.touched,
+          ...action.payload,
+        },
+      }
+    default:
+      throw new Error(`could not parse action.type`)
+  }
+}
+
+interface InitialValues {
+  values: {
+    [key: string]: string
+  }
+}
+
+const useForm = ({ values }: InitialValues) => {
+  const [state, dispatch] = useReducer(reducer, {
+    values,
+    errors: {},
+    touched: {},
+    isSubmitting: false,
+  })
+
+  const getPropField = (fieldName: string) => ({
+    value: state.values[fieldName],
+    onChange: handleChange(fieldName),
+    onBlur: handleBlur(fieldName),
+  })
+
+  const handleChange =
+    (fieldName: string) =>
+    (event: React.ChangeEvent<HTMLInputElement>): void => {
+      dispatch({ type: "SET_FIELD_VALUE", payload: { [fieldName]: event.target.value } })
+    }
+
+  const handleBlur =
+    (fieldName: string) =>
+    (event: React.ChangeEvent<HTMLInputElement>): void => {
+      event.persist()
+      dispatch({ type: "SET_FIELD_TOUCHED", payload: { [fieldName]: true } })
+    }
+
+  return { getPropField, ...state }
+}
+
+const MailChimp = () => {
+  const formValues = { values: { name: "", email: "" } }
+  const { getPropField, ...state } = useForm(formValues)
+  const { values } = state
+  console.log({ state })
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await addToMailchimp(email, { FNAME: name })
+    await addToMailchimp(values.email, { FNAME: values.name })
   }
 
   return (
     <Form onSubmit={handleSubmit}>
+      {/* TODO: Delete */}
+
+      <Debugger data={state} />
+      {/* TODO: Delete */}
       <Content>
         <p>
           Want to read more about <StrokeWrapper className={strokeStyles}>React</StrokeWrapper>,{" "}
@@ -117,14 +193,7 @@ const MailChimp = () => {
         <Label htmlFor="name">
           <span>Your name</span>
         </Label>
-        <Input
-          id="name"
-          type="text"
-          value={name}
-          name="name"
-          placeholder="you"
-          onChange={(event) => setName(event.target.value)}
-        />
+        <Input id="name" type="text" name="name" placeholder="you" {...getPropField("name")} />
       </FormGroup>
 
       <FormGroup>
@@ -134,10 +203,9 @@ const MailChimp = () => {
         <Input
           id="email"
           type="email"
-          value={email}
           name="email"
           placeholder="you@example.com"
-          onChange={(event) => setEmail(event.target.value)}
+          {...getPropField("email")}
           autoComplete="email"
         />
       </FormGroup>
