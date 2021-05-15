@@ -82,7 +82,7 @@ const SubmitButton = styled.button`
   background-color: ${elements.fillerStroke};
 `
 // TODO: Useform hook for validation
-// const useForm = () => {}
+const useForm = () => {}
 
 const strokeStyles = css`
   color: ${elements.fillerStroke};
