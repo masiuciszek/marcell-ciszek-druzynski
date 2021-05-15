@@ -58,6 +58,7 @@ const Input = styled.input`
   box-shadow: ${elevations.shadowM};
   outline: none;
   font-size: ${pxToRem(16)};
+  padding-left: ${pxToRem(8)};
   &:focus {
     box-shadow: 0 0 0 1px ${elements.stroke};
   }
