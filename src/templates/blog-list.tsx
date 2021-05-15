@@ -1,9 +1,9 @@
 import React from "react"
 import Layout from "@/components/layout/layout"
-import { PageProps } from "gatsby"
+import { Link, PageProps } from "gatsby"
 import { graphql } from "gatsby"
 import Post from "@/components/blog-list/post"
-import Pagination from "@/components/blog-list/navigation"
+import Pagination from "@/components/blog-list/pagination"
 import TagsNavigation from "@/components/blog-list/tags-navigation"
 import ContentWrapper from "@/components/common/content-wrapper"
 import { blogListStyles } from "@/styles/blog-list"
@@ -33,38 +33,47 @@ interface BlogPageQuery {
 }
 
 interface BlogPageContext {
-  humanPageNumber: number
   limit: number
-  nextPagePath: string
   numberOfPages: number
-  pageNumber: number
-  previousPagePath: string
+  currentPage: number
   skip: number
 }
 
 const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContext>) => {
   const { edges } = data.allMdx
   const { group: tagsList } = data.tags
-  const { previousPagePath, nextPagePath } = pageContext
+  const { currentPage, numberOfPages } = pageContext
+
+  const isOnFirstPage = currentPage === 1
+  const isOnLastPage = currentPage === numberOfPages
+  const previousPage = currentPage - 1 === 1 ? "" : (currentPage - 1).toString()
+  const nextPage = (currentPage + 1).toString()
+
+  const previousPagePath = `/blog/${previousPage}`
+  const nextPagePath = `/blog/${nextPage}`
 
   return (
     <Layout>
       <ContentWrapper className={blogListStyles}>
         <Pagination
+          isOnFirstPage={isOnFirstPage}
+          isOnLastPage={isOnLastPage}
           previousPagePath={previousPagePath}
-          pageNumber={pageContext.pageNumber}
-          numberOfPages={pageContext.numberOfPages}
           nextPagePath={nextPagePath}
+          pageNumber={pageContext.currentPage}
+          numberOfPages={pageContext.numberOfPages}
         />
         <TagsNavigation tagsList={tagsList} />
         {edges.map(({ node }) => (
           <Post key={node.id} node={node} />
         ))}
         <Pagination
+          isOnFirstPage={isOnFirstPage}
+          isOnLastPage={isOnLastPage}
           previousPagePath={previousPagePath}
-          pageNumber={pageContext.pageNumber}
-          numberOfPages={pageContext.numberOfPages}
           nextPagePath={nextPagePath}
+          pageNumber={pageContext.currentPage}
+          numberOfPages={pageContext.numberOfPages}
         />
       </ContentWrapper>
     </Layout>

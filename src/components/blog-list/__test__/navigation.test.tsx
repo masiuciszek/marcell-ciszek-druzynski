@@ -1,8 +1,8 @@
 import * as React from "react"
 import { render, screen } from "@testing-library/react"
-import Navigation from "../navigation"
+import Pagination from "../pagination"
 
-describe("Navigation", () => {
+describe("Pagination", () => {
   test("renders as expected", () => {
     const previousPagePath = "previousPagePath"
     const pageNumber = 2
@@ -10,7 +10,7 @@ describe("Navigation", () => {
     const nextPagePath = "nextPagePath"
 
     render(
-      <Navigation
+      <Pagination
         previousPagePath={previousPagePath}
         pageNumber={pageNumber}
         numberOfPages={numberOfPages}

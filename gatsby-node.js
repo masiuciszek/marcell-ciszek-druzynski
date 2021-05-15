@@ -66,7 +66,7 @@ exports.onCreateWebpackConfig = ({ getConfig, actions, stage, loaders }) => {
 exports.createPages = async ({ actions: { createPage }, graphql, reporter }) => {
   const result = await graphql(`
     {
-      posts: allMdx(sort: { fields: [frontmatter___date], order: ASC }) {
+      posts: allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
         edges {
           node {
             slug
@@ -92,13 +92,29 @@ exports.createPages = async ({ actions: { createPage }, graphql, reporter }) => 
   const posts = result.data.posts.edges
   const tags = result.data.tagsGroup.group
 
-  paginate({
-    createPage,
-    items: posts,
-    itemsPerPage: 3,
-    pathPrefix: "/blog",
-    component: path.resolve("./src/templates/blog-list.tsx"),
+  const POST_PER_PAGE = 4
+  const AMOUNT_OF_PAGES = Math.ceil(posts.length / POST_PER_PAGE)
+
+  Array.from({ length: AMOUNT_OF_PAGES }).forEach((_, idx) => {
+    createPage({
+      path: idx === 0 ? "/blog" : `/blog/${idx + 1}`,
+      component: path.resolve("./src/templates/blog-list.tsx"),
+      context: {
+        limit: POST_PER_PAGE,
+        skip: idx * POST_PER_PAGE,
+        numberOfPages: AMOUNT_OF_PAGES,
+        currentPage: idx + 1,
+      },
+    })
   })
+
+  // paginate({
+  //   createPage,
+  //   items: posts,
+  //   itemsPerPage: 3,
+  //   pathPrefix: "/blog",
+  //   component: path.resolve("./src/templates/blog-list.tsx"),
+  // })
 
   posts.forEach(({ node }, index) => {
     const previousPost = index === 0 ? null : posts[index - 1].node

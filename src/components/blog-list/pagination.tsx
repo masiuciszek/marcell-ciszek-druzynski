@@ -6,11 +6,13 @@ import { Link } from "gatsby"
 import { strains } from "@/styles/strains"
 import { below } from "@/styles/media-query"
 
-interface NavigationProps {
+interface PaginationProps {
   previousPagePath: string
+  nextPagePath: string
   pageNumber: number
   numberOfPages: number
-  nextPagePath: string
+  isOnFirstPage: boolean
+  isOnLastPage: boolean
 }
 
 const topSectionStyles = css`
@@ -77,29 +79,31 @@ const topSectionStyles = css`
   }
 `
 
-const Navigation: React.FC<NavigationProps> = ({
+const Pagination: React.FC<PaginationProps> = ({
   previousPagePath,
   pageNumber,
   numberOfPages,
   nextPagePath,
+  isOnFirstPage,
+  isOnLastPage,
 }) => {
   return (
     <TopSection className={topSectionStyles}>
-      {previousPagePath ? (
-        <Link to={previousPagePath}> &#8592; prev 3 posts </Link>
+      {!isOnFirstPage ? (
+        <Link to={previousPagePath}> &#8592; prev 4 posts </Link>
       ) : (
         <Link aria-disabled to={previousPagePath}>
           {" "}
-          &#8592; prev 3 posts{" "}
+          &#8592; prev 4 posts{" "}
         </Link>
       )}
 
       <h4>
-        page <span>{pageNumber + 1}</span> of <span>{numberOfPages}</span>
+        page <span>{pageNumber}</span> of <span>{numberOfPages}</span>
       </h4>
 
-      {nextPagePath ? (
-        <Link to={nextPagePath}> 3 more posts &#8594; </Link>
+      {!isOnLastPage ? (
+        <Link to={nextPagePath}> 4 more posts &#8594; </Link>
       ) : (
         <Link to={nextPagePath} aria-disabled>
           {" "}
@@ -109,4 +113,4 @@ const Navigation: React.FC<NavigationProps> = ({
     </TopSection>
   )
 }
-export default Navigation
+export default Pagination
