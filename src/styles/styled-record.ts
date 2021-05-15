@@ -43,6 +43,7 @@ interface Elements {
   highlightShadow: string
   stroke: string
   filler: string
+  fillerStroke: string
   boxBackground: string
   boxText: string
   bgShadow: string
@@ -59,6 +60,7 @@ const elements: Elements = {
   highlightShadow: "var(--highlight-shadow)",
   stroke: "var(--stroke)",
   filler: "var(--filler)",
+  fillerStroke: "var(--filler-stroke)",
   boxBackground: "var(--box-background)",
   boxText: "var(--box-text)",
   bgShadow: "var(--bg-shadow)",
