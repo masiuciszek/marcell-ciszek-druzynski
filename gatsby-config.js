@@ -64,12 +64,12 @@ module.exports = {
         endpoint: process.env.MAILCHIMP_ENDPOINT,
       },
     },
-    {
-      resolve: "gatsby-plugin-manifest",
-      options: {
-        icon: `${__dirname}/src/images/favicons/favicon-16x16.png`,
-      },
-    },
+    // {
+    //   resolve: "gatsby-plugin-manifest",
+    //   options: {
+    //     icon: `${__dirname}/src/images/favicons/favicon-16x16.png`,
+    //   },
+    // },
     "gatsby-plugin-mdx",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
