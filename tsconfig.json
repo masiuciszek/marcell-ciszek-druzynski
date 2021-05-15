@@ -8,9 +8,7 @@
     "resolveJsonModule": true,
     "strict": true,
     "baseUrl": ".",
-    
-        "typeRoots" : ["node_modules/@types", "src/types"]
-,
+    "typeRoots": ["node_modules/@types", "src/types"],
     "paths": {
       "@test-utils": ["test/test-utils.tsx"],
       "@/*": ["src/*"]
