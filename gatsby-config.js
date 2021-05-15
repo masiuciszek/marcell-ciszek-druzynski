@@ -1,4 +1,7 @@
 const path = require("path")
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 const config = {
   // Project title. Used as SEO title and PWA name
   title: "Marcell Ciszek Druzysnki",
@@ -53,6 +56,12 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `./src/data/`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-mailchimp",
+      options: {
+        endpoint: process.env.MAILCHIMP_ENDPOINT,
       },
     },
     {

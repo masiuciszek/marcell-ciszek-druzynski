@@ -3,6 +3,7 @@ import Intro from "@/components/about/intro"
 import ContentWrapper from "@/components/common/content-wrapper"
 import StrokeWrapper from "@/components/common/stroke-wrapper"
 import Layout from "@/components/layout/layout"
+import { Seo } from "@/components/seo"
 import { css } from "@emotion/css"
 import React from "react"
 
@@ -16,6 +17,7 @@ const styles = css`
 const AboutPage = () => {
   return (
     <Layout fluid>
+      <Seo title="about me" description="who am I what I do and what I like" />
       <ContentWrapper className={styles}>
         <h3>
           Hey I&apos;m <StrokeWrapper>Marcell</StrokeWrapper> Ciszek Druszynski

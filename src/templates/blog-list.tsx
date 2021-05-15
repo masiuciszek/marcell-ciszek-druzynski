@@ -48,7 +48,6 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
   const isOnLastPage = currentPage === numberOfPages
   const previousPage = currentPage - 1 === 1 ? "" : (currentPage - 1).toString()
   const nextPage = (currentPage + 1).toString()
-
   const previousPagePath = `/blog/${previousPage}`
   const nextPagePath = `/blog/${nextPage}`
 

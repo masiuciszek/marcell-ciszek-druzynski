@@ -3,6 +3,7 @@ import StrokeWrapper from "@/components/common/stroke-wrapper"
 import ContactInfo from "@/components/contact-info"
 import { Content } from "@/components/contact-info/content"
 import Layout from "@/components/layout/layout"
+import { Seo } from "@/components/seo"
 import { elements, fonts } from "@/styles/styled-record"
 import { css } from "@emotion/css"
 import styled from "@emotion/styled"
@@ -39,6 +40,7 @@ const strokeStyles = css`
 const ContactPage = () => {
   return (
     <Layout>
+      <Seo title="Contact me" description="Let's get in touch" />
       <ContentWrapper className={wrapperStyles}>
         <H1>
           <StrokeWrapper className={strokeStyles}>Contact</StrokeWrapper> me
