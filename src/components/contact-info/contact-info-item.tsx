@@ -31,7 +31,36 @@ const renderIcon = (contactDataName: string) => {
 }
 
 const StyledContactItem = styled(motion.li)`
-  border-left: 2px solid ${elements.stroke};
+  /* border-left: 2px solid ${elements.stroke}; */
+  position: relative;
+  &:before {
+    position: absolute;
+    content: "";
+    background-color: ${elements.stroke};
+    width: 2px;
+    height: 80%;
+    left: 0;
+    bottom: 0;
+    transition: 300ms height ease-in;
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    background-color: ${elements.stroke};
+    width: 75%;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    transition: 300ms width ease-in;
+  }
+  &:hover {
+    &:before {
+      height: 100%;
+    }
+    &:after {
+      width: 85%;
+    }
+  }
 
   p {
     margin-left: 0.5em;
@@ -42,6 +71,7 @@ const Icon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0.5rem;
 `
 
 const variants = {

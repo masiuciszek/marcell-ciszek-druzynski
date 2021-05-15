@@ -48,7 +48,7 @@ const StyledLink = styled(Link)`
       height: 0.75em;
       content: "";
       pointer-events: none;
-      background-color: ${elements.stroke};
+      background-color: ${elements.bgShadow};
       position: absolute;
       z-index: 0;
       opacity: 1;
@@ -63,7 +63,7 @@ const StyledLink = styled(Link)`
       position: absolute;
       bottom: 0;
       left: 0;
-      background-color: ${elements.stroke};
+      background-color: ${elements.background};
       width: 100%;
       height: 2px;
       transition: 200ms ease all;

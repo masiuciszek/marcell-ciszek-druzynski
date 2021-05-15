@@ -19,11 +19,12 @@ const useOnClickOutside = <T extends HTMLElement = HTMLElement>(
     }
 
     document.addEventListener("mousedown", listener)
-    document.addEventListener("touchstart", listener) // for mobile and ipads
+    document.addEventListener("touchcancel", listener)
+    // document.addEventListener("touchstart", listener) // for mobile and ipads
 
     return () => {
       document.removeEventListener("mousedown", listener)
-      document.removeEventListener("touchstart", listener)
+      document.removeEventListener("touchcancel", listener)
     }
   }, [handler, ref])
 }

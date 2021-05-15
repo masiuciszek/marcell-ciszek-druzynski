@@ -33,7 +33,9 @@ export const Content = () => {
       <p>
         I have some <StrokeWrapper>questions</StrokeWrapper>, and want to stay in touch.
       </p>
-      <p>What can I do?</p>
+      <p>
+        <strong>What can I do?</strong>
+      </p>
       <hr />
       <p>
         Hey, you can always send me a <StrokeWrapper>message</StrokeWrapper> on my most frequent
@@ -47,7 +49,7 @@ export const Content = () => {
         Want to check out some code, then you are more then welcome to visit my{" "}
         <StrokeWrapper>Github</StrokeWrapper> and <StrokeWrapper>Codepen</StrokeWrapper> profile
       </p>
-      <p>Is that not enough?</p>
+      <p>Not what you are looking for?</p>
       <address>
         <StrokeWrapper>Hey!!</StrokeWrapper> you could always email at{" "}
         <motion.a
