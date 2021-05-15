@@ -74,7 +74,7 @@ const Capture = styled.div`
   flex-direction: column;
 `
 
-const HomePage = () => {
+const HomePage = (): JSX.Element => {
   return (
     <Layout fluid>
       <Seo />

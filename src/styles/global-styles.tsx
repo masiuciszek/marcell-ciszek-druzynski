@@ -34,6 +34,7 @@ export const GlobalStyles = () => {
           --box-background: var(--dark-blue);
           --box-text: var(--dark-blue);
           --filler: var(--light-blue-xs);
+          --filler-stroke: var(--light-blue);
           --bg-shadow: var(--dark-blue-shadow);
 
           /* Typography */
@@ -115,6 +116,7 @@ export const GlobalStyles = () => {
           --box-background: var(--grey);
           --box-text: var(--dark-blue-2);
           --filler: var(--dark-blue);
+          --filler-stroke: var(--light-blue);
           --bg-shadow: var(--dark-blue-shadow);
         }
         body[data-theme="dark"] {
@@ -129,6 +131,7 @@ export const GlobalStyles = () => {
           --box-background: var(--dark-blue);
           --box-text: var(--white);
           --filler: var(--light-blue-xs);
+          --filler-stroke: var(--dark-main);
           --bg-shadow: var(--light-blue-shadow-higher-opacity);
         }
 
