@@ -1,4 +1,4 @@
-import React, { useReducer, useState, Reducer } from "react"
+import React, { useReducer, useState, Reducer, useEffect, useCallback, useMemo } from "react"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 import styled from "@emotion/styled"
 import StrokeWrapper from "./common/stroke-wrapper"
@@ -7,6 +7,8 @@ import { above } from "@/styles/media-query"
 import { elements, elevations, sizes } from "@/styles/styled-record"
 import { css } from "@emotion/css"
 import Debugger from "./debugger"
+
+const isDev = () => process.env.NODE_ENV === "development"
 
 const Form = styled.form`
   display: grid;
@@ -99,10 +101,14 @@ interface State {
 
 const SET_FIELD_VALUE = "SET_FIELD_VALUE"
 const SET_FIELD_TOUCHED = "SET_FIELD_TOUCHED"
+const SET_FIELD_ERRORS = "SET_FIELD_ERRORS"
+const SUBMIT_ATTEMPT = "SUBMIT_ATTEMPT"
 
 type Action =
-  | { type: "SET_FIELD_VALUE"; payload: any }
-  | { type: "SET_FIELD_TOUCHED"; payload: any }
+  | { type: typeof SET_FIELD_VALUE; payload: Record<string, string> }
+  | { type: typeof SET_FIELD_TOUCHED; payload: Record<string, boolean> }
+  | { type: typeof SET_FIELD_ERRORS; payload: Record<string, string> }
+  | { type: typeof SUBMIT_ATTEMPT }
 
 const reducer: Reducer<State, Action> = (state: State, action: Action) => {
   switch (action.type) {
@@ -122,6 +128,16 @@ const reducer: Reducer<State, Action> = (state: State, action: Action) => {
           ...action.payload,
         },
       }
+    case SET_FIELD_ERRORS:
+      return {
+        ...state,
+        errors: action.payload,
+      }
+    case SUBMIT_ATTEMPT:
+      return {
+        ...state,
+        isSubmitting: true,
+      }
     default:
       throw new Error(`could not parse action.type`)
   }
@@ -131,15 +147,24 @@ interface InitialValues {
   values: {
     [key: string]: string
   }
+  validate: (values: Record<string, string>) => Record<string, string>
+  onSubmit: (values: Record<string, string>) => Promise<void>
 }
 
-const useForm = ({ values }: InitialValues) => {
+const useForm = ({ values, validate, onSubmit }: InitialValues) => {
   const [state, dispatch] = useReducer(reducer, {
     values,
     errors: {},
     touched: {},
     isSubmitting: false,
   })
+
+  useEffect(() => {
+    if (validate) {
+      const errors = validate(state.values)
+      dispatch({ type: "SET_FIELD_ERRORS", payload: errors })
+    }
+  }, [state.values, validate])
 
   const getPropField = (fieldName: string) => ({
     value: state.values[fieldName],
@@ -159,58 +184,73 @@ const useForm = ({ values }: InitialValues) => {
       event.persist()
       dispatch({ type: "SET_FIELD_TOUCHED", payload: { [fieldName]: true } })
     }
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    // onSubmit()
+  }
 
-  return { getPropField, ...state }
+  return { getPropField, handleSubmit, ...state }
 }
 
 const MailChimp = () => {
-  const formValues = { values: { name: "", email: "" } }
-  const { getPropField, ...state } = useForm(formValues)
-  const { values } = state
-  console.log({ state })
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    await addToMailchimp(values.email, { FNAME: values.name })
-  }
+  const { getPropField, ...state } = useForm({
+    values: useMemo(() => ({ name: "", email: "" }), []),
+    validate: useCallback((values: Record<string, string>) => {
+      const errors: Record<string, string> = {}
+      if (values.name.length <= 1) {
+        errors.name = "Please fill in a valid name"
+      }
+      if (!values.email || values.email.length < 10) {
+        errors.email = "email must be filled in"
+      }
+      return errors
+    }, []),
+    onSubmit: useCallback(async (values: Record<string, string>) => {
+      await addToMailchimp(values.email, { FNAME: values.name })
+    }, []),
+  })
+  const { errors, touched, handleSubmit } = state
+  console.log({ state, errors })
 
   return (
-    <Form onSubmit={handleSubmit}>
-      {/* TODO: Delete */}
+    <>
+      {isDev() && <Debugger data={state} />}
+      <Form onSubmit={handleSubmit}>
+        <Content>
+          <p>
+            Want to read more about <StrokeWrapper className={strokeStyles}>React</StrokeWrapper>,{" "}
+            <StrokeWrapper className={strokeStyles}>Javascript</StrokeWrapper> and other cool dev
+            topics
+          </p>
+          <p>
+            Sign up for my <StrokeWrapper className={strokeStyles}>newsletter</StrokeWrapper>
+          </p>
+        </Content>
+        <FormGroup>
+          <Label htmlFor="name">
+            <span>Your name</span>
+          </Label>
+          <Input id="name" type="text" name="name" placeholder="you" {...getPropField("name")} />
+          {errors.name && touched.name && <p>{errors.name}</p>}
+        </FormGroup>
 
-      <Debugger data={state} />
-      {/* TODO: Delete */}
-      <Content>
-        <p>
-          Want to read more about <StrokeWrapper className={strokeStyles}>React</StrokeWrapper>,{" "}
-          <StrokeWrapper className={strokeStyles}>Javascript</StrokeWrapper> and other cool dev
-          topics
-        </p>
-        <p>
-          Sign up for my <StrokeWrapper className={strokeStyles}>newsletter</StrokeWrapper>
-        </p>
-      </Content>
-      <FormGroup>
-        <Label htmlFor="name">
-          <span>Your name</span>
-        </Label>
-        <Input id="name" type="text" name="name" placeholder="you" {...getPropField("name")} />
-      </FormGroup>
-
-      <FormGroup>
-        <Label htmlFor="email">
-          <span>Your email</span>
-        </Label>
-        <Input
-          id="email"
-          type="email"
-          name="email"
-          placeholder="you@example.com"
-          {...getPropField("email")}
-          autoComplete="email"
-        />
-      </FormGroup>
-      <SubmitButton type="submit">Submit</SubmitButton>
-    </Form>
+        <FormGroup>
+          <Label htmlFor="email">
+            <span>Your email</span>
+          </Label>
+          <Input
+            id="email"
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            {...getPropField("email")}
+            autoComplete="email"
+          />
+          {errors.email && touched.email && <p>{errors.email}</p>}
+        </FormGroup>
+        <SubmitButton type="submit">Submit</SubmitButton>
+      </Form>
+    </>
   )
 }
 
