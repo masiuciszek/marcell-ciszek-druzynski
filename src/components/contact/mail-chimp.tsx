@@ -1,14 +1,13 @@
-import React, { useReducer, useState, Reducer, useEffect, useCallback, useMemo } from "react"
+import React, { useReducer, Reducer, useEffect, useCallback, useMemo } from "react"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 import styled from "@emotion/styled"
-import StrokeWrapper from "./common/stroke-wrapper"
+import StrokeWrapper from "../common/stroke-wrapper"
 import { buttonResetStyles, pxToRem } from "@/styles/css-utils"
 import { above } from "@/styles/media-query"
 import { elements, elevations, sizes } from "@/styles/styled-record"
 import { css } from "@emotion/css"
 import Debugger from "./debugger"
-
-const isDev = () => process.env.NODE_ENV === "development"
+import { isDev } from "@/util"
 
 const Form = styled.form`
   display: grid;

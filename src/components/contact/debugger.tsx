@@ -43,7 +43,7 @@ const Debugger: React.FC<DebuggerProps> = ({ data }) => {
       <Button onClick={toggle} aria-pressed={state} type="button">
         {state ? "hide " : "show "} Debug
       </Button>
-      {state && <Pre>{JSON.stringify(data, null, 4)}</Pre>}
+      {state && <Pre data-testid="pre-debug">{JSON.stringify(data, null, 4)}</Pre>}
     </div>
   )
 }
