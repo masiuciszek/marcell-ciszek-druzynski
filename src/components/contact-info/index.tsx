@@ -1,7 +1,7 @@
 import { above } from "@/styles/media-query"
 import { ContactType } from "@/types/types"
 import styled from "@emotion/styled"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
 import ContactInfoItem from "./contact-info-item"
@@ -42,37 +42,54 @@ const ContactGrid = styled(motion.ul)`
   }
 `
 
-const variants = {
-  initial: { opacity: 0, x: "-100" },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.3,
-      // delay: 0.24,
-      duration: 0.45,
-      ease: "easeOut",
+const variants = ({ inView }: { inView: boolean }) =>
+  ({
+    initial: { opacity: 0, x: -1000 },
+    visible: {
+      opacity: inView ? 1 : 0,
+      x: inView ? 0 : -1000,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.3,
+        // delay: 0.24,
+        duration: 0.45,
+        ease: "easeOut",
+      },
     },
-  },
-  exit: {
-    opacity: 0,
-    x: "100",
-    transition: {
-      when: "afterChildren", // let children exit first before parent will run it's thing
+    exit: {
+      opacity: 0,
+      x: -1000,
+      transition: {
+        when: "afterChildren", // let children exit first before parent will run it's thing
+      },
     },
-  },
-} as const
+  } as const)
 
-const ContactInfo = () => {
+interface ContactInfoProps {
+  inView: boolean
+}
+const ContactInfo = React.forwardRef<HTMLDivElement, ContactInfoProps>(({ inView }, ref) => {
   const { contactList } = useStaticQuery<QueryType>(CONTACT_QUERY)
   return (
-    <ContactGrid initial="initial" animate="visible" exit="exit" variants={variants}>
-      {contactList.edges.map(({ node }, i) => (
-        <ContactInfoItem key={node.id} contactData={node} i={i} />
-      ))}
-    </ContactGrid>
+    <>
+      <AnimatePresence>
+        {inView && (
+          <ContactGrid
+            layout
+            initial="initial"
+            animate="visible"
+            exit="exit"
+            variants={variants({ inView })}
+          >
+            {contactList.edges.map(({ node }, i) => (
+              <ContactInfoItem key={node.id} contactData={node} i={i} />
+            ))}
+          </ContactGrid>
+        )}
+      </AnimatePresence>
+      <div ref={ref} />
+    </>
   )
-}
+})
 
 export default ContactInfo

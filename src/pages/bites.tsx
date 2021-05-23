@@ -1,6 +1,7 @@
 import React from "react"
 import Layout from "@/components/layout/layout"
 import { Seo } from "@/components/seo"
+import StrokeWrapper from "@/components/common/stroke-wrapper"
 
 const BitesPage = (): JSX.Element => {
   return (
@@ -8,7 +9,14 @@ const BitesPage = (): JSX.Element => {
       <Seo title="Bites and stuff" description="Some of my pictures and different bites" />
       <h1>BitesPage</h1>
 
-      <p>some cool piece of bites</p>
+      <p>
+        My collection of code snippets that I use daily. Get some inspiration or use the code by all
+        the developers favorite mode, <StrokeWrapper>copy and paste</StrokeWrapper>.
+      </p>
+      <p>
+        inspired by <StrokeWrapper>Kyle Shelvin&#x27;s blog</StrokeWrapper> and{" "}
+        <StrokeWrapper>Josh W. Comeau&#x27;s blog</StrokeWrapper>{" "}
+      </p>
     </Layout>
   )
 }

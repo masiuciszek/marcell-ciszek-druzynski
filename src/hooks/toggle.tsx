@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import { produce } from "immer"
 interface Toggle {
   state: boolean
   toggle: () => void
@@ -17,7 +17,8 @@ const useToggle = (initialState = false): Toggle => {
     setState(false)
   }
   const toggle = (): void => {
-    setState((prev) => !prev)
+    // setState((prev) => !prev)
+    setState(produce((prev) => !prev))
   }
 
   return { state, toggle, setToTrue, setToFalse }

@@ -9,6 +9,7 @@ import { elements, fonts } from "@/styles/styled-record"
 import { css } from "@emotion/css"
 import styled from "@emotion/styled"
 import React from "react"
+import { useInView } from "react-intersection-observer"
 
 const wrapperStyles = css`
   justify-items: center;
@@ -39,6 +40,10 @@ const strokeStyles = css`
 `
 
 const ContactPage = (): JSX.Element => {
+  const { ref, inView } = useInView({
+    threshold: 0,
+  })
+
   return (
     <Layout>
       <Seo title="Contact me" description="Let's get in touch" />
@@ -49,7 +54,7 @@ const ContactPage = (): JSX.Element => {
         <Content />
         <MailChimp />
         {/* TODO: When we scroll down then we will animate the icons */}
-        <ContactInfo />
+        <ContactInfo ref={ref} inView={inView} />
       </ContentWrapper>
     </Layout>
   )

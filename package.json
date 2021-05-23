@@ -55,9 +55,11 @@
     "gatsby-transformer-json": "^3.4.0",
     "gatsby-transformer-sharp": "^3.1.0",
     "gbimage-bridge": "^0.1.1",
+    "immer": "^9.0.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
+    "react-intersection-observer": "^8.32.0",
     "react-typed": "^1.2.0"
   },
   "devDependencies": {

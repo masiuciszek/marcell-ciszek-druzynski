@@ -6,7 +6,7 @@ import { graphql, PageProps } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import React from "react"
 
-interface BlogPostQuery {
+interface BiteItemQuery {
   post: {
     id: string
     frontmatter: {
@@ -27,7 +27,7 @@ interface Node {
   }
 }
 
-interface BlogPostContext {
+interface BiteItemContext {
   slug: string
   previousPost: Node | null
   nextPost: Node | null
@@ -37,37 +37,33 @@ const articleStyles = css`
   margin-bottom: 2rem;
 `
 
-const BlogPost = ({ data, pageContext }: PageProps<BlogPostQuery, BlogPostContext>) => {
-  const { previousPost, nextPost } = pageContext
-
+const BiteItem = ({ data, pageContext }: PageProps) => {
   return (
     <Layout>
-      <Seo
-        title={`blog post ${data.post.frontmatter.title}`}
-        description={`this is the about ${data.post.frontmatter.title}`}
-      />
-      <article className={articleStyles}>
+      <Seo title={`bites`} description="" />
+      <p>Bite item</p>
+      {/* <article className={articleStyles}>
         <MDXRenderer>{data.post.body}</MDXRenderer>
-      </article>
-      <Paginate previousPost={previousPost} nextPost={nextPost} />
+      </article> */}
+      {/* <Paginate previousPost={previousPost} nextPost={nextPost} /> */}
     </Layout>
   )
 }
 
-export const BLOG_POST_QUERY = graphql`
-  query ($slug: String!) {
-    post: mdx(slug: { eq: $slug }) {
-      id
-      frontmatter {
-        title
-        date(formatString: "DD MMMM, YYYY")
-        spoiler
-        length
-        tags
-      }
-      body
-    }
-  }
-`
+// export const BITES_ITEM_QUERY = graphql`
+//   query ($slug: String!) {
+//     post: mdx(slug: { eq: $slug }) {
+//       id
+//       frontmatter {
+//         title
+//         date(formatString: "DD MMMM, YYYY")
+//         spoiler
+//         length
+//         tags
+//       }
+//       body
+//     }
+//   }
+// `
 
-export default BlogPost
+export default BiteItem

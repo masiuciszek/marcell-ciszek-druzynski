@@ -7,6 +7,7 @@ import Pagination from "@/components/blog-list/pagination"
 import TagsNavigation from "@/components/blog-list/tags-navigation"
 import ContentWrapper from "@/components/common/content-wrapper"
 import { blogListStyles } from "@/styles/blog-list"
+import { Seo } from "@/components/seo"
 
 interface Node {
   node: {
@@ -53,6 +54,7 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
 
   return (
     <Layout>
+      <Seo title="blog list" description="all the blog post with pagination" />
       <ContentWrapper className={blogListStyles}>
         <Pagination
           isOnFirstPage={isOnFirstPage}
@@ -81,7 +83,7 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
 
 // TODO: Changer back to ASC if something is not correct, kind of braking change here
 export const BLOG_PAGE_QUERY = graphql`
-  query($skip: Int!, $limit: Int!) {
+  query ($skip: Int!, $limit: Int!) {
     allMdx(sort: { fields: [frontmatter___date], order: DESC }, skip: $skip, limit: $limit) {
       edges {
         node {
