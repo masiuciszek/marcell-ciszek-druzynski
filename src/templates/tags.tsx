@@ -1,13 +1,11 @@
 import React from "react"
 import { graphql, PageProps } from "gatsby"
 import Layout from "@/components/layout/layout"
-import styled from "@emotion/styled"
 import DirectionLink from "@/components/common/direction-link"
 import Post from "@/components/blog-list/post"
 import Title from "@/components/common/title"
 import { css } from "@emotion/css"
 import { strains } from "@/styles/strains"
-import { pxToRem } from "@/styles/css-utils"
 import StrokeWrapper from "@/components/common/stroke-wrapper"
 import { elements, sizes } from "@/styles/styled-record"
 import { above, below } from "@/styles/media-query"
@@ -99,7 +97,7 @@ export const TAGS_QUERY = graphql`
   query getPostsForGivenTag($tag: String) {
     posts: allMdx(
       sort: { fields: [frontmatter___date], order: ASC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: { fileAbsolutePath: { regex: "/(posts)/" }, frontmatter: { tags: { in: [$tag] } } }
     ) {
       totalCount
       edges {

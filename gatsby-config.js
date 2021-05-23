@@ -89,14 +89,14 @@ module.exports = {
       },
       __key: "posts",
     },
-    // {
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     name: "pages",
-    //     path: "./src/pages/",
-    //   },
-    //   __key: "pages",
-    // },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "bites",
+        path: `${__dirname}/bites`,
+      },
+      __key: "bites",
+    },
     {
       resolve: `gatsby-plugin-typescript`,
       options: {

@@ -84,7 +84,12 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
 // TODO: Changer back to ASC if something is not correct, kind of braking change here
 export const BLOG_PAGE_QUERY = graphql`
   query ($skip: Int!, $limit: Int!) {
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }, skip: $skip, limit: $limit) {
+    allMdx(
+      filter: { fileAbsolutePath: { regex: "/(posts)/" } }
+      sort: { fields: [frontmatter___date], order: DESC }
+      skip: $skip
+      limit: $limit
+    ) {
       edges {
         node {
           id
