@@ -1,4 +1,4 @@
-import React, { useReducer, Reducer, useEffect, useCallback, useMemo } from "react"
+import React, { useCallback, useMemo } from "react"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 import styled from "@emotion/styled"
 import StrokeWrapper from "../common/stroke-wrapper"
@@ -7,7 +7,9 @@ import { above } from "@/styles/media-query"
 import { elements, elevations, sizes } from "@/styles/styled-record"
 import { css } from "@emotion/css"
 import Debugger from "./debugger"
-import { isDev } from "@/util"
+import { isDev, re } from "@/util"
+import { motion } from "framer-motion"
+import useForm from "@/hooks/form"
 
 const Form = styled.form`
   display: grid;
@@ -68,7 +70,7 @@ const Input = styled.input`
     padding-left: ${pxToRem(8)};
   }
 `
-const SubmitButton = styled.button`
+const SubmitButton = styled(motion.button)`
   ${buttonResetStyles};
   @media ${above.tablet} {
     grid-column: span 6;
@@ -91,105 +93,21 @@ const strokeStyles = css`
   }
 `
 
-interface State {
-  values: Record<string, string>
-  errors: Record<string, string>
-  touched: Record<string, boolean>
-  isSubmitting: boolean
-}
-
-const SET_FIELD_VALUE = "SET_FIELD_VALUE"
-const SET_FIELD_TOUCHED = "SET_FIELD_TOUCHED"
-const SET_FIELD_ERRORS = "SET_FIELD_ERRORS"
-const SUBMIT_ATTEMPT = "SUBMIT_ATTEMPT"
-
-type Action =
-  | { type: typeof SET_FIELD_VALUE; payload: Record<string, string> }
-  | { type: typeof SET_FIELD_TOUCHED; payload: Record<string, boolean> }
-  | { type: typeof SET_FIELD_ERRORS; payload: Record<string, string> }
-  | { type: typeof SUBMIT_ATTEMPT }
-
-const reducer: Reducer<State, Action> = (state: State, action: Action) => {
-  switch (action.type) {
-    case SET_FIELD_VALUE:
-      return {
-        ...state,
-        values: {
-          ...state.values,
-          ...action.payload,
-        },
-      }
-    case SET_FIELD_TOUCHED:
-      return {
-        ...state,
-        touched: {
-          ...state.touched,
-          ...action.payload,
-        },
-      }
-    case SET_FIELD_ERRORS:
-      return {
-        ...state,
-        errors: action.payload,
-      }
-    case SUBMIT_ATTEMPT:
-      return {
-        ...state,
-        isSubmitting: true,
-      }
-    default:
-      throw new Error(`could not parse action.type`)
+const ErrorDisplay = styled.p`
+  padding: ${pxToRem(1.5)} 0;
+  position: relative;
+  line-height: ${pxToRem(10)};
+  &::after {
+    content: "";
+    position: absolute;
+    top: ${pxToRem(8)};
+    height: ${pxToRem(8)};
+    opacity: 0.4;
+    background-color: ${elements.fillerStroke};
+    width: 56%;
+    left: 0;
   }
-}
-
-interface InitialValues {
-  values: {
-    [key: string]: string
-  }
-  validate: (values: Record<string, string>) => Record<string, string>
-  onSubmit: (values: Record<string, string>) => Promise<void>
-}
-
-const useForm = ({ values, validate, onSubmit }: InitialValues) => {
-  const [state, dispatch] = useReducer(reducer, {
-    values,
-    errors: {},
-    touched: {},
-    isSubmitting: false,
-  })
-
-  useEffect(() => {
-    if (validate) {
-      const errors = validate(state.values)
-      dispatch({ type: "SET_FIELD_ERRORS", payload: errors })
-    }
-  }, [state.values, validate])
-
-  const getPropField = (fieldName: string) => ({
-    value: state.values[fieldName],
-    onChange: handleChange(fieldName),
-    onBlur: handleBlur(fieldName),
-  })
-
-  const handleChange =
-    (fieldName: string) =>
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      dispatch({ type: "SET_FIELD_VALUE", payload: { [fieldName]: event.target.value } })
-    }
-
-  const handleBlur =
-    (fieldName: string) =>
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      event.persist()
-      dispatch({ type: "SET_FIELD_TOUCHED", payload: { [fieldName]: true } })
-    }
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    // onSubmit()
-  }
-
-  return { getPropField, handleSubmit, ...state }
-}
+`
 
 const MailChimp = () => {
   const { getPropField, ...state } = useForm({
@@ -199,8 +117,8 @@ const MailChimp = () => {
       if (values.name.length <= 1) {
         errors.name = "Please fill in a valid name"
       }
-      if (!values.email || values.email.length < 10) {
-        errors.email = "email must be filled in"
+      if (!values.email || !re.test(values.email)) {
+        errors.email = "please enter a valid email address"
       }
       return errors
     }, []),
@@ -209,7 +127,6 @@ const MailChimp = () => {
     }, []),
   })
   const { errors, touched, handleSubmit } = state
-  console.log({ state, errors })
 
   return (
     <>
@@ -230,7 +147,7 @@ const MailChimp = () => {
             <span>Your name</span>
           </Label>
           <Input id="name" type="text" name="name" placeholder="you" {...getPropField("name")} />
-          {errors.name && touched.name && <p>{errors.name}</p>}
+          {errors.name && touched.name && <ErrorDisplay>{errors.name}</ErrorDisplay>}
         </FormGroup>
 
         <FormGroup>
@@ -243,11 +160,15 @@ const MailChimp = () => {
             name="email"
             placeholder="you@example.com"
             {...getPropField("email")}
-            autoComplete="email"
           />
-          {errors.email && touched.email && <p>{errors.email}</p>}
+          {errors.email && touched.email && <ErrorDisplay>{errors.email}</ErrorDisplay>}
         </FormGroup>
-        <SubmitButton type="submit">Submit</SubmitButton>
+        <SubmitButton
+          type="submit"
+          whileHover={{ scale: 1.05, rotate: 1, backgroundColor: elements.background }}
+        >
+          Submit
+        </SubmitButton>
       </Form>
     </>
   )
