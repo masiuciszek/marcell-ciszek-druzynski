@@ -110,14 +110,6 @@ exports.createPages = async ({ actions: { createPage }, graphql, reporter }) => 
     })
   })
 
-  // paginate({
-  //   createPage,
-  //   items: posts,
-  //   itemsPerPage: 3,
-  //   pathPrefix: "/blog",
-  //   component: path.resolve("./src/templates/blog-list.tsx"),
-  // })
-
   posts.forEach(({ node }, index) => {
     const previousPost = index === 0 ? null : posts[index - 1].node
     const nextPost = index === posts.length - 1 ? null : posts[index + 1].node

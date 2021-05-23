@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "@/components/layout/layout"
-import { Link, PageProps } from "gatsby"
+import { PageProps } from "gatsby"
 import { graphql } from "gatsby"
 import Post from "@/components/blog-list/post"
 import Pagination from "@/components/blog-list/pagination"
@@ -81,7 +81,6 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
   )
 }
 
-// TODO: Changer back to ASC if something is not correct, kind of braking change here
 export const BLOG_PAGE_QUERY = graphql`
   query ($skip: Int!, $limit: Int!) {
     allMdx(
@@ -105,7 +104,7 @@ export const BLOG_PAGE_QUERY = graphql`
         }
       }
     }
-    tags: allMdx {
+    tags: allMdx(filter: { fileAbsolutePath: { regex: "/(posts)/" } }) {
       group(field: frontmatter___tags) {
         fieldValue
       }

@@ -39,7 +39,6 @@ const articleStyles = css`
 
 const BlogPost = ({ data, pageContext }: PageProps<BlogPostQuery, BlogPostContext>) => {
   const { previousPost, nextPost } = pageContext
-
   return (
     <Layout>
       <Seo
