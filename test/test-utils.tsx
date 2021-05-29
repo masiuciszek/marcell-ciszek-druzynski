@@ -2,10 +2,10 @@
 // https://testing-library.com/docs/react-testing-library/setup#custom-render
 import React from "react"
 import { render, RenderOptions } from "@testing-library/react"
-import { RootWrapper } from "../src/components/common/root-wrapper"
+// import { RootWrapper } from "../src/components/"
 
 const customRender = (ui: React.ReactElement, { ...options }: RenderOptions = {}) =>
-  render(ui, { wrapper: ({ children }) => <RootWrapper>{children}</RootWrapper>, ...options })
+  render(ui, { wrapper: ({ children }) => <>{children}</>, ...options })
 
 export * from "@testing-library/react"
 

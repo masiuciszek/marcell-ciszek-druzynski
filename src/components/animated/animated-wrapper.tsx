@@ -29,6 +29,7 @@ const AnimatedWrapper: React.FC<AnimatedWrapperProps> = ({
     <AnimatePresence exitBeforeEnter={exitBeforeEnter ? exitBeforeEnter : false}>
       {isAnimated && (
         <motion.section
+          data-testid="animated-animatedWrapper"
           layout={layout}
           initial={{ opacity: 0, ...options?.initial }}
           animate={{ opacity: 1, ...options?.animate }}
