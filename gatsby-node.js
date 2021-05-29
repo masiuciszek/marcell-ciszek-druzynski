@@ -65,7 +65,10 @@ exports.onCreateWebpackConfig = ({ getConfig, actions, stage, loaders }) => {
 exports.createPages = async ({ actions: { createPage }, graphql, reporter }) => {
   const result = await graphql(`
     {
-      posts: allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+      posts: allMdx(
+        filter: { fileAbsolutePath: { regex: "/(posts)/" } }
+        sort: { fields: [frontmatter___date], order: DESC }
+      ) {
         edges {
           node {
             slug
@@ -75,7 +78,7 @@ exports.createPages = async ({ actions: { createPage }, graphql, reporter }) => 
           }
         }
       }
-      tagsGroup: allMdx {
+      tagsGroup: allMdx(filter: { fileAbsolutePath: { regex: "/(posts)/" } }) {
         group(field: frontmatter___tags) {
           fieldValue
         }
@@ -106,14 +109,6 @@ exports.createPages = async ({ actions: { createPage }, graphql, reporter }) => 
       },
     })
   })
-
-  // paginate({
-  //   createPage,
-  //   items: posts,
-  //   itemsPerPage: 3,
-  //   pathPrefix: "/blog",
-  //   component: path.resolve("./src/templates/blog-list.tsx"),
-  // })
 
   posts.forEach(({ node }, index) => {
     const previousPost = index === 0 ? null : posts[index - 1].node

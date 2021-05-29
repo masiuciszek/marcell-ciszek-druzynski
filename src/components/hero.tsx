@@ -32,5 +32,3 @@ const Hero: React.FC<HeroProps> = ({ children, image }) => {
   return <BgImage image={img}>{children}</BgImage>
 }
 export default Hero
-
-// export declare const getImage: (node: ImageDataLike) => IGatsbyImageData | undefined;

@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "@/components/layout/layout"
-import { Link, PageProps } from "gatsby"
+import { PageProps } from "gatsby"
 import { graphql } from "gatsby"
 import Post from "@/components/blog-list/post"
 import Pagination from "@/components/blog-list/pagination"
@@ -44,7 +44,6 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
   const { edges } = data.allMdx
   const { group: tagsList } = data.tags
   const { currentPage, numberOfPages } = pageContext
-
   const isOnFirstPage = currentPage === 1
   const isOnLastPage = currentPage === numberOfPages
   const previousPage = currentPage - 1 === 1 ? "" : (currentPage - 1).toString()
@@ -81,10 +80,14 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
   )
 }
 
-// TODO: Changer back to ASC if something is not correct, kind of braking change here
 export const BLOG_PAGE_QUERY = graphql`
   query ($skip: Int!, $limit: Int!) {
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }, skip: $skip, limit: $limit) {
+    allMdx(
+      filter: { fileAbsolutePath: { regex: "/(posts)/" } }
+      sort: { fields: [frontmatter___date], order: DESC }
+      skip: $skip
+      limit: $limit
+    ) {
       edges {
         node {
           id
@@ -100,7 +103,7 @@ export const BLOG_PAGE_QUERY = graphql`
         }
       }
     }
-    tags: allMdx {
+    tags: allMdx(filter: { fileAbsolutePath: { regex: "/(posts)/" } }) {
       group(field: frontmatter___tags) {
         fieldValue
       }

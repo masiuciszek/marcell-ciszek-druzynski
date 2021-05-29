@@ -77,7 +77,7 @@ const List = styled.ul`
 const SocialList = ({ contactList }: SocialListProps) => {
   return (
     <SocialListWrapper>
-      <Small>
+      <Small data-testid="footer-say-hi-to-me-on">
         <StrokeWrapper>Say Hi</StrokeWrapper> to me on
       </Small>
       <List>
