@@ -44,7 +44,6 @@ const BlogPage = ({ data, pageContext }: PageProps<BlogPageQuery, BlogPageContex
   const { edges } = data.allMdx
   const { group: tagsList } = data.tags
   const { currentPage, numberOfPages } = pageContext
-
   const isOnFirstPage = currentPage === 1
   const isOnLastPage = currentPage === numberOfPages
   const previousPage = currentPage - 1 === 1 ? "" : (currentPage - 1).toString()
