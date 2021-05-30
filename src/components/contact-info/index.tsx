@@ -37,6 +37,8 @@ const ContactGrid = styled(motion.ul)`
   margin: 1rem auto;
   padding: 0.5em;
   list-style: none;
+  height: 100%;
+  /* margin-bottom: 2rem; */
   @media ${above.tablet} {
     margin-bottom: 2rem;
   }
@@ -68,27 +70,27 @@ const variants = ({ inView }: { inView: boolean }) =>
 interface ContactInfoProps {
   inView: boolean
 }
-const ContactInfo = React.forwardRef<HTMLDivElement, ContactInfoProps>(({ inView }, ref) => {
+const ContactInfo = React.forwardRef<HTMLUListElement, ContactInfoProps>(({ inView }, ref) => {
   const { contactList } = useStaticQuery<QueryType>(CONTACT_QUERY)
   return (
-    <>
-      <AnimatePresence>
+    <ContactGrid
+      layout
+      initial="initial"
+      animate="visible"
+      exit="exit"
+      variants={variants({ inView })}
+      ref={ref}
+    >
+      <AnimatePresence exitBeforeEnter>
         {inView && (
-          <ContactGrid
-            layout
-            initial="initial"
-            animate="visible"
-            exit="exit"
-            variants={variants({ inView })}
-          >
+          <>
             {contactList.edges.map(({ node }, i) => (
               <ContactInfoItem key={node.id} contactData={node} i={i} />
             ))}
-          </ContactGrid>
+          </>
         )}
       </AnimatePresence>
-      <div ref={ref} />
-    </>
+    </ContactGrid>
   )
 })
 

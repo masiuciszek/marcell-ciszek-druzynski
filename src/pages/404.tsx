@@ -59,11 +59,7 @@ const NotFoundPage = ({ location, data }: PageProps<NotFoundPageProps>): JSX.Ele
       <Seo title="Oops something went wrong" description="something went wrong page, 404" />
       <Hero image={hero as ImageDataLike}>
         <ContentWrapper className={notFoundPageStyles}>
-          <Title
-            className={titleStyles}
-            mainTitle={`Oops something went wrong, could not find page ${location.pathname}`}
-            secondaryTitle="No worries I will help you to get back"
-          >
+          <Title className={titleStyles}>
             <StyledLink to="/">Back Home</StyledLink>
           </Title>
         </ContentWrapper>

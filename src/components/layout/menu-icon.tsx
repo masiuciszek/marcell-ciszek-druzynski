@@ -9,12 +9,12 @@ interface MenuIconProps {
   toggleIsOpen: () => void
 }
 
-const MenuIconWrapper = styled(motion.button)`
+const MenuIconButton = styled(motion.button)`
   ${buttonResetStyles};
   position: absolute;
+  top: 0;
   width: 2rem;
   height: 1.35rem;
-  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -32,14 +32,12 @@ const MenuIconWrapper = styled(motion.button)`
     box-shadow: ${elevations.shadowM};
     width: 100%;
   }
-  .nav-icon-part {
-  }
 `
 // TODO: WIP, change to SVG
 // TODO: WIP, use variants
 const MenuIcon: React.FC<MenuIconProps> = ({ isOpen, toggleIsOpen }) => {
   return (
-    <MenuIconWrapper
+    <MenuIconButton
       data-testid="header-menu-icon"
       type="button"
       aria-pressed={isOpen}
@@ -70,7 +68,6 @@ const MenuIcon: React.FC<MenuIconProps> = ({ isOpen, toggleIsOpen }) => {
           scale: isOpen ? 0 : 1,
           opacity: isOpen ? 0 : 1,
           backgroundColor: isOpen ? elements.background : elements.stroke,
-          // x: isOpen ? "1000%" : 0,
         }}
       />
       <motion.div
@@ -83,7 +80,7 @@ const MenuIcon: React.FC<MenuIconProps> = ({ isOpen, toggleIsOpen }) => {
           backgroundColor: isOpen ? elements.background : elements.stroke,
         }}
       />
-    </MenuIconWrapper>
+    </MenuIconButton>
   )
 }
 export default MenuIcon

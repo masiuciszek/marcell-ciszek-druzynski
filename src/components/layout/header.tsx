@@ -11,8 +11,9 @@ import Marcell from "../icons/marcell"
 import MenuIcon from "./menu-icon"
 import useToggle from "@/hooks/toggle"
 import useMediaQuery from "@/hooks/media-query"
-import { above } from "@/styles/media-query"
+import { above, below } from "@/styles/media-query"
 import useOnClickOutside from "@/hooks/click-outside"
+import { Command } from "../icons/command"
 
 const headerStyles = css`
   position: relative;
@@ -30,6 +31,16 @@ const IconButton = styled.button`
   top: ${pxToRem(12)};
   right: ${pxToRem(22)};
   ${buttonResetStyles}
+`
+
+const CmdButton = styled(IconButton)`
+  position: absolute;
+  top: 0.8rem;
+  right: 4.5rem;
+  @media ${below.tabletL} {
+    right: 1.375rem;
+    top: 3.2rem;
+  }
 `
 
 const MarcellLink = styled(Link)`
@@ -81,6 +92,11 @@ export const Header = () => {
           />
         </IconButton>
       </AnimatedWrapper>
+
+      {/* TODO: Command icon FIX */}
+      <CmdButton>
+        <Command />
+      </CmdButton>
       <Nav isOpen={isOpen} />
     </header>
   )

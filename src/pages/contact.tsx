@@ -41,7 +41,7 @@ const strokeStyles = css`
 
 const ContactPage = (): JSX.Element => {
   const { ref, inView } = useInView({
-    threshold: 0,
+    threshold: 0.1,
   })
 
   return (
