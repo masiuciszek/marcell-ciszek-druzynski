@@ -3,21 +3,19 @@ import { css, cx } from "@emotion/css"
 
 interface TitleProps {
   className?: string
-  mainTitle?: string
-  secondaryTitle?: string
 }
 
-const styles = css``
+const styles = css`
+  display: flex;
+  flex-wrap: row wrap;
+`
 
-const Title: React.FC<TitleProps> = ({ className, mainTitle, children, secondaryTitle }) => {
-  const hasSecondaryTitle = Boolean(secondaryTitle)
+const Title: React.FC<TitleProps> = ({ className, children }) => {
   return (
     <section
       data-testid="page-title-component"
       className={cx(styles, "component-title", className)}
     >
-      {mainTitle && <h1>{mainTitle}</h1>}
-      {hasSecondaryTitle && <h3>{secondaryTitle}</h3>}
       {children}
     </section>
   )

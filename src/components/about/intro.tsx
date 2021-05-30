@@ -2,6 +2,9 @@ import { StaticImage } from "gatsby-plugin-image"
 import React from "react"
 import { H4, Section } from "./styles"
 import StrokeWrapper from "../common/stroke-wrapper"
+import { elements } from "@/styles/styled-record"
+import { Welcomes } from "../icons/welcomes"
+import { css } from "@emotion/css"
 
 const getDate = (dateStamp = "10/13/1995"): number => {
   const dateDiff = new Date(dateStamp)
@@ -15,13 +18,14 @@ const getDate = (dateStamp = "10/13/1995"): number => {
   return age
 }
 
+const welcomeStyles = css``
+
 const focusTopics = ["React", "Node", "GraphQL", "NextJS", "Java"]
 
 const Intro = () => {
   return (
     <Section
       initial={{ opacity: 0 }}
-      layout
       animate={{
         opacity: 1,
         scale: [1, 1.02, 1.02, 1, 1],
@@ -31,13 +35,15 @@ const Intro = () => {
       transition={{ delay: 0.2 }}
     >
       <H4>Short about me...</H4>
-      <StaticImage
-        src="../../images/jp-view-1.png"
+      {/* <StaticImage
+        src="../../images/fantasy.jpg"
         alt="me at work"
         width={800}
         placeholder="tracedSVG"
         layout="constrained"
-      />
+        backgroundColor={elements.filler}
+      /> */}
+      <Welcomes className={welcomeStyles} />
       <p>
         I am a developer from Gotheburg Sweden. I am {getDate()} years old and been programming for{" "}
         {getDate("10/13/2018")} years

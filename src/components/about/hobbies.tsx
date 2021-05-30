@@ -1,8 +1,8 @@
 import { AnimatePresence } from "framer-motion"
 import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
 import React from "react"
 import StrokeWrapper from "../common/stroke-wrapper"
+import HobbiesImage from "../icons/hobbies"
 import NameInJp from "../icons/name-in-jp"
 import { H4, RefTarget, Section } from "./styles"
 
@@ -49,16 +49,8 @@ export const Hobbies = React.forwardRef<HTMLDivElement, HobbiesProps>(({ inView 
             </p>
             <p>But home is home</p>
           </p>
-          <StaticImage
-            src="../../images/krakow.jpg"
-            alt="krakow old town"
-            width={800}
-            height={600}
-            placeholder="tracedSVG"
-            layout="constrained"
-            transformOptions={{ fit: "cover" }}
-            formats={["auto", "webp"]}
-          />
+
+          <HobbiesImage />
           <NameInJp />
           <p>
             <strong>My hobbies.</strong> I really like to exercise I have always been into sports
