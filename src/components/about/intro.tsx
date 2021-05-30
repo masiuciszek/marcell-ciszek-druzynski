@@ -19,7 +19,17 @@ const focusTopics = ["React", "Node", "GraphQL", "NextJS", "Java"]
 
 const Intro = () => {
   return (
-    <Section>
+    <Section
+      initial={{ opacity: 0 }}
+      layout
+      animate={{
+        opacity: 1,
+        scale: [1, 1.02, 1.02, 1, 1],
+        rotate: [0, 0, 2, 2, 0],
+      }}
+      exit={{ opacity: 0 }}
+      transition={{ delay: 0.2 }}
+    >
       <H4>Short about me...</H4>
       <StaticImage
         src="../../images/jp-view-1.png"

@@ -1,5 +1,6 @@
 import { elements } from "@/styles/styled-record"
 import styled from "@emotion/styled"
+import { motion } from "framer-motion"
 
 export const H4 = styled.h4`
   position: relative;
@@ -19,4 +20,10 @@ export const H4 = styled.h4`
     transform: translateX(var(--translate)) translateY(var(--translate)) rotate(var(--rotate));
   }
 `
-export const Section = styled.section``
+
+export const RefTarget = styled.div`
+  height: 100%;
+`
+export const Section = styled(motion.section)`
+  width: 100%;
+`
