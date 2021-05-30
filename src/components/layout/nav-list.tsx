@@ -21,7 +21,7 @@ interface NavListProps {
 
 export const NavList = ({ className, routes }: NavListProps) => {
   return (
-    <ul className={cx(styles, className)}>
+    <ul className={cx(styles, className)} data-testid="main-nav-list-NavList">
       {routes.map(({ name, route }) => (
         <li key={name}>
           <HoverLink path={route} text={name} />

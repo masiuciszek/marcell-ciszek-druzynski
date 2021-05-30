@@ -34,10 +34,7 @@ describe("nav", () => {
     const mediaQuery = above.tabletL
     const firstListener = jest.fn()
     const secondListener = jest.fn()
-    const mql = window.matchMedia(mediaQuery)
-
-    mql.addListener((ev) => ev.matches && firstListener())
-    mql.addListener((ev) => ev.matches && secondListener())
+    // const mql = window.matchMedia(mediaQuery)
 
     matchMedia.useMediaQuery(mediaQuery)
 

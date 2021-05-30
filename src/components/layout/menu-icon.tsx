@@ -40,6 +40,7 @@ const MenuIconWrapper = styled(motion.button)`
 const MenuIcon: React.FC<MenuIconProps> = ({ isOpen, toggleIsOpen }) => {
   return (
     <MenuIconWrapper
+      data-testid="header-menu-icon"
       type="button"
       aria-pressed={isOpen}
       onClick={toggleIsOpen}

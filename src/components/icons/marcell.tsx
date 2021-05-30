@@ -3,6 +3,7 @@ import React from "react"
 const Marcell = () => {
   return (
     <svg
+      data-testid="marcell-icon"
       width="102"
       height="100"
       viewBox="0 0 362 149"

@@ -18,7 +18,6 @@ const headerStyles = css`
   position: relative;
   min-height: var(--header-size);
   margin-bottom: ${pxToRem(20)};
-  /* width: 100%; */
   display: flex;
   align-items: center;
   .theme-toggle-button {

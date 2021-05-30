@@ -139,6 +139,7 @@ export default class MatchMedia {
    */
   public destroy(): void {
     this.clear()
+    // @ts-ignore
     delete window.matchMedia
   }
 }

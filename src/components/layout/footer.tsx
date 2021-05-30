@@ -55,7 +55,6 @@ const Small = styled.small`
 
 export const Footer = () => {
   const { site, contactList } = useStaticQuery<QueryType>(QUERY)
-
   return (
     <FooterStyles>
       <SocialList contactList={contactList.edges} />
