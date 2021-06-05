@@ -13,8 +13,8 @@ interface Node {
 }
 
 interface PaginateProps {
-  previousPost: Node | null
-  nextPost: Node | null
+  previousPath: Node | null
+  nextPath: Node | null
 }
 
 const PaginateStyles = styled.div`
@@ -46,27 +46,27 @@ const PaginateStyles = styled.div`
   }
 `
 
-const Paginate = ({ previousPost, nextPost }: PaginateProps) => {
-  const hasPreviousPost = Boolean(previousPost)
-  const hasNextPost = Boolean(nextPost)
+const Paginate = ({ previousPath, nextPath }: PaginateProps) => {
+  const hasPreviousPath = previousPath !== null
+  const hasNextPath = nextPath !== null
   return (
     <PaginateStyles>
-      {hasPreviousPost ? (
-        <Link to={`/blog/${previousPost?.slug}`}>
-          {sliceIt(previousPost?.frontmatter.title ?? "", 0, 16)}
+      {hasPreviousPath ? (
+        <Link to={`/blog/${previousPath?.slug}`}>
+          {sliceIt(previousPath?.frontmatter.title ?? "", 0, 16)}
         </Link>
       ) : (
-        <Link aria-disabled="true" to={`/blog/${previousPost?.slug}`}>
+        <Link aria-disabled="true" to={`/blog/${previousPath?.slug}`}>
           previous Post
         </Link>
       )}
 
-      {hasNextPost ? (
-        <Link to={`/blog/${nextPost?.slug}`}>
-          {sliceIt(nextPost?.frontmatter.title ?? "End of posts", 0, 16)}
+      {hasNextPath ? (
+        <Link to={`/blog/${nextPath?.slug}`}>
+          {sliceIt(nextPath?.frontmatter.title ?? "End of posts", 0, 16)}
         </Link>
       ) : (
-        <Link aria-disabled to={`/blog/${nextPost?.slug}`}>
+        <Link aria-disabled to={`/blog/${nextPath?.slug}`}>
           End of posts
         </Link>
       )}

@@ -36,6 +36,8 @@ export const GlobalStyles = () => {
           --filler: var(--light-blue-xs);
           --filler-stroke: var(--light-blue);
           --bg-shadow: var(--dark-blue-shadow);
+          --table-bg: var(--dark-blue);
+          --table-text: var(--white);
 
           /* Typography */
           --h1: 3.052rem;
@@ -118,6 +120,8 @@ export const GlobalStyles = () => {
           --filler: var(--dark-blue);
           --filler-stroke: var(--light-blue);
           --bg-shadow: var(--dark-blue-shadow);
+          --table-bg: var(--dark-blue);
+          --table-text: var(--white);
         }
         body[data-theme="dark"] {
           --background: var(--dark-blue-main);
@@ -133,6 +137,8 @@ export const GlobalStyles = () => {
           --filler: var(--light-blue-xs);
           --filler-stroke: var(--dark-main);
           --bg-shadow: var(--light-blue-shadow-higher-opacity);
+          --table-bg: var(--light-blue);
+          --table-text: var(--dark-blue-main);
         }
 
         p {

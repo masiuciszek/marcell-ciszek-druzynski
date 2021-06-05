@@ -2,9 +2,8 @@ import React from "react"
 import { H4, Section } from "./styles"
 import StrokeWrapper from "../common/stroke-wrapper"
 import { Welcomes } from "../icons/welcomes"
-import { css } from "@emotion/css"
 
-const getDate = (dateStamp = "10/13/1995"): number => {
+const getDate = (dateStamp = "10/13/1994"): number => {
   const dateDiff = new Date(dateStamp)
   const date = new Date()
   let age = date.getFullYear() - dateDiff.getFullYear()
@@ -12,15 +11,15 @@ const getDate = (dateStamp = "10/13/1995"): number => {
   if (month < 0 || (month === 0 && date.getDate() < dateDiff.getDate())) {
     age = age - 1
   }
-
   return age
 }
-
-const welcomeStyles = css``
 
 const focusTopics = ["React", "Node", "GraphQL", "NextJS", "Java", "Rust"]
 
 const Intro = () => {
+  const getMyAge = getDate()
+  const getTimeSpentPrograming = getDate("10/13/2018")
+
   return (
     <Section
       initial={{ opacity: 0 }}
@@ -33,18 +32,10 @@ const Intro = () => {
       transition={{ delay: 0.2 }}
     >
       <H4>Short about me...</H4>
-      {/* <StaticImage
-        src="../../images/fantasy.jpg"
-        alt="me at work"
-        width={800}
-        placeholder="tracedSVG"
-        layout="constrained"
-        backgroundColor={elements.filler}
-      /> */}
-      <Welcomes className={welcomeStyles} />
+      <Welcomes />
       <p>
-        I am a developer from Gotheburg Sweden. I am {getDate()} years old and been programming for{" "}
-        {getDate("10/13/2018")} years
+        I am a developer from Gotheburg Sweden. I am {getMyAge} years old and been programming for{" "}
+        {getTimeSpentPrograming} years
       </p>
 
       <p>

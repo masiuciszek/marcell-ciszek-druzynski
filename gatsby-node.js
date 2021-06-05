@@ -2,6 +2,12 @@
 const path = require("path")
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
 
+const generatePrevAndPostPath = (list, index) => {
+  const prev = index === 0 ? null : list[index - 1].node
+  const next = index === list.length - 1 ? null : list[index + 1].node
+  return [prev, next]
+}
+
 exports.onCreateWebpackConfig = ({ getConfig, actions, stage, loaders }) => {
   const existingConfig = getConfig()
 
@@ -83,16 +89,35 @@ exports.createPages = async ({ actions: { createPage }, graphql, reporter }) => 
           fieldValue
         }
       }
+      bites: allMdx(
+        sort: { fields: [frontmatter___date], order: DESC }
+        filter: { fileAbsolutePath: { regex: "/(bites)/" } }
+      ) {
+        edges {
+          node {
+            id
+            slug
+            frontmatter {
+              title
+              date(formatString: "DD MMMM, YYYY")
+              length
+              spoiler
+              tags
+            }
+          }
+        }
+      }
     }
   `)
 
   if (result.error) {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
-    return
-    // throw new Error(`failed to parse graphql query${result.error}`)
+    // return
+    throw new Error(`failed to parse graphql query${result.error}`)
   }
   const posts = result.data.posts.edges
   const tags = result.data.tagsGroup.group
+  const bites = result.data.bites.edges
 
   const POST_PER_PAGE = 4
   const AMOUNT_OF_PAGES = Math.ceil(posts.length / POST_PER_PAGE)
@@ -111,8 +136,7 @@ exports.createPages = async ({ actions: { createPage }, graphql, reporter }) => 
   })
 
   posts.forEach(({ node }, index) => {
-    const previousPost = index === 0 ? null : posts[index - 1].node
-    const nextPost = index === posts.length - 1 ? null : posts[index + 1].node
+    const [previousPost, nextPost] = generatePrevAndPostPath(posts, index)
 
     createPage({
       path: `/blog/${node.slug}`,
@@ -131,6 +155,20 @@ exports.createPages = async ({ actions: { createPage }, graphql, reporter }) => 
       component: require.resolve("./src/templates/tags.tsx"),
       context: {
         tag: fieldValue,
+      },
+    })
+  })
+
+  bites.forEach(({ node }, index) => {
+    const [previousBite, nextBite] = generatePrevAndPostPath(bites, index)
+
+    createPage({
+      path: `/bites/${node.slug}`,
+      component: require.resolve("./src/templates/bite-item.tsx"),
+      context: {
+        slug: node.slug,
+        previousBite,
+        nextBite,
       },
     })
   })

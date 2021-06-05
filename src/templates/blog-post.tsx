@@ -48,7 +48,7 @@ const BlogPost = ({ data, pageContext }: PageProps<BlogPostQuery, BlogPostContex
       <article className={articleStyles}>
         <MDXRenderer>{data.post.body}</MDXRenderer>
       </article>
-      <Paginate previousPost={previousPost} nextPost={nextPost} />
+      <Paginate previousPath={previousPost} nextPath={nextPost} />
     </Layout>
   )
 }

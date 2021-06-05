@@ -47,6 +47,8 @@ interface Elements {
   boxBackground: string
   boxText: string
   bgShadow: string
+  tableBg: string
+  tableText: string
 }
 
 const elements: Elements = {
@@ -64,6 +66,8 @@ const elements: Elements = {
   boxBackground: "var(--box-background)",
   boxText: "var(--box-text)",
   bgShadow: "var(--bg-shadow)",
+  tableBg: "var(--table-bg)",
+  tableText: "var(--table-text)",
 }
 
 const transition = {

@@ -10,6 +10,7 @@ import Debugger from "./debugger"
 import { isDev, re } from "@/util"
 import { motion } from "framer-motion"
 import useForm from "@/hooks/form"
+import { length } from "@/util/fp"
 
 const Form = styled.form`
   display: grid;
@@ -114,7 +115,7 @@ const MailChimp = () => {
     values: useMemo(() => ({ name: "", email: "" }), []),
     validate: useCallback((values: Record<string, string>) => {
       const errors: Record<string, string> = {}
-      if (values.name.length <= 1) {
+      if (length(values.name) <= 1) {
         errors.name = "Please fill in a valid name"
       }
       if (!values.email || !re.test(values.email)) {
