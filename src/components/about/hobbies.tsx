@@ -32,31 +32,36 @@ export const Hobbies = React.forwardRef<HTMLDivElement, HobbiesProps>(({ inView 
             log thinking that makes it so fun, helping others via software is also a bonus.
           </p>
           <p>
-            I like to work both on the client-side and on the server-side. I would say that it all
-            depends on what mode you are one. When it is colorful and rainbows and{" "}
-            <StrokeWrapper>unicorns</StrokeWrapper> outside then it is a typical, front-end day.{" "}
-            <br />
-            raining and cloudy outside then I put on my hoodie and start to hack on my machine 😁
-            ...it is a typical <StrokeWrapper>hack/server-side</StrokeWrapper> day
+            I work both on the client-side and on the server-side, as a{" "}
+            <StrokeWrapper>full stack developer</StrokeWrapper>. Creating cool user experiences and
+            awesome visible features is awesome and I really enjoy doing that.
+          </p>
+          <p>
+            with tools like <StrokeWrapper>React</StrokeWrapper>,
+            <StrokeWrapper>GraphQL</StrokeWrapper>
+          </p>
+          <p>And the server side logic to get a full completed application.</p>
+          <p>
+            using tools like <StrokeWrapper>Rust</StrokeWrapper> ,{" "}
+            <StrokeWrapper>SQL</StrokeWrapper> and <StrokeWrapper>Java</StrokeWrapper>
           </p>
 
           <p>
-            <strong>I Live in Gothenburg Sweden</strong>
+            <strong>I am born and raised in Gothenburg Sweden</strong>
             <br />
-            <p>
-              Gothenburg is where I am born and raised, I been living in asia for a longer period
-              which has been a great experience for me
-            </p>
-            <p>But home is home</p>
+            <p>Gothenburg is where I live, work eat and sleep.</p>
           </p>
 
           <HobbiesImage />
           <NameInJp />
           <p>
-            <strong>My hobbies.</strong> I really like to exercise I have always been into sports
-            and to get a mental break from the computer, just to do something different, nothing
-            beats a long run.I also have a passion for photography and when have some time over I
-            like to run with my camera and take some nice pictures of the nature.
+            <strong>My hobbies.</strong> I like to exercise I have always been into sports. To get a
+            mental break from the computer can be good sometimes, just to do something different,
+            nothing beats a long run. <br /> I also have a passion for photography and music.
+          </p>
+          <p>
+            Running in the nature with the camera to captures some awesome{" "}
+            <StrokeWrapper>pixels</StrokeWrapper> is unbeatable.
           </p>
           <p>
             To see some of my <StrokeWrapper>pixels(photos)</StrokeWrapper> you can check them out

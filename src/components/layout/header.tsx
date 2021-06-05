@@ -94,9 +94,9 @@ export const Header = () => {
       </AnimatedWrapper>
 
       {/* TODO: Command icon FIX */}
-      <CmdButton>
+      {/* <CmdButton>
         <Command />
-      </CmdButton>
+      </CmdButton> */}
       <Nav isOpen={isOpen} />
     </header>
   )

@@ -9,7 +9,8 @@ interface Props {
 
 const styles = css`
   display: block;
-  margin: 0 auto; ;
+  margin: 0 auto;
+  max-width: 100%;
 `
 
 const NameInJp = ({ className }: Props) => (

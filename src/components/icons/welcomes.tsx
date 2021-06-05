@@ -9,6 +9,7 @@ interface Props {
 
 const styles = css`
   margin: 0 auto;
+  max-width: 100%;
 `
 
 export const Welcomes = ({ className }: Props) => {

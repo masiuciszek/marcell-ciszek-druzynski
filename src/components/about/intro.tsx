@@ -1,8 +1,6 @@
-import { StaticImage } from "gatsby-plugin-image"
 import React from "react"
 import { H4, Section } from "./styles"
 import StrokeWrapper from "../common/stroke-wrapper"
-import { elements } from "@/styles/styled-record"
 import { Welcomes } from "../icons/welcomes"
 import { css } from "@emotion/css"
 
@@ -20,7 +18,7 @@ const getDate = (dateStamp = "10/13/1995"): number => {
 
 const welcomeStyles = css``
 
-const focusTopics = ["React", "Node", "GraphQL", "NextJS", "Java"]
+const focusTopics = ["React", "Node", "GraphQL", "NextJS", "Java", "Rust"]
 
 const Intro = () => {
   return (

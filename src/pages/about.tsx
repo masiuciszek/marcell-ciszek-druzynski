@@ -69,7 +69,7 @@ const AboutPage = (): JSX.Element => {
           is my blog.
           <br />
           <span>
-            Here where I share my thoughts, ideas and experience as a software engineer ans
+            Here where I share my thoughts, ideas and experience as a software engineer and
             everything that is my main focus right now, like <StrokeWrapper>React</StrokeWrapper>,
             <StrokeWrapper>Typescript</StrokeWrapper>, <StrokeWrapper>GraphQL</StrokeWrapper> and{" "}
             <StrokeWrapper>Rust</StrokeWrapper>.
