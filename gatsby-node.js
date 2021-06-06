@@ -161,7 +161,6 @@ exports.createPages = async ({ actions: { createPage }, graphql, reporter }) => 
 
   bites.forEach(({ node }, index) => {
     const [previousBite, nextBite] = generatePrevAndPostPath(bites, index)
-
     createPage({
       path: `/bites/${node.slug}`,
       component: require.resolve("./src/templates/bite-item.tsx"),
