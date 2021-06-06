@@ -10,7 +10,7 @@ import Debugger from "./debugger"
 import { isDev, re } from "@/util"
 import { motion } from "framer-motion"
 import useForm from "@/hooks/form"
-import { length } from "@/util/fp"
+import { length } from "@/util"
 
 const Form = styled.form`
   display: grid;

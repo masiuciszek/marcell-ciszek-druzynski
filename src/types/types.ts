@@ -12,3 +12,31 @@ export interface ContactType {
   name: string
   path: string
 }
+
+export interface Frontmatter {
+  date?: string
+  length?: string
+  spoiler?: string
+  tags?: Array<string>
+  title?: string
+}
+
+export interface NodeType {
+  id: string
+  slug: string
+  frontmatter: Frontmatter
+}
+
+export interface Node {
+  node: {
+    id: string
+    slug: string
+    frontmatter: {
+      date: string
+      length: string
+      spoiler: string
+      tags: Array<string>
+      title: string
+    }
+  }
+}
