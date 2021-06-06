@@ -1,5 +1,3 @@
-import { Node } from "@/types/types"
-
 export const length = <T>(value: string | Array<T>): number => value.length
 export const head = <T>(value: string | Array<T>): string | T => value[0]
 export const tail = <T>(value: string | Array<T>): Array<T> | string => value.slice(1)
@@ -40,4 +38,8 @@ export const setNestedObjectValues = (
   return response
 }
 
-export const getNodes = (edges: Array<Node>) => edges.map((x) => x.node)
+// export const getNodes = (edges: Array<Node>) => edges.map((x) => x.node)
+
+export const getNodes = <T extends { node: Record<string, any> }>(
+  edges: Array<T>,
+): Array<T["node"]> => edges.map((x) => x.node)

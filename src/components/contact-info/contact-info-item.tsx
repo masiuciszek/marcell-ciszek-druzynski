@@ -1,4 +1,5 @@
 import useToggle from "@/hooks/toggle"
+import { pxToRem } from "@/styles/css-utils"
 import { elements, elevations } from "@/styles/styled-record"
 import { ContactType } from "@/types/types"
 import { positiveOrNegative } from "@/util"
@@ -31,15 +32,19 @@ const renderIcon = (contactDataName: string) => {
 }
 
 const StyledContactItem = styled(motion.li)`
-  /* border-left: 2px solid ${elements.stroke}; */
   position: relative;
+  max-height: 10rem;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: left;
+  justify-content: center;
   &:before {
     position: absolute;
     content: "";
     background-color: ${elements.stroke};
     width: 2px;
     height: 80%;
-    left: 0;
+    left: ${pxToRem(30)};
     bottom: 0;
     transition: 300ms height ease-in;
   }
@@ -49,7 +54,7 @@ const StyledContactItem = styled(motion.li)`
     background-color: ${elements.stroke};
     width: 75%;
     bottom: 0;
-    left: 0;
+    left: ${pxToRem(30)};
     height: 2px;
     transition: 300ms width ease-in;
   }
@@ -63,7 +68,7 @@ const StyledContactItem = styled(motion.li)`
   }
 
   p {
-    margin-left: 0.5em;
+    text-align: center;
   }
 `
 

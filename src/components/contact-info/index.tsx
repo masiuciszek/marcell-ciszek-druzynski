@@ -29,6 +29,13 @@ interface QueryType {
   }
 }
 
+const InViewWrapper = styled.div`
+  width: 100%;
+  min-height: 20rem;
+  display: flex;
+  align-items: center;
+`
+
 const ContactGrid = styled(motion.ul)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
@@ -37,15 +44,13 @@ const ContactGrid = styled(motion.ul)`
   margin: 1rem auto;
   padding: 0.5em;
   list-style: none;
-  height: 100%;
-  /* margin-bottom: 2rem; */
   @media ${above.tablet} {
     margin-bottom: 2rem;
   }
 `
 
-const variants = ({ inView }: { inView: boolean }) =>
-  ({
+const variants = (inView: boolean) => {
+  return {
     initial: { opacity: 0, x: -1000 },
     visible: {
       opacity: inView ? 1 : 0,
@@ -65,32 +70,34 @@ const variants = ({ inView }: { inView: boolean }) =>
         when: "afterChildren", // let children exit first before parent will run it's thing
       },
     },
-  } as const)
+  } as const
+}
 
 interface ContactInfoProps {
   inView: boolean
 }
-const ContactInfo = React.forwardRef<HTMLUListElement, ContactInfoProps>(({ inView }, ref) => {
+const ContactInfo = React.forwardRef<HTMLDivElement, ContactInfoProps>(({ inView }, ref) => {
   const { contactList } = useStaticQuery<QueryType>(CONTACT_QUERY)
   return (
-    <ContactGrid
-      layout
-      initial="initial"
-      animate="visible"
-      exit="exit"
-      variants={variants({ inView })}
-      ref={ref}
-    >
-      <AnimatePresence exitBeforeEnter>
-        {inView && (
-          <>
-            {contactList.edges.map(({ node }, i) => (
-              <ContactInfoItem key={node.id} contactData={node} i={i} />
-            ))}
-          </>
-        )}
-      </AnimatePresence>
-    </ContactGrid>
+    <InViewWrapper ref={ref}>
+      <ContactGrid
+        layout
+        initial="initial"
+        animate="visible"
+        exit="exit"
+        variants={variants(inView)}
+      >
+        <AnimatePresence exitBeforeEnter>
+          {inView && (
+            <>
+              {contactList.edges.map(({ node }, i) => (
+                <ContactInfoItem key={node.id} contactData={node} i={i} />
+              ))}
+            </>
+          )}
+        </AnimatePresence>
+      </ContactGrid>
+    </InViewWrapper>
   )
 })
 

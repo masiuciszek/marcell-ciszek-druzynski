@@ -14,29 +14,24 @@ export interface ContactType {
 }
 
 export interface Frontmatter {
-  date?: string
-  length?: string
-  spoiler?: string
-  tags?: Array<string>
-  title?: string
+  date: string
+  length: string
+  spoiler: string
+  tags: Array<string>
+  title: string
 }
 
-export interface NodeType {
-  id: string
-  slug: string
-  frontmatter: Frontmatter
-}
+// export interface NodeType {
+//   id: string
+//   slug: string
+//   frontmatter: Frontmatter
+// }
 
 export interface Node {
   node: {
     id: string
-    slug: string
-    frontmatter: {
-      date: string
-      length: string
-      spoiler: string
-      tags: Array<string>
-      title: string
-    }
+    slug?: string
+    excerpt?: string
+    frontmatter: Frontmatter
   }
 }

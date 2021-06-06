@@ -17,7 +17,7 @@ interface BitesQueryProps {
 
 const BitesPage: React.FC<PageProps<BitesQueryProps>> = ({ data: { bites } }): JSX.Element => {
   const isAboveTablet = useMediaQuery(above.tabletL)
-  const nodes = getNodes(bites.edges)
+  const nodes = getNodes<Node>(bites.edges)
 
   return (
     <Layout>
