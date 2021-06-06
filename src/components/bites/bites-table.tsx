@@ -42,37 +42,34 @@ const Tcell = styled.td`
   }
 `
 
-const BitesTable: React.FC<BitesTableProps> = ({ bites }) => {
-  console.log("bites", bites)
-  return (
-    <Table>
-      <Thead>
-        <Trow>
-          <TheadCell role="button">Title</TheadCell>
-          <TheadCell>Description</TheadCell>
-          <TheadCell role="button">Tags</TheadCell>
-        </Trow>
-      </Thead>
-      <tbody>
-        {bites.map(({ id, slug, frontmatter }) => (
-          <tr key={id}>
-            <Tcell>
-              <Link to={`/bites/${slug}`}>{frontmatter.title} </Link>
-            </Tcell>
-            <Tcell>
-              <Link to={`/bites/${slug}`}>{frontmatter.spoiler} </Link>
-            </Tcell>
-            <Tcell className="tags">
-              {frontmatter.tags.map((tag) => (
-                <Link key={tag} to={`/tags/${tag}`}>
-                  {tag}
-                </Link>
-              ))}{" "}
-            </Tcell>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
-  )
-}
+const BitesTable: React.FC<BitesTableProps> = ({ bites }) => (
+  <Table>
+    <Thead>
+      <Trow>
+        <TheadCell role="button">Title</TheadCell>
+        <TheadCell>Description</TheadCell>
+        <TheadCell role="button">Tags</TheadCell>
+      </Trow>
+    </Thead>
+    <tbody>
+      {bites.map(({ id, slug, frontmatter }) => (
+        <tr key={id}>
+          <Tcell>
+            <Link to={`/bites/${slug}`}>{frontmatter.title} </Link>
+          </Tcell>
+          <Tcell>
+            <Link to={`/bites/${slug}`}>{frontmatter.spoiler} </Link>
+          </Tcell>
+          <Tcell className="tags">
+            {frontmatter.tags.map((tag) => (
+              <Link key={tag} to={`/tags/${tag}`}>
+                {tag}
+              </Link>
+            ))}{" "}
+          </Tcell>
+        </tr>
+      ))}
+    </tbody>
+  </Table>
+)
 export default BitesTable

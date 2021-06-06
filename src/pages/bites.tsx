@@ -8,6 +8,7 @@ import { above } from "@/styles/media-query"
 import BitesTable from "@/components/bites/bites-table"
 import { getNodes } from "@/util"
 import { Node } from "@/types/types"
+import BitesList from "@/components/bites/bites-list"
 
 interface BitesQueryProps {
   bites: {
@@ -37,6 +38,7 @@ const BitesPage: React.FC<PageProps<BitesQueryProps>> = ({ data: { bites } }): J
           <StrokeWrapper>Josh W. Comeau&#x27;s blog</StrokeWrapper>{" "}
         </a>
       </p>
+      {!isAboveTablet && <BitesList bites={nodes} />}
       {isAboveTablet && <BitesTable bites={nodes} />}
     </Layout>
   )
