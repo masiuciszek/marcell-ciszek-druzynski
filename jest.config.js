@@ -1,24 +1,45 @@
 module.exports = {
-  transform: { "^.+\\.[tj]sx?$": "<rootDir>/test/jest-preprocess.js" },
-
-  moduleNameMapper: {
-    ".+\\.(svg|jpg|jpeg|png|webp|woff|woff2|mp4|webm|mp3|css)$": "<rootDir>/__mocks__/file-mock.js",
-    "@test-utils": "<rootDir>/test/test-utils.tsx",
-    "@/(.*)": "<rootDir>/src/$1",
-  },
-  testPathIgnorePatterns: [`node_modules`, `\\.cache`, `<rootDir>.*/public`],
-  transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`],
-  globals: {
-    __PATH_PREFIX__: ``,
-  },
-  testURL: `http://localhost`,
-  setupFiles: ["<rootDir>/test/loadershim.js"],
+  roots: ["<rootDir>"],
+  clearMocks: true,
   watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
-  setupFilesAfterEnv: ["<rootDir>/test/setup-test-env.js"],
+  coverageDirectory: ".coverage",
+  collectCoverageFrom: ["**/*.{js,jsx,ts,tsx}", "!**/*.d.ts", "!**/node_modules/**"],
 
-  collectCoverageFrom: [
-    "<rootDir>/src/components/**/*.{tsx,ts,js}",
-    "<rootDir>/src/images/**/*.{png,svg,jpg,jpeg}",
-    "<rootDir>/src/utils/*.{tsx,ts,js}",
+  moduleFileExtensions: ["ts", "tsx", "js", "json", "jsx"],
+  testPathIgnorePatterns: ["<rootDir>[/\\\\](node_modules|.next)[/\\\\]"],
+  transformIgnorePatterns: ["[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$"],
+  setupFilesAfterEnv: ["<rootDir>/setup-tests.js"],
+
+  testRegex: [
+    "(/__tests__/.*(test|spec))\\.([tj]sx?)$",
+    "/node_modules/",
+    "/.next/",
+    "/.vercel/",
+    "/cypress/",
   ],
+  transform: {
+    "^.+\\.(ts|tsx|js)$": "babel-jest",
+    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+    "^.+\\.css$": "<rootDir>/config/jest/css-transform.js",
+  },
+
+  testEnvironment: "jsdom",
+  moduleNameMapper: {
+    "\\.(css|less|sass|scss)$": "identity-obj-proxy",
+    "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/__mocks__/file-mock.js",
+    "^@/components(.*)$": "<rootDir>/components$1",
+
+    // "@components(.*)$": "<rootDir>/src/components$1",
+    // "@styles/(.*)": "<rootDir>/src/styles/$1",
+    // "@hooks/(.*)": "<rootDir>/src/hooks/$1",
+    // "@utils/(.*)": "<rootDir>/src/utils/$1",
+  },
+
+  snapshotSerializers: ["@emotion/jest/serializer"],
+
+  globals: {
+    __PATH_PREFIX__: "",
+  },
+  testURL: "http://localhost",
+  collectCoverage: false,
 }

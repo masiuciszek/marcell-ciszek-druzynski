@@ -35,6 +35,10 @@ module.exports = {
     "import/no-named-as-default": 0,
     "react/prop-types": 0,
     "react/display-name": 0,
+    "react/react-in-jsx-scope": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }], //should add ".ts" if typescript project
+
+
   },
   settings: {
     // Add aliases support with eslint-import-resolver-alias
