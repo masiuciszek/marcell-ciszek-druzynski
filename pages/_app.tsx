@@ -1,12 +1,18 @@
+import * as React from "react"
+import {GlobalStyles} from "@components/app/global-styles"
 import {AppProps} from "next/app"
+import {DefaultSeo} from "next-seo"
+import defaultSeoConfig from "../next.seo.json"
 
-function App({Component, pageProps}: AppProps) {
+function MyApp({Component, pageProps}: AppProps) {
   return (
     <>
-      {/* Globalstyles here */}
+      <GlobalStyles />
+      <DefaultSeo {...defaultSeoConfig} />
+
       <Component {...pageProps} />
     </>
   )
 }
 
-export default App
+export default MyApp
