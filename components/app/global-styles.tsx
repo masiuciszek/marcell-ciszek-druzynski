@@ -156,6 +156,9 @@ export const GlobalStyles = () => (
         list-style: none;
         font-family: var(--radnika);
       }
+      a {
+        text-decoration: none;
+      }
     `}
   />
 )

@@ -18,7 +18,7 @@ const MarcellLogo = () => (
       x2="301.02"
       y2="114.5"
       stroke={illustrations.highlight2}
-      stroke-width="3"
+      strokeWidth="3"
     />
   </svg>
 )
