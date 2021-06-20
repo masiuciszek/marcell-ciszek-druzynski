@@ -5,6 +5,8 @@ import Link from "next/link"
 import routes from "../../data/routes.json"
 import {css} from "@emotion/react"
 import {pxToRem} from "@styles/css-helpers"
+import useMediaQuery from "@hooks/media-query"
+import {above} from "@styles/media-query"
 
 const Nav = styled.nav`
   display: flex;
@@ -17,6 +19,7 @@ const NavList = styled.ul`
   border: 2px solid red;
   padding: 0.5rem;
   flex: 1;
+  margin-top: auto;
 `
 const listItemStyles = (active: boolean) => css`
   a {
@@ -28,7 +31,7 @@ const listItemStyles = (active: boolean) => css`
       position: absolute;
       top: ${pxToRem(2)};
       left: ${pxToRem(-1)};
-      background-color: ${active ? illustrations.highlight2 : null};
+      background-color: ${active ? "red" : null};
       opacity: 0.7;
       height: ${pxToRem(12)};
       width: ${pxToRem(12)};
@@ -39,24 +42,27 @@ const listItemStyles = (active: boolean) => css`
 
 const isActiveLink = (pathName: string, routerPathName: string) => pathName === routerPathName
 
-const Navigation = () => {
+const Navigation = (): JSX.Element => {
   const router = useRouter()
+  const aboveTablet = useMediaQuery(above.tablet)
   return (
     <Nav>
-      <NavList>
-        {routes.map(({name, path}) => (
-          <li
-            key={name}
-            css={css`
-              ${listItemStyles(isActiveLink(path, router.pathname))};
-            `}
-          >
-            <Link href={path}>
-              <a>{name}</a>
-            </Link>
-          </li>
-        ))}
-      </NavList>
+      {aboveTablet && (
+        <NavList>
+          {routes.map(({name, path}) => (
+            <li
+              key={name}
+              css={css`
+                ${listItemStyles(isActiveLink(path, router.pathname))};
+              `}
+            >
+              <Link href={path}>
+                <a>{name}</a>
+              </Link>
+            </li>
+          ))}
+        </NavList>
+      )}
     </Nav>
   )
 }

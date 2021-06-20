@@ -2,6 +2,7 @@ export const elements = {
   background: "var(--background)",
   headline: "var(--headline)",
   paragraph: "var(--paragraph)",
+  paragraph2: "var(--paragraph2)",
   button: "var(--button)",
   buttonText: "var(--buttonText)",
 }

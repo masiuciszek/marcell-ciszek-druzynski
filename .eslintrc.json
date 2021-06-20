@@ -15,14 +15,13 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    // "plugin:testing-library/recommended",
     "prettier"
   ],
   "rules": {
     "react/react-in-jsx-scope": 0,
     "react/display-name": 0,
     "react/prop-types": 0,
-    "@typescript-eslint/explicit-module-boundary-types": 1,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
     "react-hooks/rules-of-hooks": 2,
     "react-hooks/exhaustive-deps": 2,
     "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx", ".tsx"]}], //should add ".ts" if typescript project

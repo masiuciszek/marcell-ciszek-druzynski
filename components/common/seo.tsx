@@ -1,4 +1,4 @@
-import React from "react"
+import {Fragment} from "react"
 import siteConfig from "../../site-config.json"
 import {NextSeo, ArticleJsonLd} from "next-seo"
 import {TWITTER_CARD_TYPE} from "@utils/constants"
@@ -13,7 +13,7 @@ interface Props {
 
 const formatDate = (date: string | undefined): string => (date ? new Date(date).toISOString() : "")
 
-const Seo = ({title, description, image, path, date, updated}: Props) => {
+const Seo = ({title, description, image, path, date, updated}: Props): JSX.Element => {
   const {
     twitter,
     author,
@@ -40,7 +40,7 @@ const Seo = ({title, description, image, path, date, updated}: Props) => {
   }
 
   return (
-    <>
+    <Fragment>
       <NextSeo
         title={seoConfig.title}
         description={seoConfig.description}
@@ -73,7 +73,7 @@ const Seo = ({title, description, image, path, date, updated}: Props) => {
         title={seoConfig.title}
         url={seoConfig.url}
       />
-    </>
+    </Fragment>
   )
 }
 export default Seo

@@ -70,7 +70,8 @@ export const GlobalStyles = () => (
         /* elements */
         --background: var(--dark);
         --headline: var(--white);
-        --paragraph: var(--blue);
+        --paragraph: var(--white);
+        --paragraph2: var(--blue);
         --button: var(--pink);
         --buttonText: var(--dark);
 
@@ -105,11 +106,12 @@ export const GlobalStyles = () => (
 
       body[data-theme="light"] {
         /* elements */
-        --background: var(--dark);
-        --headline: var(--white);
-        --paragraph: var(--blue);
-        --button: var(--pink);
-        --buttonText: var(--dark);
+        --background: var(--white);
+        --headline: var(--dark-secondary);
+        --paragraph: var(--dark-third);
+        --paragraph2: var(--blue);
+        --button: var(--dark-secondary);
+        --buttonText: var(--pink);
 
         /* Illustration */
         --stroke: var(--dark-secondary);
@@ -123,7 +125,8 @@ export const GlobalStyles = () => (
         /* elements */
         --background: var(--dark);
         --headline: var(--white);
-        --paragraph: var(--blue);
+        --paragraph: var(--white);
+        --paragraph2: var(--blue);
         --button: var(--pink);
         --buttonText: var(--dark);
 

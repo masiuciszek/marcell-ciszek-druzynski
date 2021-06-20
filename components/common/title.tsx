@@ -1,6 +1,10 @@
-interface Props {}
+import {FC} from "react"
 
-const Title = () => {
+interface Props {
+  title?: string
+}
+
+const Title: FC<Props> = () => {
   return (
     <div>
       <h1>asdas</h1>
