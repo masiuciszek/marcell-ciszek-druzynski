@@ -23,3 +23,14 @@ export const sizes = {
   h5: "var(--h5)",
   maxWidth: "var(--maxWidth)",
 }
+
+export const elevations = {
+  shadow: "var(--shadow-s)",
+  shadowDefault: "var(--shadow-default)",
+  shadowMd: "var(--shadow-md)",
+  shadowLg: "var(--shadow-lg)",
+  shadowXl: "var(--shadow-xl)",
+  shadow2Xl: "var(--shadow-2xl)",
+  shadow3Xl: "var(--shadow-3xl)",
+  shadowInner: "var(--shadow-inner)",
+}

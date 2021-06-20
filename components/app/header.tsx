@@ -6,7 +6,7 @@ import Link from "next/link"
 import Cmd from "@components/icons/cmd"
 import {buttonResetStyles} from "@styles/css-helpers"
 import useTheme from "@hooks/theme"
-import {elements} from "@styles/styled-record"
+import {elements, elevations} from "@styles/styled-record"
 
 const StyledHeader = styled.header`
   border: 2px solid red;
@@ -42,8 +42,9 @@ const ButtonWrapper = styled.div`
   width: 8rem;
   display: flex;
   justify-content: space-between;
+  /* box-shadow: ${elevations.shadow2Xl}; */
   button {
-    ${buttonResetStyles}
+    ${buttonResetStyles};
   }
 
   @media ${below.mobileL} {
