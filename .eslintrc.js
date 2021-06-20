@@ -29,16 +29,14 @@ module.exports = {
     "@typescript-eslint/no-empty-function": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-var-requires": 0,
-    "@typescript-eslint/no-unused-vars": [1, { ignoreRestSiblings: true }],
+    "@typescript-eslint/no-unused-vars": [1, {ignoreRestSiblings: true}],
     "@typescript-eslint/no-use-before-define": 0,
     "jsx-a11y/no-onchange": 0,
     "import/no-named-as-default": 0,
     "react/prop-types": 0,
     "react/display-name": 0,
-    "react/react-in-jsx-scope": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }], //should add ".ts" if typescript project
-
-
+    "react/react-in-jsx-scope": 2,
+    "react/jsx-filename-extension": [1, {extensions: [".js", ".jsx", ".tsx"]}], //should add ".ts" if typescript project
   },
   settings: {
     // Add aliases support with eslint-import-resolver-alias

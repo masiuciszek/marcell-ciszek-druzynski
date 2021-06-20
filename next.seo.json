@@ -11,13 +11,13 @@
   ],
   "twitter": {
     "cardType": "summary_large_image",
-    "handle": "masiu.blog",
-    "site": "masiu.blog"
+    "handle": "@masiu_cd",
+    "site": "@masiu_cd"
   },
   "openGraph": {
     "type": "website",
     "title": "My name is Marcell, I share my thoughts and knowledge about software development and other technical stuff",
-    "description": "egghead is your source for the Badass Portfolio Projects you need to climb the career ladder as a modern web developer.",
+    "description": "My name is Marcell, I share my thoughts and knowledge about software development and other technical stuff",
     "site_name": "masiu.blog",
     "profile": {
       "firstName": "Marcell",

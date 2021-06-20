@@ -5,10 +5,11 @@ export const elements = {
   button: "var(--button)",
   buttonText: "var(--buttonText)",
 }
-export const Illustrations = {
+export const illustrations = {
   stroke: "var(--stroke)",
   main: "var(--main)",
   highlight: "var(--highlight)",
+  highlight2: "var(--highlight-2)",
   secondary: "var(--secondary)",
   tertiary: "var(--tertiary)",
 }

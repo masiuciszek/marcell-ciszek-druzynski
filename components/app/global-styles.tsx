@@ -78,6 +78,7 @@ export const GlobalStyles = () => (
         --stroke: var(--dark-secondary);
         --main: var(--blue);
         --highlight: var(--pink);
+        --highlight-2: var(--pink-darker);
         --secondary: var(--white);
         --tertiary: var(--pink);
       }
@@ -114,6 +115,7 @@ export const GlobalStyles = () => (
         --stroke: var(--dark-secondary);
         --main: var(--blue);
         --highlight: var(--pink);
+        --highlight-2: var(--pink-darker);
         --secondary: var(--white);
         --tertiary: var(--pink);
       }
@@ -129,6 +131,7 @@ export const GlobalStyles = () => (
         --stroke: var(--dark-secondary);
         --main: var(--blue);
         --highlight: var(--pink);
+        --highlight-2: var(--pink-darker);
         --secondary: var(--white);
         --tertiary: var(--pink);
       }
